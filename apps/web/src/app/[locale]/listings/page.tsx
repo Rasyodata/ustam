@@ -52,6 +52,19 @@ export default async function JobBoardPage({
     categories = categories.filter((c) => slugs.includes(c.slug));
   }
 
+  // Başlığı seçili gruba göre ayarla (Tamirat / Temizlik / Nakliyat / Özel Ders / Diğer İlanları)
+  const GROUP_TITLE: Record<string, { emoji: string; label: Record<string, string> }> = {
+    repair: { emoji: "🔧", label: { tr: "Tamirat İlanları", en: "Repair Listings", de: "Reparaturaufträge", fr: "Demandes de réparation", es: "Solicitudes de reparación" } },
+    cleaning: { emoji: "🧹", label: { tr: "Temizlik İlanları", en: "Cleaning Listings", de: "Reinigungsaufträge", fr: "Demandes de nettoyage", es: "Solicitudes de limpieza" } },
+    moving: { emoji: "🚚", label: { tr: "Nakliyat İlanları", en: "Moving Listings", de: "Umzugsaufträge", fr: "Demandes de déménagement", es: "Solicitudes de mudanza" } },
+    tutoring: { emoji: "📚", label: { tr: "Özel Ders İlanları", en: "Tutoring Listings", de: "Nachhilfe-Aufträge", fr: "Demandes de cours", es: "Solicitudes de clases" } },
+    other: { emoji: "➕", label: { tr: "Diğer İlanlar", en: "Other Listings", de: "Andere Aufträge", fr: "Autres demandes", es: "Otras solicitudes" } },
+  };
+  const heading =
+    g && GROUP_TITLE[g]
+      ? `${GROUP_TITLE[g].emoji} ${GROUP_TITLE[g].label[locale] ?? GROUP_TITLE[g].label.tr}`
+      : `🔧 ${t("jobBoard.title")}`;
+
   const buildHref = (patch: Record<string, string | undefined>) => {
     const merged = { ...sp, ...patch };
     const qs = new URLSearchParams(
@@ -68,7 +81,7 @@ export default async function JobBoardPage({
   return (
     <div className="max-w-5xl mx-auto px-5 py-10">
       <div className="flex items-center justify-between flex-wrap gap-3 mb-2">
-        <h1 className="text-3xl font-black">🔧 {t("jobBoard.title")}</h1>
+        <h1 className="text-3xl font-black">{heading}</h1>
         <Link
           href="/post"
           className="font-bold px-4 py-2 rounded-xl bg-gradient-to-br from-brand to-brand-light text-black"

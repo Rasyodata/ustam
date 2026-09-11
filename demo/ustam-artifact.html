@@ -418,8 +418,18 @@ function renderPros(){
 function reqQuote(name){prosReq[name]=true;renderPros();toast("📨 "+pr('reqd'))}
 
 /* Tamirat İlanları başlığı */
-const JB={tr:"🔧 Tamirat İlanları",en:"🔧 Repair Jobs",de:"🔧 Reparaturaufträge",fr:"🔧 Demandes de réparation",es:"🔧 Solicitudes de reparación"};
-function renderJobBoard(){const e=document.getElementById('jbTitle');if(e)e.textContent=JB[lang]||JB.en||JB.tr}
+const JB_SUF={tr:"İlanları",en:"Listings",de:"Aufträge",fr:"Demandes",es:"Solicitudes",ru:"Заявки",ar:"إعلانات",fa:"آگهی‌ها"};
+const JB_ALL={tr:"📋 Güncel İlanlar",en:"📋 Recent Listings",de:"📋 Aktuelle Aufträge",fr:"📋 Demandes récentes",es:"📋 Solicitudes recientes",ru:"📋 Последние заявки",ar:"📋 أحدث الإعلانات",fa:"📋 آگهی‌های اخیر"};
+const GROUP_EMOJI={repair:"🔧",cleaning:"🧹",moving:"🚚",tutoring:"📚",other:"➕"};
+function renderJobBoard(){
+  const e=document.getElementById('jbTitle');if(!e)return;
+  if(groupFilter&&GROUPS[groupFilter]){
+    const suf=JB_SUF[lang]||JB_SUF.en;
+    e.textContent=`${GROUP_EMOJI[groupFilter]||'📋'} ${gLabel(groupFilter)} ${suf}`;
+  } else {
+    e.textContent=JB_ALL[lang]||JB_ALL.en;
+  }
+}
 
 /* ============ Örnek veri ============ */
 const CATS=[
@@ -457,7 +467,7 @@ function gLabel(g){return (GROUPS[g][lang]||GROUPS[g].en||GROUPS[g].tr)}
 function selectGroup(g){
   groupFilter=(g==="home")?null:g;
   document.querySelectorAll('.gnav').forEach(a=>a.classList.toggle('active',a.dataset.g===g));
-  renderCats();renderListings();
+  renderCats();renderListings();renderJobBoard();
   if(g==="home")window.scrollTo({top:0,behavior:'smooth'});else scrollToId('cats');
 }
 function groupCatKeys(){return groupFilter?GROUPS[groupFilter].cats:null}
