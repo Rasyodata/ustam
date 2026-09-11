@@ -182,12 +182,6 @@
         <select id="cityF"><option value="" data-i18n="common.city">Şehir</option></select>
         <button class="btn btn-primary" onclick="doSearch()"><span data-i18n="common.search">Ara</span> 🔎</button>
       </div>
-      <div class="hero-stats">
-        <div><div class="n">12.400+</div><div class="l" data-i18n="home.statsProviders">Kayıtlı usta</div></div>
-        <div><div class="n">89.300+</div><div class="l" data-i18n="home.statsListings">Açılan ilan</div></div>
-        <div><div class="n">81</div><div class="l" data-i18n="home.statsCities">Hizmet şehri</div></div>
-      </div>
-      <div class="demo-note">⚙️ Bu interaktif bir <b>önizleme demosudur</b> (örnek verilerle). Gerçek sürümde tüm veriler canlı backend'den gelir.</div>
     </div>
   </div>
 
@@ -430,8 +424,8 @@ PROVIDERS.forEach((p,i)=>{
 /* Ustam Pro — üyelik paketleri (gelir modeli) */
 const PLANS=[
   {key:"free",price:0,color:"#6b7688",name:{tr:"Ücretsiz",en:"Free"},feats:{tr:["Profil oluştur","Ayda 5 teklif hakkı","Temel görünürlük"],en:["Create profile","5 offers/month","Basic visibility"]}},
-  {key:"pro",price:299,color:"#ea6a0e",popular:true,name:{tr:"Pro",en:"Pro"},feats:{tr:["Sınırsız teklif","⭐ Öne çıkan rozet","2x daha fazla görünürlük","Öncelikli destek"],en:["Unlimited offers","⭐ Featured badge","2x more visibility","Priority support"]}},
-  {key:"premium",price:599,color:"#7c3aed",name:{tr:"Premium",en:"Premium"},feats:{tr:["Pro'daki her şey","Aramada üst sıralarda","Ana sayfada öne çıkma","Doğrulanmış rozet","Aylık reklam kredisi"],en:["Everything in Pro","Top of search results","Homepage spotlight","Verified badge","Monthly ad credit"]}}
+  {key:"pro",price:990,color:"#ea6a0e",popular:true,name:{tr:"Pro",en:"Pro"},feats:{tr:["Sınırsız teklif","⭐ Öne çıkan rozet","2x daha fazla görünürlük","Öncelikli destek"],en:["Unlimited offers","⭐ Featured badge","2x more visibility","Priority support"]}},
+  {key:"premium",price:1950,color:"#7c3aed",name:{tr:"Premium",en:"Premium"},feats:{tr:["Pro'daki her şey","Aramada üst sıralarda","Ana sayfada öne çıkma","Doğrulanmış rozet","Aylık reklam kredisi"],en:["Everything in Pro","Top of search results","Homepage spotlight","Verified badge","Monthly ad credit"]}}
 ];
 const PLAN_TXT={tr:{title:"💎 Ustam Pro — Üyelik Paketleri",sub:"Daha çok iş al, öne çık. İstediğin zaman iptal et.",month:"/ay",popular:"EN POPÜLER",choose:"Paketi Seç",chosen:"✅ Paket talebin alındı (admin onayına düştü)",featured:"⭐ Öne Çıkan"},en:{title:"💎 Ustam Pro — Membership Plans",sub:"Get more jobs, stand out. Cancel anytime.",month:"/mo",popular:"MOST POPULAR",choose:"Choose plan",chosen:"✅ Plan request received (sent to admin)",featured:"⭐ Featured"}};
 function pl(k){return (PLAN_TXT[lang]||PLAN_TXT.en)[k]}
@@ -521,11 +515,11 @@ function renderProsPage(){
       <p style="color:var(--muted);max-width:640px;margin:0 auto">${p2('heroSub')}</p>
     </div>
     <div class="hero-stats" style="justify-content:center;margin:12px 0 26px"><div style="text-align:center"><div class="n">${PROVIDERS.length}+</div><div class="l">${p2('total')}</div></div></div>
-    <h2 class="sec-title">${pl('title')}</h2>
+    <h2 class="sec-title">📊 ${p2('analysis')}</h2>
+    <div class="cats" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr))">${analizTiles}</div>
+    <h2 class="sec-title" style="margin-top:30px">${pl('title')}</h2>
     <p style="color:var(--muted);font-size:14px;margin:0 0 18px">${pl('sub')}</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:6px">${pricing}</div>
-    <h2 class="sec-title" style="margin-top:30px">📊 ${p2('analysis')}</h2>
-    <div class="cats" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr))">${analizTiles}</div>
     <div id="signupForm" class="lcard" style="margin-top:30px;padding:26px;box-shadow:var(--shadow)">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
         <div style="width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px;color:#1a1205;background:linear-gradient(135deg,var(--brand),var(--brand2))">🛠️</div>
