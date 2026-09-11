@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Ustam",
+    "slug": "ustam",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "ustam",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#0f1420"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.ustam.mobile"
+    },
+    "android": {
+      "package": "app.ustam.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#ff7a1a"
+      },
+      "permissions": ["NOTIFICATIONS"]
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "color": "#ff7a1a"
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "http://localhost:4000",
+      "eas": {
+        "projectId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  }
+}

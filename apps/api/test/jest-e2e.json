@@ -1,0 +1,11 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": { "^.+\\.(t|j)s$": "ts-jest" },
+  "moduleNameMapper": {
+    "^@ustam/shared$": "<rootDir>/../../../packages/shared/src/index.ts",
+    "^@ustam/shared/i18n$": "<rootDir>/../../../packages/shared/src/i18n/index.ts"
+  }
+}

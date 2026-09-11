@@ -1,0 +1,565 @@
+// ============================================================
+//  Ustam — Prisma şeması (tam domain modeli)
+//  PostgreSQL. Tüm enum'lar @ustam/shared ile senkron tutulmalı.
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------- ENUM'lar -----------------------
+
+enum Locale {
+  tr
+  en
+  de
+  fr
+  es
+}
+
+enum UserRoleType {
+  CUSTOMER
+  PROVIDER
+  COMPANY
+  MODERATOR
+  SUPPORT
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  BANNED
+  DELETED
+}
+
+enum ProviderKind {
+  INDIVIDUAL
+  TECHNICAL_SERVICE
+  MANUFACTURER
+  CONTRACTOR
+}
+
+enum ListingStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  EXPIRED
+  REJECTED
+}
+
+enum UrgencyLevel {
+  FLEXIBLE
+  WITHIN_WEEK
+  URGENT
+  EMERGENCY
+}
+
+enum OfferStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  WITHDRAWN
+  EXPIRED
+}
+
+enum BudgetType {
+  FIXED
+  RANGE
+  NEGOTIABLE
+}
+
+enum OtpChannel {
+  EMAIL
+  SMS
+}
+
+enum OtpPurpose {
+  VERIFY_EMAIL
+  VERIFY_PHONE
+  PASSWORD_RESET
+  LOGIN_2FA
+}
+
+enum NotificationType {
+  NEW_OFFER
+  OFFER_ACCEPTED
+  OFFER_REJECTED
+  NEW_MESSAGE
+  LISTING_MATCH
+  REVIEW_RECEIVED
+  SYSTEM
+}
+
+enum ReviewDirection {
+  CUSTOMER_TO_PROVIDER
+  PROVIDER_TO_CUSTOMER
+}
+
+enum ReportTargetType {
+  USER
+  LISTING
+  OFFER
+  MESSAGE
+  REVIEW
+}
+
+enum ReportStatus {
+  OPEN
+  REVIEWING
+  RESOLVED
+  DISMISSED
+}
+
+enum MediaType {
+  IMAGE
+  DOCUMENT
+  VIDEO
+}
+
+enum PaymentStatus {
+  PENDING // ödeme bekleniyor
+  HELD // emanette (escrow) tutuluyor
+  RELEASED // ustaya aktarıldı
+  REFUNDED // müşteriye iade edildi
+  FAILED
+  CANCELLED
+}
+
+// ----------------------- Kimlik & Kullanıcı -----------------------
+
+model User {
+  id              String     @id @default(uuid())
+  email           String     @unique
+  phone           String?    @unique
+  passwordHash    String
+  displayName     String
+  avatarUrl       String?
+  locale          Locale     @default(tr)
+  status          UserStatus @default(PENDING)
+  emailVerifiedAt DateTime?
+  phoneVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  failedLogins    Int        @default(0)
+  lockedUntil     DateTime?
+
+  roles           UserRole[]
+  providerProfile ProviderProfile?
+
+  listings                Listing[]      @relation("ListingOwner")
+  offers                  Offer[]        @relation("OfferProvider")
+  sentMessages            Message[]      @relation("MessageSender")
+  conversationsAsCustomer Conversation[] @relation("ConvCustomer")
+  conversationsAsProvider Conversation[] @relation("ConvProvider")
+  writtenReviews          Review[]       @relation("ReviewAuthor")
+  receivedReviews         Review[]       @relation("ReviewTarget")
+  notifications           Notification[]
+  refreshTokens           RefreshToken[]
+  pushTokens              PushToken[]
+  otpCodes                OtpCode[]
+  media                   Media[]
+  reportsMade             Report[]       @relation("Reporter")
+  paymentsMade            Payment[]      @relation("PaymentPayer")
+  paymentsReceived        Payment[]      @relation("PaymentPayee")
+  auditLogs               AuditLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model UserRole {
+  id     String       @id @default(uuid())
+  userId String
+  role   UserRoleType
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, role])
+  @@index([role])
+}
+
+model ProviderProfile {
+  id            String       @id @default(uuid())
+  userId        String       @unique
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind          ProviderKind @default(INDIVIDUAL)
+  businessName  String
+  bio           String?
+  taxId         String?
+  verified      Boolean      @default(false)
+  verifiedAt    DateTime?
+  avgRating     Float        @default(0)
+  reviewCount   Int          @default(0)
+  completedJobs Int          @default(0)
+
+  serviceAreas ProviderServiceArea[]
+  categories   ProviderCategory[]
+  documents    ProviderDocument[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([verified])
+  @@index([avgRating])
+}
+
+model ProviderServiceArea {
+  id         String          @id @default(uuid())
+  providerId String
+  provider   ProviderProfile @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  cityId     String
+  city       City            @relation(fields: [cityId], references: [id])
+
+  @@unique([providerId, cityId])
+}
+
+model ProviderCategory {
+  id         String          @id @default(uuid())
+  providerId String
+  provider   ProviderProfile @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, categoryId])
+}
+
+model ProviderDocument {
+  id         String          @id @default(uuid())
+  providerId String
+  provider   ProviderProfile @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  mediaId    String
+  media      Media           @relation(fields: [mediaId], references: [id])
+  label      String
+  approved   Boolean         @default(false)
+  createdAt  DateTime        @default(now())
+}
+
+// ----------------------- Kategoriler (i18n) -----------------------
+
+model Category {
+  id       String     @id @default(uuid())
+  slug     String     @unique
+  parentId String?
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryTree")
+  icon     String?
+  order    Int        @default(0)
+  active   Boolean    @default(true)
+
+  translations CategoryTranslation[]
+  listings     Listing[]
+  providers    ProviderCategory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([parentId])
+  @@index([active])
+}
+
+model CategoryTranslation {
+  id          String   @id @default(uuid())
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  locale      Locale
+  name        String
+  description String?
+
+  @@unique([categoryId, locale])
+}
+
+// ----------------------- Konum (il/ilçe) -----------------------
+
+model City {
+  id           String                @id @default(uuid())
+  name         String
+  code         String?               @unique
+  countryCode  String                @default("TR")
+  districts    District[]
+  listings     Listing[]
+  serviceAreas ProviderServiceArea[]
+
+  @@index([countryCode])
+}
+
+model District {
+  id       String    @id @default(uuid())
+  cityId   String
+  city     City      @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  name     String
+  listings Listing[]
+
+  @@unique([cityId, name])
+}
+
+// ----------------------- İlan (talep) -----------------------
+
+model Listing {
+  id          String        @id @default(uuid())
+  ownerId     String
+  owner       User          @relation("ListingOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  categoryId  String
+  category    Category      @relation(fields: [categoryId], references: [id])
+  cityId      String
+  city        City          @relation(fields: [cityId], references: [id])
+  districtId  String?
+  district    District?     @relation(fields: [districtId], references: [id])
+
+  title       String
+  description String
+  locale      Locale        @default(tr)
+  status      ListingStatus @default(PENDING_REVIEW)
+  urgency     UrgencyLevel  @default(FLEXIBLE)
+
+  budgetType BudgetType @default(NEGOTIABLE)
+  budgetMin  Decimal?   @db.Decimal(12, 2)
+  budgetMax  Decimal?   @db.Decimal(12, 2)
+  currency   String     @default("TRY")
+
+  offerCount Int @default(0)
+  viewCount  Int @default(0)
+
+  photos        Media[]        @relation("ListingPhotos")
+  offers        Offer[]
+  conversations Conversation[]
+  reviews       Review[]
+
+  publishedAt DateTime?
+  expiresAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([status, createdAt])
+  @@index([categoryId])
+  @@index([cityId])
+  @@index([ownerId])
+}
+
+// ----------------------- Teklif -----------------------
+
+model Offer {
+  id         String @id @default(uuid())
+  listingId  String
+  listing    Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  providerId String
+  provider   User    @relation("OfferProvider", fields: [providerId], references: [id], onDelete: Cascade)
+
+  price         Decimal     @db.Decimal(12, 2)
+  currency      String      @default("TRY")
+  message       String
+  estimatedDays Int?
+  status        OfferStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([listingId, providerId])
+  @@index([status])
+  @@index([providerId])
+}
+
+// ----------------------- Mesajlaşma -----------------------
+
+model Conversation {
+  id            String    @id @default(uuid())
+  listingId     String
+  listing       Listing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  customerId    String
+  customer      User      @relation("ConvCustomer", fields: [customerId], references: [id], onDelete: Cascade)
+  providerId    String
+  provider      User      @relation("ConvProvider", fields: [providerId], references: [id], onDelete: Cascade)
+  messages      Message[]
+  lastMessageAt DateTime?
+  createdAt     DateTime  @default(now())
+
+  @@unique([listingId, customerId, providerId])
+  @@index([customerId])
+  @@index([providerId])
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  body           String
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId, createdAt])
+}
+
+// ----------------------- Değerlendirme -----------------------
+
+model Review {
+  id        String          @id @default(uuid())
+  listingId String
+  listing   Listing         @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User            @relation("ReviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  targetId  String
+  target    User            @relation("ReviewTarget", fields: [targetId], references: [id], onDelete: Cascade)
+  direction ReviewDirection
+  rating    Int
+  comment   String?
+  createdAt DateTime        @default(now())
+
+  @@unique([listingId, authorId, direction])
+  @@index([targetId])
+}
+
+// ----------------------- Güvenlik: OTP, token -----------------------
+
+model OtpCode {
+  id         String     @id @default(uuid())
+  userId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channel    OtpChannel
+  purpose    OtpPurpose
+  codeHash   String
+  attempts   Int        @default(0)
+  consumedAt DateTime?
+  expiresAt  DateTime
+  createdAt  DateTime   @default(now())
+
+  @@index([userId, purpose])
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  userAgent String?
+  ip        String?
+  revokedAt DateTime?
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+model PushToken {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique // Expo push token (ExponentPushToken[...])
+  platform  String? // ios | android
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ----------------------- Bildirim -----------------------
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  titleKey  String
+  data      Json?
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  @@index([userId, readAt])
+}
+
+// ----------------------- Medya -----------------------
+
+model Media {
+  id      String    @id @default(uuid())
+  ownerId String?
+  owner   User?     @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  type    MediaType @default(IMAGE)
+  key     String
+  url     String
+  mime    String?
+  size    Int?
+  width   Int?
+  height  Int?
+
+  listingId    String?
+  listing      Listing?           @relation("ListingPhotos", fields: [listingId], references: [id], onDelete: SetNull)
+  providerDocs ProviderDocument[]
+
+  createdAt DateTime @default(now())
+}
+
+// ----------------------- Ödeme / Taahhüt (escrow) -----------------------
+
+model Payment {
+  id          String        @id @default(uuid())
+  listingId   String
+  offerId     String        @unique
+  payerId     String // müşteri
+  payer       User          @relation("PaymentPayer", fields: [payerId], references: [id])
+  payeeId     String // usta
+  payee       User          @relation("PaymentPayee", fields: [payeeId], references: [id])
+
+  amount      Decimal       @db.Decimal(12, 2) // toplam tutar
+  commission  Decimal       @db.Decimal(12, 2) // platform komisyonu
+  payout      Decimal       @db.Decimal(12, 2) // ustaya net aktarılacak
+  currency    String        @default("TRY")
+  status      PaymentStatus @default(PENDING)
+
+  provider    String        @default("mock") // iyzico | stripe | mock
+  providerRef String? // sağlayıcı işlem kimliği
+
+  heldAt      DateTime?
+  releasedAt  DateTime?
+  refundedAt  DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([payerId])
+  @@index([payeeId])
+  @@index([status])
+}
+
+// ----------------------- Moderasyon & Denetim -----------------------
+
+model Report {
+  id         String           @id @default(uuid())
+  reporterId String
+  reporter   User             @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  targetType ReportTargetType
+  targetId   String
+  reason     String
+  status     ReportStatus     @default(OPEN)
+  resolution String?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@index([status])
+  @@index([targetType, targetId])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action    String
+  target    String?
+  meta      Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([actorId])
+  @@index([action])
+  @@index([createdAt])
+}

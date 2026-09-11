@@ -1,0 +1,7 @@
+{
+  "name": "@ustam/config",
+  "version": "0.1.0",
+  "private": true,
+  "files": ["tsconfig.base.json", "tsconfig.nest.json", "tsconfig.next.json"],
+  "main": "index.js"
+}

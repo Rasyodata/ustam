@@ -1,0 +1,41 @@
+# Ustam — Render Blueprint (api + web + PostgreSQL). Ücretsiz plan.
+databases:
+  - name: ustam-db
+    plan: free
+    databaseName: ustam
+    user: ustam
+
+services:
+  - type: web
+    name: ustam-api
+    runtime: node
+    plan: free
+    buildCommand: npm install -g pnpm@9.12.0 && pnpm install --no-frozen-lockfile --prod=false && pnpm --filter @ustam/api exec prisma generate && pnpm --filter @ustam/api build
+    startCommand: pnpm --filter @ustam/api exec prisma db push --accept-data-loss && (pnpm --filter @ustam/api exec prisma db seed || true) && node apps/api/dist/main.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ustam-db
+          property: connectionString
+      - key: WEB_URL
+        value: https://ustam-web.onrender.com
+      - key: ADMIN_URL
+        value: https://ustam-web.onrender.com
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+
+  - type: web
+    name: ustam-web
+    runtime: node
+    plan: free
+    buildCommand: npm install -g pnpm@9.12.0 && pnpm install --no-frozen-lockfile --prod=false && pnpm --filter @ustam/web build
+    startCommand: pnpm --filter @ustam/web exec next start -p $PORT
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://ustam-api.onrender.com

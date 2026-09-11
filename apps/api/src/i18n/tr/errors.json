@@ -1,0 +1,14 @@
+{
+  "generic": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+  "unauthorized": "Bu işlem için giriş yapmalısınız.",
+  "forbidden": "Bu işlem için yetkiniz yok.",
+  "notFound": "Kayıt bulunamadı.",
+  "invalidCredentials": "E-posta veya şifre hatalı.",
+  "emailTaken": "Bu e-posta zaten kayıtlı.",
+  "phoneTaken": "Bu telefon zaten kayıtlı.",
+  "weakPassword": "Şifre en az 8 karakter, bir harf ve bir rakam içermeli.",
+  "otpInvalid": "Doğrulama kodu hatalı veya süresi dolmuş.",
+  "otpTooMany": "Çok fazla deneme. Lütfen biraz sonra tekrar deneyin.",
+  "rateLimited": "Çok sık istek. Lütfen bekleyin.",
+  "offerLimit": "Bu ilan en fazla teklif sayısına ulaştı (5)."
+}

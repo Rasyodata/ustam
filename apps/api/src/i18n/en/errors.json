@@ -1,0 +1,14 @@
+{
+  "generic": "Something went wrong. Please try again.",
+  "unauthorized": "You must log in to do this.",
+  "forbidden": "You don't have permission for this action.",
+  "notFound": "Record not found.",
+  "invalidCredentials": "Invalid email or password.",
+  "emailTaken": "This email is already registered.",
+  "phoneTaken": "This phone is already registered.",
+  "weakPassword": "Password must be at least 8 characters with a letter and a number.",
+  "otpInvalid": "Verification code is invalid or expired.",
+  "otpTooMany": "Too many attempts. Please try again later.",
+  "rateLimited": "Too many requests. Please wait.",
+  "offerLimit": "This job has reached the maximum number of offers (5)."
+}

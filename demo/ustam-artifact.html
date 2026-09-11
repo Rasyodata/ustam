@@ -1,0 +1,867 @@
+<style>
+  :root{
+    --bg:#0f1420; --bg2:#151c2c; --card:#1b2335; --card2:#222c42;
+    --line:#2b3650; --text:#eaf0ff; --muted:#97a3be; --brand:#ff7a1a;
+    --brand2:#ffb347; --accent:#2dd4bf; --danger:#f43f5e; --ok:#34d399;
+    --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 600px at 80% -10%,#1c2740 0,var(--bg) 55%);
+    color:var(--text); line-height:1.5; min-height:100vh;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px}
+  .row{display:flex;gap:16px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;
+    font-weight:700;font-size:15px;padding:11px 18px;border-radius:12px;
+    background:var(--card2);color:var(--text);transition:.15s;white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#1a1205}
+  .btn-ghost{background:transparent;border:1px solid var(--line)}
+  .btn-sm{padding:7px 12px;font-size:13px;border-radius:10px}
+  .pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);
+    background:rgba(15,20,32,.82);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:18px;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;letter-spacing:.3px}
+  .logo .mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));color:#1a1205;font-size:20px}
+  .nav-links{display:flex;gap:18px;margin-inline-start:auto;align-items:center}
+  .nav-links a{color:var(--muted);font-weight:600;font-size:14px}
+  .nav-links a:hover{color:var(--text)}
+  .lang{position:relative}
+  .lang-btn{background:var(--card2);border:1px solid var(--line);border-radius:10px;
+    padding:8px 12px;cursor:pointer;color:var(--text);font-weight:700;font-size:13px}
+  .lang-menu{position:absolute;inset-inline-end:0;top:46px;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;padding:6px;min-width:150px;
+    box-shadow:var(--shadow);display:none}
+  .lang-menu.open{display:block}
+  .lang-menu button{display:flex;gap:10px;width:100%;background:none;border:none;color:var(--text);
+    padding:9px 10px;border-radius:8px;cursor:pointer;font-size:14px;align-items:center;text-align:start}
+  .lang-menu button:hover{background:var(--card2)}
+  @media(max-width:820px){.nav-links a.hide-sm{display:none}}
+
+  /* Hero */
+  .hero{padding:56px 0 34px}
+  .hero h1{font-size:clamp(28px,5vw,46px);line-height:1.12;margin:0 0 14px;font-weight:900}
+  .hero p.sub{color:var(--muted);font-size:18px;margin:0 0 26px;max-width:620px}
+  .searchbar{display:flex;gap:10px;background:var(--card);border:1px solid var(--line);
+    padding:10px;border-radius:16px;box-shadow:var(--shadow);max-width:760px;flex-wrap:wrap}
+  .searchbar input,.searchbar select{
+    background:var(--bg2);border:1px solid var(--line);color:var(--text);
+    padding:13px 14px;border-radius:11px;font-size:15px;outline:none}
+  .searchbar input{flex:1;min-width:180px}
+  .searchbar select{min-width:130px}
+  .hero-stats{display:flex;gap:34px;margin-top:30px;flex-wrap:wrap}
+  .hero-stats .n{font-size:26px;font-weight:900}
+  .hero-stats .l{color:var(--muted);font-size:13px}
+
+  section{padding:30px 0}
+  .sec-title{font-size:22px;font-weight:800;margin:0 0 18px}
+
+  /* Categories */
+  .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .cat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;
+    cursor:pointer;transition:.15s;display:flex;flex-direction:column;gap:8px}
+  .cat:hover{border-color:var(--brand);transform:translateY(-2px)}
+  .cat .ic{font-size:26px}
+  .cat .nm{font-weight:700;font-size:14px}
+  .cat .ct{color:var(--muted);font-size:12px}
+
+  /* How */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .step .num{width:34px;height:34px;border-radius:10px;background:var(--card2);
+    display:grid;place-items:center;font-weight:900;color:var(--brand2);margin-bottom:12px}
+  .step h3{margin:0 0 6px;font-size:16px}
+  .step p{margin:0;color:var(--muted);font-size:14px}
+
+  /* Listings */
+  .listings{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .lcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    cursor:pointer;transition:.15s;display:flex;flex-direction:column}
+  .lcard:hover{border-color:var(--brand);transform:translateY(-3px)}
+  .lcard .ph{height:140px;background:linear-gradient(135deg,#26324c,#1a2133);
+    display:grid;place-items:center;font-size:46px}
+  .lcard .bd{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .lcard h4{margin:0;font-size:16px}
+  .lcard .meta{color:var(--muted);font-size:13px;display:flex;gap:10px;flex-wrap:wrap}
+  .lcard .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:6px}
+  .badge-urgent{background:rgba(244,63,94,.16);color:#ff8ba0}
+  .badge-week{background:rgba(45,212,191,.16);color:#5eead4}
+  .badge-flex{background:rgba(151,163,190,.16);color:#b9c3da}
+  .badge-offers{background:rgba(255,122,26,.16);color:var(--brand2)}
+
+  /* Modal */
+  .overlay{position:fixed;inset:0;background:rgba(5,8,15,.7);backdrop-filter:blur(4px);
+    display:none;align-items:flex-start;justify-content:center;z-index:60;padding:30px 16px;overflow:auto}
+  .overlay.open{display:flex}
+  .modal{background:var(--bg2);border:1px solid var(--line);border-radius:18px;max-width:560px;
+    width:100%;box-shadow:var(--shadow);animation:pop .18s ease}
+  .modal.wide{max-width:720px}
+  @keyframes pop{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+  .modal .mh{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line)}
+  .modal .mh h3{margin:0;font-size:19px}
+  .modal .mb{padding:20px}
+  .x{background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;line-height:1}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:600}
+  .field input,.field select,.field textarea{width:100%;background:var(--card);border:1px solid var(--line);
+    color:var(--text);padding:12px;border-radius:11px;font-size:15px;outline:none;font-family:inherit}
+  .field textarea{min-height:90px;resize:vertical}
+  .seg{display:flex;gap:8px;flex-wrap:wrap}
+  .seg .opt{flex:1;min-width:120px;border:1px solid var(--line);border-radius:11px;padding:11px;
+    text-align:center;cursor:pointer;font-size:14px;font-weight:600;background:var(--card)}
+  .seg .opt.active{border-color:var(--brand);background:rgba(255,122,26,.12);color:var(--brand2)}
+  .tabs{display:flex;gap:8px;margin-bottom:16px}
+  .tab{flex:1;padding:10px;text-align:center;border-radius:10px;cursor:pointer;font-weight:700;
+    background:var(--card);border:1px solid var(--line);font-size:14px}
+  .tab.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#1a1205;border-color:transparent}
+
+  /* Offers in detail */
+  .offer{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
+  .offer .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .offer .who{font-weight:700}
+  .offer .price{font-weight:900;color:var(--brand2);font-size:17px}
+  .offer .msg{color:var(--muted);font-size:14px}
+  .stars{color:#ffc14d;font-size:13px}
+
+  .toast{position:fixed;inset-inline:0;bottom:24px;margin:auto;width:max-content;max-width:90%;
+    background:var(--ok);color:#06281c;font-weight:700;padding:12px 20px;border-radius:12px;
+    box-shadow:var(--shadow);z-index:80;opacity:0;transform:translateY(12px);transition:.25s;pointer-events:none}
+  .toast.show{opacity:1;transform:none}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 0;color:var(--muted);font-size:13px}
+  .demo-note{background:rgba(255,122,26,.1);border:1px dashed var(--brand);border-radius:12px;
+    padding:10px 14px;font-size:13px;color:var(--brand2);margin-top:18px}
+</style>
+<header>
+  <div class="container nav">
+    <div class="logo"><span class="mark">🛠️</span><span>Ustam</span></div>
+    <nav class="nav-links">
+      <a class="hide-sm" data-i18n="nav.home" onclick="window.scrollTo({top:0,behavior:'smooth'})">Ana Sayfa</a>
+      <a class="hide-sm" style="color:#5eead4" onclick="scrollToId('guarantee')">🛡️ Güvence</a>
+      <a class="hide-sm" data-i18n="nav.howItWorks" onclick="scrollToId('how')">Nasıl Çalışır?</a>
+      <a class="hide-sm" data-i18n="nav.becomeProvider">Usta Ol</a>
+      <button class="btn btn-ghost btn-sm" data-i18n="common.login" onclick="openAuth('login')">Giriş</button>
+      <button class="btn btn-primary btn-sm" data-i18n="common.register" onclick="openAuth('register')">Kayıt ol</button>
+      <div class="lang">
+        <button class="lang-btn" onclick="toggleLang(event)"><span id="langFlag">🇹🇷</span> <span id="langCode">TR</span> ▾</button>
+        <div class="lang-menu" id="langMenu">
+          <button onclick="setLang('tr')">🇹🇷 Türkçe</button>
+          <button onclick="setLang('en')">🇬🇧 English</button>
+          <button onclick="setLang('de')">🇩🇪 Deutsch</button>
+          <button onclick="setLang('fr')">🇫🇷 Français</button>
+          <button onclick="setLang('es')">🇪🇸 Español</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container">
+      <h1 data-i18n="home.heroTitle">Küçük tamiratlar veya büyük projeler — ustanı dakikalar içinde bul.</h1>
+      <p class="sub" data-i18n="home.heroSubtitle">İlanını aç, ustalardan teklif topla, en uygununu seç.</p>
+      <div class="searchbar">
+        <input id="q" data-i18n-ph="common.searchPlaceholder" placeholder="Ne yaptırmak istiyorsunuz?" />
+        <select id="cityF"><option value="" data-i18n="common.city">Şehir</option></select>
+        <button class="btn btn-primary" onclick="doSearch()"><span data-i18n="common.search">Ara</span> 🔎</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="n">12.400+</div><div class="l" data-i18n="home.statsProviders">Kayıtlı usta</div></div>
+        <div><div class="n">89.300+</div><div class="l" data-i18n="home.statsListings">Açılan ilan</div></div>
+        <div><div class="n">81</div><div class="l" data-i18n="home.statsCities">Hizmet şehri</div></div>
+      </div>
+      <div class="demo-note">⚙️ Bu interaktif bir <b>önizleme demosudur</b> (örnek verilerle). Gerçek sürümde tüm veriler canlı backend'den gelir.</div>
+    </div>
+  </div>
+
+  <!-- TRUST BAND -->
+  <section style="padding-top:6px">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
+          <span style="font-size:28px">🛡️</span><div><div class="nm" id="tEscrow"></div><div class="ct" id="tEscrowD"></div></div>
+        </div>
+        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
+          <span style="font-size:28px">✅</span><div><div class="nm" id="tVerified"></div><div class="ct" id="tVerifiedD"></div></div>
+        </div>
+        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
+          <span style="font-size:28px">💬</span><div><div class="nm" id="tFree"></div><div class="ct" id="tFreeD"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COST ESTIMATOR -->
+  <section style="padding-top:10px">
+    <div class="container">
+      <div class="lcard" style="cursor:default;padding:20px">
+        <h2 class="sec-title" style="margin:0 0 6px" id="estTitle"></h2>
+        <p style="color:var(--muted);margin:0 0 14px;font-size:14px" id="estDesc"></p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <select id="estCat" class="searchbar" style="padding:12px 14px;border-radius:11px;background:var(--bg2);border:1px solid var(--line);color:var(--text);min-width:220px" onchange="renderEstimate()"></select>
+          <div id="estOut" style="font-weight:900;font-size:20px;color:var(--brand2)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USTAM GÜVENCESİ -->
+  <section id="guarantee" style="padding-top:10px">
+    <div class="container">
+      <h2 class="sec-title" id="guarTitle" style="margin-bottom:4px"></h2>
+      <p style="color:var(--muted);margin:0 0 16px;font-size:14px" id="guarSub"></p>
+      <div class="cats" id="guarGrid"></div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="cats">
+    <div class="container">
+      <h2 class="sec-title" id="anaCatTitle" style="margin-bottom:4px"></h2>
+      <p style="color:var(--muted);margin:0 0 12px;font-size:14px" id="anaCatSub"></p>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+        <span style="font-size:14px;color:var(--muted);font-weight:600" id="anaCityLbl"></span>
+        <select id="anaCity" onchange="setCityFactor()" class="lang-btn" style="min-width:160px"></select>
+      </div>
+      <div class="cats" id="catGrid"></div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section id="how">
+    <div class="container">
+      <h2 class="sec-title" data-i18n="home.howTitle">Nasıl çalışır?</h2>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h3 data-i18n="home.step1Title">İlanını aç</h3><p data-i18n="home.step1Desc">Yaptırmak istediğin işi birkaç cümleyle anlat.</p></div>
+        <div class="step"><div class="num">2</div><h3 data-i18n="home.step2Title">Teklifleri topla</h3><p data-i18n="home.step2Desc">İlgili ustalar sana teklif gönderir.</p></div>
+        <div class="step"><div class="num">3</div><h3 data-i18n="home.step3Title">Ustanı seç</h3><p data-i18n="home.step3Desc">Puanları, yorumları karşılaştır ve işe başla.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USTA ANALİZİ -->
+  <section style="padding-top:6px">
+    <div class="container">
+      <h2 class="sec-title" id="anaProTitle" style="margin-bottom:4px"></h2>
+      <p style="color:var(--muted);margin:0 0 16px;font-size:14px" id="anaProSub"></p>
+      <div class="lcard" style="cursor:default;padding:20px;display:flex;flex-direction:column;gap:12px" id="anaProv"></div>
+    </div>
+  </section>
+
+  <!-- PROVIDERS (puana göre sıralı) -->
+  <section>
+    <div class="container">
+      <h2 class="sec-title" id="prosTitle" style="margin-bottom:4px"></h2>
+      <p style="color:var(--muted);margin:0 0 16px;font-size:14px" id="prosSub"></p>
+      <div id="prosGrid"></div>
+    </div>
+  </section>
+
+  <!-- LISTINGS -->
+  <section>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <h2 class="sec-title" style="margin:0" id="jbTitle">🔧 Tamirat İlanları</h2>
+        <button class="btn btn-primary" onclick="openPost()">＋ <span data-i18n="listing.create">İlan ver</span></button>
+      </div>
+      <div class="listings" id="listGrid" style="margin-top:16px"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="logo" style="font-size:18px;margin-bottom:8px"><span class="mark" style="width:26px;height:26px;font-size:15px">🛠️</span> Ustam</div>
+    <span data-i18n="common.tagline">İşini ustasına bırak.</span> · © 2026 Ustam · Demo
+  </div>
+</footer>
+
+<!-- MODAL ROOT -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal"><div id="modalInner"></div></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ i18n sözlükleri (5 dil) ============ */
+const I18N = {
+  tr:{common:{appName:"Ustam",tagline:"İşini ustasına bırak.",search:"Ara",searchPlaceholder:"Ne yaptırmak istiyorsunuz? (örn. musluk tamiri)",login:"Giriş yap",register:"Kayıt ol",city:"Şehir",category:"Kategori",submit:"Gönder",cancel:"İptal"},
+    nav:{home:"Ana Sayfa",categories:"Kategoriler",howItWorks:"Nasıl Çalışır?",becomeProvider:"Usta Ol",myListings:"Güncel ilanlar"},
+    home:{heroTitle:"Küçük tamiratlar veya büyük projeler — ustanı dakikalar içinde bul.",heroSubtitle:"İlanını aç, ustalardan teklif topla, en uygununu seç.",popularCategories:"Popüler kategoriler",howTitle:"Nasıl çalışır?",step1Title:"İlanını aç",step1Desc:"Yaptırmak istediğin işi birkaç cümleyle anlat.",step2Title:"Teklifleri topla",step2Desc:"İlgili ustalar sana teklif gönderir.",step3Title:"Ustanı seç",step3Desc:"Puanları, yorumları karşılaştır ve işe başla.",statsProviders:"Kayıtlı usta",statsListings:"Açılan ilan",statsCities:"Hizmet şehri"},
+    listing:{create:"İlan ver",title:"Başlık",description:"İş açıklaması",urgency:"Aciliyet",offers:"teklif",make:"Teklif ver"},
+    auth:{loginTitle:"Hesabına giriş yap",registerTitle:"Yeni hesap oluştur",email:"E-posta",phone:"Telefon",password:"Şifre",displayName:"Ad Soyad / İşletme adı",customer:"İş veren (ilan açarım)",provider:"Usta / Hizmet veren",company:"Şirket",otpSent:"Doğrulama kodu gönderildi (SMS + e-posta)."},
+    offer:{make:"Teklif ver",price:"Teklif tutarı",message:"Mesajınız",accept:"Teklifi kabul et",statusPending:"Bekliyor"},
+    urg:{FLEXIBLE:"Esnek",WITHIN_WEEK:"Bu hafta",URGENT:"Acil",EMERGENCY:"Çok acil"},
+    msg:{posted:"İlanınız yayınlandı! Ustalara bildirildi.",offered:"Teklifiniz gönderildi!",accepted:"Teklif kabul edildi!",loggedin:"Hoş geldiniz!"}},
+  en:{common:{appName:"Ustam",tagline:"Leave the job to the pros.",search:"Search",searchPlaceholder:"What do you need done? (e.g. faucet repair)",login:"Log in",register:"Sign up",city:"City",category:"Category",submit:"Submit",cancel:"Cancel"},
+    nav:{home:"Home",categories:"Categories",howItWorks:"How it works",becomeProvider:"Become a pro",myListings:"Recent jobs"},
+    home:{heroTitle:"Small fixes or big projects — find your pro in minutes.",heroSubtitle:"Post your job, collect offers from pros, pick the best one.",popularCategories:"Popular categories",howTitle:"How it works",step1Title:"Post your job",step1Desc:"Describe what you need in a few sentences.",step2Title:"Collect offers",step2Desc:"Relevant pros send you their offers.",step3Title:"Choose your pro",step3Desc:"Compare ratings and reviews, then get started.",statsProviders:"Registered pros",statsListings:"Jobs posted",statsCities:"Cities served"},
+    listing:{create:"Post a job",title:"Title",description:"Job description",urgency:"Urgency",offers:"offers",make:"Make an offer"},
+    auth:{loginTitle:"Log in to your account",registerTitle:"Create a new account",email:"Email",phone:"Phone",password:"Password",displayName:"Full name / Business name",customer:"Client (I post jobs)",provider:"Pro / Service provider",company:"Company",otpSent:"Verification code sent (SMS + email)."},
+    offer:{make:"Make an offer",price:"Offer amount",message:"Your message",accept:"Accept offer",statusPending:"Pending"},
+    urg:{FLEXIBLE:"Flexible",WITHIN_WEEK:"This week",URGENT:"Urgent",EMERGENCY:"Emergency"},
+    msg:{posted:"Your job is published! Pros have been notified.",offered:"Your offer was sent!",accepted:"Offer accepted!",loggedin:"Welcome!"}},
+  de:{common:{appName:"Ustam",tagline:"Überlass die Arbeit den Profis.",search:"Suchen",searchPlaceholder:"Was soll erledigt werden? (z. B. Wasserhahn reparieren)",login:"Anmelden",register:"Registrieren",city:"Stadt",category:"Kategorie",submit:"Senden",cancel:"Abbrechen"},
+    nav:{home:"Startseite",categories:"Kategorien",howItWorks:"So funktioniert's",becomeProvider:"Profi werden",myListings:"Aktuelle Aufträge"},
+    home:{heroTitle:"Kleine Reparaturen oder große Projekte – finde deinen Profi in Minuten.",heroSubtitle:"Stelle deinen Auftrag ein, sammle Angebote, wähle das beste aus.",popularCategories:"Beliebte Kategorien",howTitle:"So funktioniert's",step1Title:"Auftrag einstellen",step1Desc:"Beschreibe in wenigen Sätzen, was du brauchst.",step2Title:"Angebote sammeln",step2Desc:"Passende Profis senden dir ihre Angebote.",step3Title:"Profi auswählen",step3Desc:"Vergleiche Bewertungen und leg los.",statsProviders:"Registrierte Profis",statsListings:"Eingestellte Aufträge",statsCities:"Versorgte Städte"},
+    listing:{create:"Auftrag einstellen",title:"Titel",description:"Auftragsbeschreibung",urgency:"Dringlichkeit",offers:"Angebote",make:"Angebot abgeben"},
+    auth:{loginTitle:"In dein Konto einloggen",registerTitle:"Neues Konto erstellen",email:"E-Mail",phone:"Telefon",password:"Passwort",displayName:"Name / Firmenname",customer:"Auftraggeber",provider:"Profi / Dienstleister",company:"Unternehmen",otpSent:"Bestätigungscode gesendet (SMS + E-Mail)."},
+    offer:{make:"Angebot abgeben",price:"Angebotsbetrag",message:"Deine Nachricht",accept:"Angebot annehmen",statusPending:"Ausstehend"},
+    urg:{FLEXIBLE:"Flexibel",WITHIN_WEEK:"Diese Woche",URGENT:"Dringend",EMERGENCY:"Notfall"},
+    msg:{posted:"Dein Auftrag ist veröffentlicht! Profis wurden benachrichtigt.",offered:"Dein Angebot wurde gesendet!",accepted:"Angebot angenommen!",loggedin:"Willkommen!"}},
+  fr:{common:{appName:"Ustam",tagline:"Confiez le travail aux pros.",search:"Rechercher",searchPlaceholder:"De quoi avez-vous besoin ? (ex. réparation de robinet)",login:"Se connecter",register:"S'inscrire",city:"Ville",category:"Catégorie",submit:"Envoyer",cancel:"Annuler"},
+    nav:{home:"Accueil",categories:"Catégories",howItWorks:"Comment ça marche",becomeProvider:"Devenir pro",myListings:"Demandes récentes"},
+    home:{heroTitle:"Petites réparations ou grands projets — trouvez votre pro en minutes.",heroSubtitle:"Publiez votre demande, recevez des offres, choisissez la meilleure.",popularCategories:"Catégories populaires",howTitle:"Comment ça marche",step1Title:"Publiez votre demande",step1Desc:"Décrivez votre besoin en quelques phrases.",step2Title:"Recevez des offres",step2Desc:"Les pros concernés vous envoient leurs offres.",step3Title:"Choisissez votre pro",step3Desc:"Comparez les notes et les avis, puis commencez.",statsProviders:"Pros inscrits",statsListings:"Demandes publiées",statsCities:"Villes desservies"},
+    listing:{create:"Publier une demande",title:"Titre",description:"Description du travail",urgency:"Urgence",offers:"offres",make:"Faire une offre"},
+    auth:{loginTitle:"Connectez-vous à votre compte",registerTitle:"Créer un nouveau compte",email:"E-mail",phone:"Téléphone",password:"Mot de passe",displayName:"Nom / Nom de l'entreprise",customer:"Client (je publie)",provider:"Pro / Prestataire",company:"Entreprise",otpSent:"Code de vérification envoyé (SMS + e-mail)."},
+    offer:{make:"Faire une offre",price:"Montant de l'offre",message:"Votre message",accept:"Accepter l'offre",statusPending:"En attente"},
+    urg:{FLEXIBLE:"Flexible",WITHIN_WEEK:"Cette semaine",URGENT:"Urgent",EMERGENCY:"Très urgent"},
+    msg:{posted:"Votre demande est publiée ! Les pros ont été notifiés.",offered:"Votre offre a été envoyée !",accepted:"Offre acceptée !",loggedin:"Bienvenue !"}},
+  es:{common:{appName:"Ustam",tagline:"Deja el trabajo en manos de profesionales.",search:"Buscar",searchPlaceholder:"¿Qué necesitas hacer? (ej. reparar grifo)",login:"Iniciar sesión",register:"Registrarse",city:"Ciudad",category:"Categoría",submit:"Enviar",cancel:"Cancelar"},
+    nav:{home:"Inicio",categories:"Categorías",howItWorks:"Cómo funciona",becomeProvider:"Ser profesional",myListings:"Solicitudes recientes"},
+    home:{heroTitle:"Pequeñas reparaciones o grandes proyectos: encuentra tu profesional en minutos.",heroSubtitle:"Publica tu solicitud, recibe ofertas, elige la mejor.",popularCategories:"Categorías populares",howTitle:"Cómo funciona",step1Title:"Publica tu solicitud",step1Desc:"Describe lo que necesitas en pocas frases.",step2Title:"Recibe ofertas",step2Desc:"Los profesionales relevantes te envían sus ofertas.",step3Title:"Elige tu profesional",step3Desc:"Compara calificaciones y reseñas, y empieza.",statsProviders:"Profesionales registrados",statsListings:"Solicitudes publicadas",statsCities:"Ciudades atendidas"},
+    listing:{create:"Publicar solicitud",title:"Título",description:"Descripción del trabajo",urgency:"Urgencia",offers:"ofertas",make:"Hacer una oferta"},
+    auth:{loginTitle:"Inicia sesión en tu cuenta",registerTitle:"Crear una cuenta nueva",email:"Correo",phone:"Teléfono",password:"Contraseña",displayName:"Nombre / Empresa",customer:"Cliente (publico)",provider:"Profesional / Proveedor",company:"Empresa",otpSent:"Código de verificación enviado (SMS + correo)."},
+    offer:{make:"Hacer una oferta",price:"Importe de la oferta",message:"Tu mensaje",accept:"Aceptar oferta",statusPending:"Pendiente"},
+    urg:{FLEXIBLE:"Flexible",WITHIN_WEEK:"Esta semana",URGENT:"Urgente",EMERGENCY:"Muy urgente"},
+    msg:{posted:"¡Tu solicitud está publicada! Los profesionales fueron notificados.",offered:"¡Tu oferta fue enviada!",accepted:"¡Oferta aceptada!",loggedin:"¡Bienvenido!"}}
+};
+
+const FLAGS={tr:"🇹🇷",en:"🇬🇧",de:"🇩🇪",fr:"🇫🇷",es:"🇪🇸"};
+
+/* Ödeme/taahhüt (escrow) sözlüğü */
+const PAY={
+  tr:{secure:"Güvenli Ödeme",escrowInfo:"Ödemeniz iş bitene kadar Ustam güvencesinde (emanette) tutulur.",amount:"Teklif tutarı",commission:"Platform komisyonu (%10)",net:"Ustaya aktarılacak",payBtn:"Emanete al & Öde",held:"💰 Ödeme emanette tutuluyor",heldDesc:"İş tamamlandığında onaylayın; tutar komisyon kesilerek ustaya aktarılır.",release:"İşi tamamla & Ustaya aktar",released:"🎉 Ödeme ustaya aktarıldı!",refund:"İade al"},
+  en:{secure:"Secure Payment",escrowInfo:"Your payment is held safely in Ustam escrow until the job is done.",amount:"Offer amount",commission:"Platform fee (10%)",net:"To be paid to pro",payBtn:"Hold in escrow & Pay",held:"💰 Payment held in escrow",heldDesc:"Confirm when the job is done; the amount is released to the pro minus the fee.",release:"Complete & Release to pro",released:"🎉 Payment released to the pro!",refund:"Refund"},
+  de:{secure:"Sichere Zahlung",escrowInfo:"Deine Zahlung wird bis zur Fertigstellung sicher im Ustam-Treuhandkonto gehalten.",amount:"Angebotsbetrag",commission:"Plattformgebühr (10%)",net:"An Profi auszuzahlen",payBtn:"Treuhänderisch zahlen",held:"💰 Zahlung im Treuhandkonto",heldDesc:"Bestätige nach Fertigstellung; der Betrag wird abzüglich Gebühr ausgezahlt.",release:"Abschließen & auszahlen",released:"🎉 Zahlung an Profi ausgezahlt!",refund:"Erstatten"},
+  fr:{secure:"Paiement sécurisé",escrowInfo:"Votre paiement est conservé en séquestre Ustam jusqu'à la fin du travail.",amount:"Montant de l'offre",commission:"Frais de plateforme (10%)",net:"À verser au pro",payBtn:"Séquestrer & Payer",held:"💰 Paiement en séquestre",heldDesc:"Confirmez à la fin ; le montant est versé au pro moins les frais.",release:"Terminer & Verser au pro",released:"🎉 Paiement versé au pro !",refund:"Rembourser"},
+  es:{secure:"Pago seguro",escrowInfo:"Tu pago se mantiene en depósito de Ustam hasta terminar el trabajo.",amount:"Importe de la oferta",commission:"Comisión de plataforma (10%)",net:"A pagar al profesional",payBtn:"Depositar y Pagar",held:"💰 Pago en depósito",heldDesc:"Confirma al terminar; el importe se paga al profesional menos la comisión.",release:"Completar y Pagar al profesional",released:"🎉 ¡Pago liberado al profesional!",refund:"Reembolsar"}
+};
+function p(k){return (PAY[lang]||PAY.tr)[k]}
+
+/* Değerlendirme/puanlama sözlüğü */
+const RATE={
+  tr:{title:"Ustayı değerlendir",desc:"İş nasıldı? Puanın diğer kullanıcılara yol gösterir.",comment:"Yorumun (isteğe bağlı)",send:"Değerlendirmeyi gönder",thanks:"Teşekkürler! Değerlendirmen kaydedildi.",selectStars:"Lütfen puan seç"},
+  en:{title:"Rate the pro",desc:"How was the job? Your rating helps others.",comment:"Your comment (optional)",send:"Submit review",thanks:"Thanks! Your review was saved.",selectStars:"Please select a rating"},
+  de:{title:"Profi bewerten",desc:"Wie war die Arbeit? Deine Bewertung hilft anderen.",comment:"Dein Kommentar (optional)",send:"Bewertung senden",thanks:"Danke! Deine Bewertung wurde gespeichert.",selectStars:"Bitte eine Bewertung wählen"},
+  fr:{title:"Évaluer le pro",desc:"Comment s'est passé le travail ? Votre note aide les autres.",comment:"Votre commentaire (facultatif)",send:"Envoyer l'avis",thanks:"Merci ! Votre avis a été enregistré.",selectStars:"Veuillez choisir une note"},
+  es:{title:"Califica al profesional",desc:"¿Cómo fue el trabajo? Tu calificación ayuda a otros.",comment:"Tu comentario (opcional)",send:"Enviar reseña",thanks:"¡Gracias! Tu reseña se guardó.",selectStars:"Selecciona una calificación"}
+};
+function r(k){return (RATE[lang]||RATE.tr)[k]}
+let ratingValue=0;
+
+/* Usta seviye rozeti (demoda puana göre) */
+const BADGE={
+  tr:{elite:"Elit Usta",topRated:"En İyi Usta",pro:"Pro",rising:"Yükselen"},
+  en:{elite:"Elite Pro",topRated:"Top Rated",pro:"Pro",rising:"Rising Pro"},
+  de:{elite:"Elite-Profi",topRated:"Top-Bewertet",pro:"Pro",rising:"Aufsteiger"},
+  fr:{elite:"Pro Élite",topRated:"Mieux noté",pro:"Pro",rising:"Pro montant"},
+  es:{elite:"Profesional Élite",topRated:"Mejor valorado",pro:"Pro",rising:"En ascenso"}
+};
+function tierFor(rating){
+  if(rating>=4.9)return{e:"👑",k:"elite",c:"#f0abfc"};
+  if(rating>=4.7)return{e:"⭐",k:"topRated",c:"#ffb347"};
+  if(rating>=4.3)return{e:"🔧",k:"pro",c:"#60a5fa"};
+  return{e:"📈",k:"rising",c:"#5eead4"};
+}
+function tierBadge(rating){
+  const m=tierFor(rating);const lbl=(BADGE[lang]||BADGE.tr)[m.k];
+  return `<span class="pill" style="color:${m.c};background:${m.c}22;margin-inline-start:6px">${m.e} ${lbl}</span>`;
+}
+
+/* Usta dizini (puana göre sıralı) */
+const PROS_I18N={
+  tr:{title:"Ustalar",subtitle:"Sektörünün en iyileri — müşteri puanlarına göre sıralı.",req:"Teklif iste",reqd:"Teklif istendi ✓",jobs:"iş",reviews:"değerlendirme"},
+  en:{title:"Pros",subtitle:"The best in their field — ranked by customer ratings.",req:"Request a quote",reqd:"Quote requested ✓",jobs:"jobs",reviews:"reviews"},
+  de:{title:"Profis",subtitle:"Die Besten ihres Fachs — nach Kundenbewertungen.",req:"Angebot anfordern",reqd:"Angefordert ✓",jobs:"Aufträge",reviews:"Bewertungen"},
+  fr:{title:"Pros",subtitle:"Les meilleurs — classés selon les avis clients.",req:"Demander un devis",reqd:"Demandé ✓",jobs:"travaux",reviews:"avis"},
+  es:{title:"Profesionales",subtitle:"Los mejores — ordenados por valoraciones.",req:"Solicitar presupuesto",reqd:"Solicitado ✓",jobs:"trabajos",reviews:"reseñas"}
+};
+function pr(k){return (PROS_I18N[lang]||PROS_I18N.tr)[k]}
+const PROVIDERS=[
+  {name:"Metal İmalat A.Ş.",cat:"manufacturing",rating:5.0,reviews:64,jobs:210},
+  {name:"Mehmet Usta Tesisat",cat:"plumbing",rating:4.9,reviews:37,jobs:152},
+  {name:"Çatı Ustası Hasan",cat:"roofing",rating:4.8,reviews:41,jobs:98},
+  {name:"Su Tesisat Ltd.",cat:"plumbing",rating:4.7,reviews:52,jobs:88},
+  {name:"Yıldız Elektrik",cat:"electrical",rating:4.6,reviews:29,jobs:61},
+  {name:"Demir Kaynak Atölyesi",cat:"ironwork",rating:4.4,reviews:18,jobs:34}
+];
+let prosReq={};
+function renderPros(){
+  const grid=document.getElementById('prosGrid');if(!grid)return;
+  const medals=["🥇","🥈","🥉"];
+  const sorted=[...PROVIDERS].sort((a,b)=>b.rating-a.rating);
+  document.getElementById('prosTitle').textContent="🏆 "+pr('title');
+  document.getElementById('prosSub').textContent=pr('subtitle');
+  grid.innerHTML=sorted.map((p,i)=>`
+    <div class="offer" style="display:flex;align-items:center;gap:14px">
+      <div style="font-size:22px;font-weight:900;width:34px;text-align:center;color:var(--muted)">${medals[i]||('#'+(i+1))}</div>
+      <div style="width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#1a1205;background:linear-gradient(135deg,var(--brand),var(--brand2))">${p.name[0]}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700">${p.name} ${tierBadge(p.rating)}</div>
+        <div style="color:var(--muted);font-size:13px"><span class="stars">★ ${p.rating.toFixed(1)}</span> · ${p.reviews} ${pr('reviews')} · ${p.jobs} ${pr('jobs')}</div>
+      </div>
+      <button class="btn btn-primary btn-sm" ${prosReq[p.name]?'disabled':''} onclick="reqQuote('${p.name.replace(/'/g,"")}')">${prosReq[p.name]?pr('reqd'):('📨 '+pr('req'))}</button>
+    </div>`).join("");
+}
+function reqQuote(name){prosReq[name]=true;renderPros();toast("📨 "+pr('reqd'))}
+
+/* Tamirat İlanları başlığı */
+const JB={tr:"🔧 Tamirat İlanları",en:"🔧 Repair Jobs",de:"🔧 Reparaturaufträge",fr:"🔧 Demandes de réparation",es:"🔧 Solicitudes de reparación"};
+function renderJobBoard(){const e=document.getElementById('jbTitle');if(e)e.textContent=JB[lang]||JB.tr}
+
+/* ============ Örnek veri ============ */
+const CATS=[
+  {icon:"🚰",key:"plumbing",tr:"Tesisat & Su",en:"Plumbing & Water",de:"Sanitär & Wasser",fr:"Plomberie & Eau",es:"Fontanería y Agua",c:1240,pmin:800,pmax:3500},
+  {icon:"💡",key:"electrical",tr:"Elektrik",en:"Electrical",de:"Elektrik",fr:"Électricité",es:"Electricidad",c:980,pmin:600,pmax:4000},
+  {icon:"🏗️",key:"construction",tr:"İnşaat & Tadilat",en:"Construction & Renovation",de:"Bau & Renovierung",fr:"Construction & Rénovation",es:"Construcción y Reforma",c:1530,pmin:15000,pmax:250000},
+  {icon:"🎨",key:"painting",tr:"Boya & Badana",en:"Painting",de:"Malerarbeiten",fr:"Peinture",es:"Pintura",c:760,pmin:3000,pmax:25000},
+  {icon:"🪚",key:"furniture",tr:"Mobilya & Marangoz",en:"Furniture & Carpentry",de:"Möbel & Tischlerei",fr:"Meubles & Menuiserie",es:"Muebles y Carpintería",c:640,pmin:1500,pmax:40000},
+  {icon:"❄️",key:"hvac",tr:"Isıtma & Soğutma",en:"Heating & Cooling",de:"Heizung & Kühlung",fr:"Chauffage & Climatisation",es:"Calefacción y Refrigeración",c:520,pmin:1000,pmax:20000},
+  {icon:"🧰",key:"appliance",tr:"Beyaz Eşya Servisi",en:"Appliance Repair",de:"Geräte-Reparatur",fr:"Réparation d'électroménager",es:"Reparación de electrodomésticos",c:870,pmin:500,pmax:5000},
+  {icon:"🔩",key:"ironwork",tr:"Demir & Kaynak",en:"Ironwork & Welding",de:"Eisen- & Schweißarbeiten",fr:"Ferronnerie & Soudure",es:"Herrería y Soldadura",c:410,pmin:2000,pmax:60000},
+  {icon:"🏠",key:"roofing",tr:"Çatı & İzolasyon",en:"Roofing & Insulation",de:"Dach & Dämmung",fr:"Toiture & Isolation",es:"Tejados y Aislamiento",c:330,pmin:20000,pmax:150000},
+  {icon:"🧹",key:"cleaning",tr:"Temizlik",en:"Cleaning",de:"Reinigung",fr:"Nettoyage",es:"Limpieza",c:1120,pmin:400,pmax:3000},
+  {icon:"🚚",key:"moving",tr:"Nakliyat",en:"Moving",de:"Umzug",fr:"Déménagement",es:"Mudanzas",c:690,pmin:2000,pmax:20000},
+  {icon:"🏭",key:"manufacturing",tr:"İmalat & Üretim",en:"Manufacturing",de:"Fertigung",fr:"Fabrication",es:"Fabricación",c:280,pmin:5000,pmax:200000}
+];
+
+/* Güven bandı + maliyet tahmini sözlüğü (yurt dışı liderlerden ilham) */
+const TRUST={
+  tr:{escrow:"Ödeme güvencesi",escrowD:"Paran iş bitene kadar emanette",verified:"Doğrulanmış ustalar",verifiedD:"Kimlik & belge kontrolü",free:"Ücretsiz teklif",freeD:"Teklif almak bedava",estTitle:"Ne kadar tutar?",estDesc:"Ortalama fiyat aralığını gör (tahmini):",estPick:"Kategori seç",estRange:"Tahmini fiyat aralığı"},
+  en:{escrow:"Payment protection",escrowD:"Your money is held until the job is done",verified:"Verified pros",verifiedD:"ID & document checked",free:"Free quotes",freeD:"Getting quotes is free",estTitle:"How much does it cost?",estDesc:"See the average price range (estimate):",estPick:"Pick a category",estRange:"Estimated price range"},
+  de:{escrow:"Zahlungsschutz",escrowD:"Dein Geld bleibt bis zur Fertigstellung sicher",verified:"Geprüfte Profis",verifiedD:"Ausweis & Dokumente geprüft",free:"Kostenlose Angebote",freeD:"Angebote sind gratis",estTitle:"Was kostet es?",estDesc:"Durchschnittliche Preisspanne ansehen (Schätzung):",estPick:"Kategorie wählen",estRange:"Geschätzte Preisspanne"},
+  fr:{escrow:"Protection des paiements",escrowD:"Votre argent est en séquestre jusqu'à la fin",verified:"Pros vérifiés",verifiedD:"Identité & documents vérifiés",free:"Devis gratuits",freeD:"Recevoir des devis est gratuit",estTitle:"Combien ça coûte ?",estDesc:"Voir la fourchette de prix moyenne (estimation) :",estPick:"Choisir une catégorie",estRange:"Fourchette de prix estimée"},
+  es:{escrow:"Protección de pago",escrowD:"Tu dinero se retiene hasta terminar",verified:"Profesionales verificados",verifiedD:"Identidad y documentos verificados",free:"Presupuestos gratis",freeD:"Pedir presupuestos es gratis",estTitle:"¿Cuánto cuesta?",estDesc:"Ver el rango de precio medio (estimado):",estPick:"Elegir categoría",estRange:"Rango de precio estimado"}
+};
+function tr_(k){return (TRUST[lang]||TRUST.tr)[k]}
+
+/* Ustam Güvencesi (garanti programı) */
+const GUAR={
+  tr:{title:"🛡️ Ustam Güvencesi",sub:"Her iş 10.000 ₺'ye kadar güvence altında. Ödemeniz korunur, memnun kalmazsanız iade edilir.",p:[["🔒","Ödeme koruması","Ödemeniz iş onaylanana kadar emanette."],["💸","Para iade garantisi","İş anlaşıldığı gibi olmazsa iade."],["✅","Doğrulanmış ustalar","Kimlik ve belge kontrolü."],["🤝","Anlaşmazlık çözümü","Sorunda destek ekibi devrede."]]},
+  en:{title:"🛡️ Ustam Guarantee",sub:"Every job is covered up to ₺10,000. Your payment is protected and refunded if you're not satisfied.",p:[["🔒","Payment protection","Held in escrow until you approve."],["💸","Money-back guarantee","Refund if not done as agreed."],["✅","Verified pros","ID & document checks."],["🤝","Dispute resolution","Support steps in on any issue."]]},
+  de:{title:"🛡️ Ustam-Garantie",sub:"Jeder Auftrag ist bis zu 10.000 ₺ abgesichert. Zahlung geschützt, Erstattung bei Unzufriedenheit.",p:[["🔒","Zahlungsschutz","Bis zur Freigabe im Treuhand."],["💸","Geld-zurück-Garantie","Erstattung bei Abweichung."],["✅","Geprüfte Profis","Ausweis- & Dokumentprüfung."],["🤝","Streitbeilegung","Support greift bei Problemen ein."]]},
+  fr:{title:"🛡️ Garantie Ustam",sub:"Chaque travail est couvert jusqu'à 10 000 ₺. Paiement protégé et remboursé si insatisfait.",p:[["🔒","Protection du paiement","En séquestre jusqu'à validation."],["💸","Satisfait ou remboursé","Remboursement si non conforme."],["✅","Pros vérifiés","Contrôles d'identité & documents."],["🤝","Résolution des litiges","Le support intervient en cas de souci."]]},
+  es:{title:"🛡️ Garantía Ustam",sub:"Cada trabajo está cubierto hasta 10.000 ₺. Pago protegido y reembolsado si no quedas satisfecho.",p:[["🔒","Protección de pago","En depósito hasta tu aprobación."],["💸","Garantía de devolución","Reembolso si no es lo acordado."],["✅","Profesionales verificados","Controles de identidad y documentos."],["🤝","Resolución de disputas","El soporte interviene ante problemas."]]}
+};
+function renderGuarantee(){
+  const g=GUAR[lang]||GUAR.tr;
+  const tt=document.getElementById('guarTitle');if(!tt)return;
+  tt.textContent=g.title;document.getElementById('guarSub').textContent=g.sub;
+  document.getElementById('guarGrid').innerHTML=g.p.map(([e,t2,d])=>`
+    <div class="cat" style="cursor:default">
+      <div class="ic">${e}</div><div class="nm">${t2}</div><div class="ct">${d}</div>
+    </div>`).join("");
+}
+
+/* Analiz sözlüğü */
+const ANA={
+  tr:{catTitle:"📊 İş Kategorileri",catSub:"Hangi kategoride kaç açık iş ve kaç usta var?",proTitle:"🛠️ Usta Analizi",proSub:"Kategori bazında kayıtlı usta dağılımı.",jobs:"iş",pros:"usta"},
+  en:{catTitle:"📊 Job Categories",catSub:"How many open jobs and pros per category?",proTitle:"🛠️ Pro Analytics",proSub:"Registered pros by category.",jobs:"jobs",pros:"pros"},
+  de:{catTitle:"📊 Auftragskategorien",catSub:"Wie viele offene Aufträge und Profis je Kategorie?",proTitle:"🛠️ Profi-Analyse",proSub:"Registrierte Profis nach Kategorie.",jobs:"Aufträge",pros:"Profis"},
+  fr:{catTitle:"📊 Catégories de demandes",catSub:"Combien de demandes ouvertes et de pros par catégorie ?",proTitle:"🛠️ Analyse des pros",proSub:"Pros inscrits par catégorie.",jobs:"demandes",pros:"pros"},
+  es:{catTitle:"📊 Categorías de trabajos",catSub:"¿Cuántos trabajos abiertos y profesionales por categoría?",proTitle:"🛠️ Análisis de profesionales",proSub:"Profesionales registrados por categoría.",jobs:"trabajos",pros:"profesionales"}
+};
+function an(k){return (ANA[lang]||ANA.tr)[k]}
+/* Şehir bazlı ölçek (demoda simüle) */
+const CITY_FACTORS={"":1,"İstanbul":0.42,"Ankara":0.18,"İzmir":0.14,"Bursa":0.08,"Antalya":0.07,"Adana":0.05,"Konya":0.04,"Gaziantep":0.03};
+let cityFactor=1;
+const CITY_LBL={tr:"🏙️ Şehir",en:"🏙️ City",de:"🏙️ Stadt",fr:"🏙️ Ville",es:"🏙️ Ciudad"};
+const ALLCITY={tr:"Tüm Türkiye",en:"All cities",de:"Alle Städte",fr:"Toutes les villes",es:"Todas las ciudades"};
+function jobsOf(c){return Math.max(1,Math.round((c.c*1.25+80)*cityFactor))} /* iş sayısı (şehir ölçekli) */
+function prosOf(c){return Math.max(1,Math.round(c.c*cityFactor))}
+function setCityFactor(){const v=document.getElementById('anaCity').value;cityFactor=CITY_FACTORS[v]??1;renderCats();renderAnalytics()}
+function renderAnalytics(){
+  const el=document.getElementById('anaProv');if(!el)return;
+  const ct=document.getElementById('anaCatTitle');if(ct)ct.textContent=an('catTitle');
+  const cs=document.getElementById('anaCatSub');if(cs)cs.textContent=an('catSub');
+  document.getElementById('anaProTitle').textContent=an('proTitle');
+  document.getElementById('anaProSub').textContent=an('proSub');
+  // Şehir seçici doldur
+  const lbl=document.getElementById('anaCityLbl');if(lbl)lbl.textContent=CITY_LBL[lang]||CITY_LBL.tr;
+  const sel=document.getElementById('anaCity');
+  if(sel&&!sel.dataset.filled){
+    sel.innerHTML=`<option value="">${ALLCITY[lang]||ALLCITY.tr}</option>`+CITIES.map(c=>`<option value="${c}">${c}</option>`).join("");
+    sel.dataset.filled="1";
+  } else if(sel){ sel.options[0].textContent=ALLCITY[lang]||ALLCITY.tr; }
+  const sorted=[...CATS].sort((a,b)=>prosOf(b)-prosOf(a)).slice(0,8);
+  const max=Math.max(...sorted.map(prosOf));
+  el.innerHTML=sorted.map(c=>`
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="width:150px;flex-shrink:0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.icon} ${catName(c)}</span>
+      <div style="flex:1;height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden">
+        <div style="height:100%;width:${Math.round(prosOf(c)/max*100)}%;background:linear-gradient(90deg,#2dd4bf,#34d399)"></div>
+      </div>
+      <span style="width:56px;text-align:right;font-weight:800;color:#5eead4;font-size:13px">${prosOf(c).toLocaleString()}</span>
+    </div>`).join("");
+}
+
+const CITIES=["İstanbul","Ankara","İzmir","Bursa","Antalya","Adana","Konya","Gaziantep"];
+
+let LISTINGS=[
+  {id:1,icon:"🚰",cat:"plumbing",city:"İstanbul",urg:"URGENT",budget:"1.500–2.500 ₺",offers:5,
+    title:{tr:"Mutfak musluğu damlatıyor, değişsin",en:"Kitchen faucet dripping, needs replacement",de:"Küchenarmatur tropft, muss getauscht werden",fr:"Robinet de cuisine qui goutte, à remplacer",es:"Grifo de cocina gotea, cambiar"},
+    desc:{tr:"Mutfaktaki eviye bataryası sürekli damlatıyor. Yenisiyle değişmesini istiyorum. Malzeme dahil teklif bekliyorum.",en:"The kitchen sink mixer drips constantly. I want it replaced with a new one, material included.",de:"Die Küchenarmatur tropft ständig. Ich möchte sie inkl. Material ersetzen lassen.",fr:"Le mitigeur de cuisine goutte en continu. Je veux le remplacer, matériel inclus.",es:"El grifo de la cocina gotea constantemente. Quiero cambiarlo, material incluido."},
+    offersList:[{who:"Mehmet Usta",rating:4.9,price:"1.800 ₺",msg:{tr:"Bugün gelebilirim, malzeme dahil.",en:"I can come today, material included.",de:"Ich kann heute kommen, inkl. Material.",fr:"Je peux venir aujourd'hui, matériel inclus.",es:"Puedo ir hoy, material incluido."}},
+      {who:"Su Tesisat Ltd.",rating:4.7,price:"2.100 ₺",msg:{tr:"2 yıl garanti veriyoruz.",en:"We offer 2-year warranty.",de:"Wir bieten 2 Jahre Garantie.",fr:"Garantie de 2 ans.",es:"Ofrecemos garantía de 2 años."}}]},
+  {id:2,icon:"🏠",cat:"roofing",city:"Bursa",urg:"WITHIN_WEEK",budget:"80.000–120.000 ₺",offers:8,
+    title:{tr:"3 katlı binaya çatı imalatı",en:"Roof construction for 3-storey building",de:"Dachbau für 3-stöckiges Gebäude",fr:"Construction de toiture pour bâtiment de 3 étages",es:"Construcción de tejado para edificio de 3 pisos"},
+    desc:{tr:"Yeni bitmiş 3 katlı binaya komple çatı imalatı ve izolasyon yaptırmak istiyorum. Keşif için gelinmeli.",en:"I need complete roof construction and insulation for a newly finished 3-storey building. On-site survey needed.",de:"Ich benötige kompletten Dachbau und Dämmung für ein neues 3-stöckiges Gebäude. Vor-Ort-Besichtigung nötig.",fr:"Je souhaite une construction complète de toiture et isolation pour un bâtiment neuf de 3 étages. Visite nécessaire.",es:"Necesito construcción completa de tejado e aislamiento para un edificio nuevo de 3 pisos. Visita necesaria."},
+    offersList:[{who:"Çatı Ustası Hasan",rating:4.8,price:"95.000 ₺",msg:{tr:"Referanslarımı gönderebilirim.",en:"I can send my references.",de:"Ich kann Referenzen senden.",fr:"Je peux envoyer mes références.",es:"Puedo enviar mis referencias."}}]},
+  {id:3,icon:"💡",cat:"electrical",city:"Ankara",urg:"EMERGENCY",budget:"Görüşülür",offers:3,
+    title:{tr:"Elektrikler gitti, sigorta atıyor",en:"Power out, breaker keeps tripping",de:"Stromausfall, Sicherung fliegt",fr:"Coupure de courant, disjoncteur saute",es:"Sin luz, el interruptor salta"},
+    desc:{tr:"Evde elektrikler gidip geliyor, sigorta sürekli atıyor. Acil bir elektrik ustası lazım.",en:"Power keeps cutting at home, breaker trips constantly. Need an electrician urgently.",de:"Strom fällt ständig aus, Sicherung fliegt. Dringend Elektriker gesucht.",fr:"Le courant saute sans cesse à la maison. J'ai besoin d'un électricien d'urgence.",es:"La luz se corta en casa, el interruptor salta. Necesito un electricista urgente."},
+    offersList:[]},
+  {id:4,icon:"🏭",cat:"manufacturing",city:"İzmir",urg:"FLEXIBLE",budget:"Görüşülür",offers:6,
+    title:{tr:"Paslanmaz çelik mutfak tezgahı imalatı",en:"Stainless steel kitchen counter manufacturing",de:"Herstellung einer Edelstahl-Küchentheke",fr:"Fabrication de plan de travail en acier inoxydable",es:"Fabricación de encimera de acero inoxidable"},
+    desc:{tr:"Restoran için 4 metre paslanmaz çelik endüstriyel tezgah imalatı ve montajı.",en:"Manufacturing and installation of a 4m stainless industrial counter for a restaurant.",de:"Herstellung und Montage einer 4 m Edelstahl-Industrietheke für ein Restaurant.",fr:"Fabrication et installation d'un comptoir industriel inox de 4 m pour un restaurant.",es:"Fabricación e instalación de una encimera industrial de acero de 4 m para un restaurante."},
+    offersList:[{who:"Metal İmalat A.Ş.",rating:5.0,price:"42.000 ₺",msg:{tr:"CNC kesim, 10 gün teslim.",en:"CNC cut, 10-day delivery.",de:"CNC-Schnitt, 10 Tage Lieferung.",fr:"Découpe CNC, livraison 10 jours.",es:"Corte CNC, entrega en 10 días."}}]}
+];
+
+/* ============ State ============ */
+let lang="tr";
+
+/* ============ i18n uygula ============ */
+function t(path){
+  const parts=path.split(".");let o=I18N[lang];
+  for(const p of parts){o=o&&o[p]}
+  if(o===undefined){o=I18N.tr;for(const p of parts){o=o&&o[p]}}
+  return o??path;
+}
+function applyI18n(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.getAttribute("data-i18n"))});
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{el.setAttribute("placeholder",t(el.getAttribute("data-i18n-ph")))});
+  document.getElementById("langFlag").textContent=FLAGS[lang];
+  document.getElementById("langCode").textContent=lang.toUpperCase();
+  renderCats();renderListings();fillCities();renderTrust();renderPros();renderJobBoard();renderAnalytics();renderGuarantee();
+}
+function renderTrust(){
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+  set('tEscrow',tr_('escrow'));set('tEscrowD',tr_('escrowD'));
+  set('tVerified',tr_('verified'));set('tVerifiedD',tr_('verifiedD'));
+  set('tFree',tr_('free'));set('tFreeD',tr_('freeD'));
+  set('estTitle',tr_('estTitle'));set('estDesc',tr_('estDesc'));
+  const sel=document.getElementById('estCat');
+  if(sel){sel.innerHTML=`<option value="">${tr_('estPick')}</option>`+CATS.map((c,i)=>`<option value="${i}">${c.icon} ${catName(c)}</option>`).join("");}
+  renderEstimate();
+}
+function renderEstimate(){
+  const sel=document.getElementById('estCat');const out=document.getElementById('estOut');
+  if(!sel||!out)return;
+  const i=sel.value;
+  if(i===""){out.textContent="";return}
+  const c=CATS[+i];
+  out.textContent=`${tr_('estRange')}: ${c.pmin.toLocaleString()} – ${c.pmax.toLocaleString()} ₺`;
+}
+function setLang(l){lang=l;document.getElementById("langMenu").classList.remove("open");applyI18n()}
+function toggleLang(e){e.stopPropagation();document.getElementById("langMenu").classList.toggle("open")}
+document.addEventListener("click",()=>document.getElementById("langMenu").classList.remove("open"));
+
+/* ============ Render ============ */
+function catName(c){return c[lang]||c.tr}
+function renderCats(){
+  const maxJ=Math.max(...CATS.map(jobsOf));const maxP=Math.max(...CATS.map(prosOf));
+  const bar=(w,col)=>`<div style="height:6px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden"><div style="height:100%;width:${w}%;background:${col}"></div></div>`;
+  document.getElementById("catGrid").innerHTML=CATS.map(c=>`
+    <div class="cat" onclick="filterCat('${c.key}')">
+      <div style="display:flex;align-items:center;gap:8px"><span class="ic">${c.icon}</span><span class="nm">${catName(c)}</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px"><span>📋 ${an('jobs')}</span><b style="color:var(--brand2)">${jobsOf(c).toLocaleString()}</b></div>
+      ${bar(Math.round(jobsOf(c)/maxJ*100),"linear-gradient(90deg,var(--brand),var(--brand2))")}
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px"><span>🛠️ ${an('pros')}</span><b style="color:#5eead4">${prosOf(c).toLocaleString()}</b></div>
+      ${bar(Math.round(prosOf(c)/maxP*100),"linear-gradient(90deg,#2dd4bf,#34d399)")}
+    </div>`).join("");
+}
+function urgBadge(u){
+  const cls=u==="URGENT"||u==="EMERGENCY"?"badge-urgent":u==="WITHIN_WEEK"?"badge-week":"badge-flex";
+  return `<span class="pill ${cls}">${t('urg.'+u)}</span>`;
+}
+let catFilter=null,cityFilter="";
+function renderListings(){
+  let data=LISTINGS.filter(l=>(!catFilter||l.cat===catFilter)&&(!cityFilter||l.city===cityFilter));
+  const grid=document.getElementById("listGrid");
+  if(!data.length){grid.innerHTML=`<p style="color:var(--muted)">—</p>`;return}
+  grid.innerHTML=data.map(l=>`
+    <div class="lcard" onclick="openDetail(${l.id})">
+      <div class="ph">${l.icon}</div>
+      <div class="bd">
+        <div>${urgBadge(l.urg)}</div>
+        <h4>${l.title[lang]||l.title.tr}</h4>
+        <div class="meta"><span>📍 ${l.city}</span><span>💰 ${l.budget}</span></div>
+        <div class="foot">
+          <span class="pill badge-offers">${l.offers}/5 ${t('listing.offers')}</span>
+          <span style="color:var(--muted);font-size:13px">${t('offer.make')} →</span>
+        </div>
+      </div>
+    </div>`).join("");
+}
+function fillCities(){
+  const sel=document.getElementById("cityF");
+  sel.innerHTML=`<option value="">${t('common.city')}</option>`+CITIES.map(c=>`<option ${c===cityFilter?'selected':''}>${c}</option>`).join("");
+  sel.onchange=e=>{cityFilter=e.target.value;renderListings()};
+}
+function filterCat(k){catFilter=catFilter===k?null:k;renderListings();scrollToId('listGrid')}
+function doSearch(){renderListings();scrollToId('listGrid');toast("🔎 "+t('common.search'))}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"})}
+
+/* ============ Modaller ============ */
+function openModal(html,wide){document.getElementById("modalInner").innerHTML=html;
+  document.getElementById("modal").classList.toggle("wide",!!wide);
+  document.getElementById("overlay").classList.add("open")}
+function closeModal(){document.getElementById("overlay").classList.remove("open")}
+
+function openDetail(id){
+  const l=LISTINGS.find(x=>x.id===id);
+  const offers=l.offersList.length?l.offersList.map(o=>`
+    <div class="offer">
+      <div class="top"><span class="who">${o.who} <span class="stars">★ ${o.rating}</span>${tierBadge(o.rating)}</span><span class="price">${o.price}</span></div>
+      <div class="msg">${o.msg[lang]||o.msg.tr}</div>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" onclick='openChat(${JSON.stringify(o.who)})'>💬 ${ch('title')}</button>
+        <button class="btn btn-primary btn-sm" onclick='acceptOffer(${JSON.stringify(o.price)},${JSON.stringify(o.who)})'>${t('offer.accept')}</button>
+      </div>
+    </div>`).join(""):`<p style="color:var(--muted)">${t('offer.statusPending')}…</p>`;
+  openModal(`
+    <div class="mh"><h3>${l.title[lang]||l.title.tr}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">${urgBadge(l.urg)}<span class="pill badge-flex">📍 ${l.city}</span><span class="pill badge-offers">💰 ${l.budget}</span></div>
+      <p style="color:var(--muted)">${l.desc[lang]||l.desc.tr}</p>
+      <h4 style="margin:18px 0 10px">${l.offers} ${t('listing.offers')}</h4>
+      ${offers}
+      <hr style="border:none;border-top:1px solid var(--line);margin:18px 0">
+      <h4 style="margin:0 0 10px">${t('offer.make')}</h4>
+      <div class="field"><label>${t('offer.price')}</label><input id="ofPrice" placeholder="₺"></div>
+      <div class="field"><label>${t('offer.message')}</label><textarea id="ofMsg"></textarea></div>
+      <button class="btn btn-primary" style="width:100%" onclick="submitOffer()">${t('offer.make')} →</button>
+    </div>`,true);
+}
+function submitOffer(){closeModal();toast("✅ "+t('msg.offered'))}
+
+/* ---- Mesajlaşma / pazarlık (armut akışı) ---- */
+const CHAT={
+  tr:{title:"Mesajlaşma",ph:"Mesaj yaz…",send:"Gönder",greet:"Merhaba, teklifimle ilgili sorularınızı yanıtlayabilirim. Ne zaman uygun olursunuz?",typing:"yazıyor…"},
+  en:{title:"Messages",ph:"Type a message…",send:"Send",greet:"Hi, I can answer any questions about my offer. When works for you?",typing:"typing…"},
+  de:{title:"Nachrichten",ph:"Nachricht schreiben…",send:"Senden",greet:"Hallo, ich beantworte gern Fragen zu meinem Angebot. Wann passt es Ihnen?",typing:"schreibt…"},
+  fr:{title:"Messages",ph:"Écrire un message…",send:"Envoyer",greet:"Bonjour, je peux répondre à vos questions sur mon offre. Quand êtes-vous disponible ?",typing:"écrit…"},
+  es:{title:"Mensajes",ph:"Escribe un mensaje…",send:"Enviar",greet:"Hola, puedo responder tus dudas sobre mi oferta. ¿Cuándo te viene bien?",typing:"escribiendo…"}
+};
+function ch(k){return (CHAT[lang]||CHAT.tr)[k]}
+let chatMsgs=[];let chatWho="";
+function openChat(who){
+  chatWho=who;chatMsgs=[{me:false,text:ch('greet')}];
+  renderChat();
+}
+function renderChat(){
+  const thread=chatMsgs.map(m=>`
+    <div style="display:flex;justify-content:${m.me?'flex-end':'flex-start'};margin-bottom:8px">
+      <div style="max-width:75%;padding:9px 13px;border-radius:14px;font-size:14px;
+        background:${m.me?'linear-gradient(135deg,var(--brand),var(--brand2))':'var(--card)'};
+        color:${m.me?'#1a1205':'var(--text)'}">${m.text}</div>
+    </div>`).join("");
+  openModal(`
+    <div class="mh"><h3>💬 ${chatWho}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <div id="chatThread" style="max-height:320px;overflow:auto;padding:4px 0;margin-bottom:12px">${thread}</div>
+      <div style="display:flex;gap:8px">
+        <input id="chatInput" class="field" style="flex:1;margin:0" placeholder="${ch('ph')}" onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="btn btn-primary" onclick="sendChat()">${ch('send')}</button>
+      </div>
+    </div>`);
+  const th=document.getElementById('chatThread');if(th)th.scrollTop=th.scrollHeight;
+}
+function sendChat(){
+  const inp=document.getElementById('chatInput');if(!inp||!inp.value.trim())return;
+  chatMsgs.push({me:true,text:inp.value.trim()});
+  renderChat();
+  // usta otomatik yanıtı (demo)
+  setTimeout(()=>{chatMsgs.push({me:false,text:ch('greet')});renderChat()},900);
+}
+
+/* ---- Ödeme / taahhüt (escrow) akışı ---- */
+function parsePrice(str){const n=parseFloat(String(str).replace(/[^\d]/g,''));return isNaN(n)?0:n}
+function money(n){return n.toLocaleString(lang==='tr'?'tr-TR':lang)+" ₺"}
+
+function acceptOffer(price,who){
+  const amount=parsePrice(price);
+  const commission=Math.round(amount*0.10);
+  const net=amount-commission;
+  toast("✅ "+t('msg.accepted'));
+  openModal(`
+    <div class="mh"><h3>🔒 ${p('secure')}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <p style="color:var(--muted);font-size:14px">${p('escrowInfo')}</p>
+      <div class="offer" style="margin-top:14px">
+        <div style="display:flex;justify-content:space-between;padding:6px 0"><span>${p('amount')}</span><b>${money(amount)}</b></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;color:#ff8ba0"><span>${p('commission')}</span><span>− ${money(commission)}</span></div>
+        <hr style="border:none;border-top:1px solid var(--line);margin:6px 0">
+        <div style="display:flex;justify-content:space-between;padding:6px 0"><span>${p('net')} (${who})</span><b class="price">${money(net)}</b></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="holdEscrow(${net})">${p('payBtn')} →</button>
+    </div>`);
+}
+function holdEscrow(net){
+  toast(p('held'));
+  openModal(`
+    <div class="mh"><h3>${p('held')}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <div class="pill badge-week" style="margin-bottom:12px">ESCROW · HELD</div>
+      <p style="color:var(--muted);font-size:14px">${p('heldDesc')}</p>
+      <button class="btn btn-primary" style="width:100%;margin-top:16px" onclick="releaseEscrow()">✅ ${p('release')}</button>
+      <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeModal()">${p('refund')}</button>
+    </div>`);
+}
+function releaseEscrow(){toast("🎉 "+p('released'));openRating()}
+
+/* ---- İş sonrası puanlama ---- */
+function openRating(who){
+  ratingValue=0;
+  openModal(`
+    <div class="mh"><h3>⭐ ${r('title')}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <p style="color:var(--muted);font-size:14px">${r('desc')}</p>
+      <div id="starRow" style="display:flex;gap:8px;font-size:38px;margin:16px 0;cursor:pointer">
+        ${[1,2,3,4,5].map(n=>`<span data-n="${n}" onclick="setStars(${n})" style="color:#3a4560;transition:.1s">☆</span>`).join("")}
+      </div>
+      <div class="field"><label>${r('comment')}</label><textarea id="ratingComment"></textarea></div>
+      <button class="btn btn-primary" style="width:100%" onclick="submitRating()">${r('send')} →</button>
+    </div>`);
+  // yıldız rengini düzelt
+  document.querySelectorAll('#starRow span').forEach(s=>s.style.color='#3a4560');
+}
+function setStars(n){
+  ratingValue=n;
+  document.querySelectorAll('#starRow span').forEach(s=>{
+    const v=parseInt(s.getAttribute('data-n'));
+    s.textContent=v<=n?'★':'☆';
+    s.style.color=v<=n?'#ffc14d':'#3a4560';
+  });
+}
+function submitRating(){
+  if(!ratingValue){toast("⚠️ "+r('selectStars'));return}
+  closeModal();
+  toast("⭐ "+r('thanks'));
+}
+
+/* ---- Yönlendirmeli ilan verme sihirbazı (armut.com akışı) ---- */
+const WIZ={
+  tr:{step:"Adım",next:"İleri",back:"Geri",publish:"İlanı Yayınla",s1:"Ne yaptırmak istiyorsun?",s1d:"Bir kategori seç.",s2:"İşi kısaca anlat",s2d:"Başlık ve birkaç cümle yeter.",s3:"Nerede ve ne zaman?",s3d:"Şehir ve aciliyet seç.",s4:"Kontrol et ve yayınla",titlePh:"Örn. Mutfak musluğu değişimi",descPh:"İşin detaylarını yaz…",privacy:"🔒 İletişim bilgilerin gizli tutulur; sadece teklif seçtiğin ustayla paylaşılır.",cap:"Bu ilan en fazla 5 teklif alır."},
+  en:{step:"Step",next:"Next",back:"Back",publish:"Publish job",s1:"What do you need done?",s1d:"Pick a category.",s2:"Describe the job",s2d:"A title and a few sentences is enough.",s3:"Where and when?",s3d:"Choose city and urgency.",s4:"Review and publish",titlePh:"E.g. Kitchen faucet replacement",descPh:"Describe the details…",privacy:"🔒 Your contact stays private; shared only with the pro you choose.",cap:"This job accepts up to 5 offers."},
+  de:{step:"Schritt",next:"Weiter",back:"Zurück",publish:"Auftrag veröffentlichen",s1:"Was soll erledigt werden?",s1d:"Wähle eine Kategorie.",s2:"Beschreibe den Auftrag",s2d:"Ein Titel und ein paar Sätze genügen.",s3:"Wo und wann?",s3d:"Stadt und Dringlichkeit wählen.",s4:"Prüfen und veröffentlichen",titlePh:"z. B. Küchenarmatur tauschen",descPh:"Beschreibe die Details…",privacy:"🔒 Deine Kontaktdaten bleiben privat; nur mit dem gewählten Profi geteilt.",cap:"Dieser Auftrag erhält bis zu 5 Angebote."},
+  fr:{step:"Étape",next:"Suivant",back:"Retour",publish:"Publier la demande",s1:"De quoi avez-vous besoin ?",s1d:"Choisissez une catégorie.",s2:"Décrivez le travail",s2d:"Un titre et quelques phrases suffisent.",s3:"Où et quand ?",s3d:"Choisissez ville et urgence.",s4:"Vérifier et publier",titlePh:"ex. Remplacement de robinet",descPh:"Décrivez les détails…",privacy:"🔒 Vos coordonnées restent privées ; partagées seulement avec le pro choisi.",cap:"Cette demande reçoit jusqu'à 5 offres."},
+  es:{step:"Paso",next:"Siguiente",back:"Atrás",publish:"Publicar solicitud",s1:"¿Qué necesitas hacer?",s1d:"Elige una categoría.",s2:"Describe el trabajo",s2d:"Un título y unas frases bastan.",s3:"¿Dónde y cuándo?",s3d:"Elige ciudad y urgencia.",s4:"Revisar y publicar",titlePh:"ej. Cambio de grifo de cocina",descPh:"Describe los detalles…",privacy:"🔒 Tu contacto es privado; se comparte solo con el profesional elegido.",cap:"Esta solicitud recibe hasta 5 ofertas."}
+};
+function wz(k){return (WIZ[lang]||WIZ.tr)[k]}
+let wiz={step:1,catIdx:null,title:"",desc:"",city:"İstanbul",urg:"FLEXIBLE"};
+function openPost(){wiz={step:1,catIdx:null,title:"",desc:"",city:"İstanbul",urg:"FLEXIBLE"};renderWiz()}
+function wizSave(){
+  const ti=document.getElementById('wTitle');if(ti)wiz.title=ti.value;
+  const de=document.getElementById('wDesc');if(de)wiz.desc=de.value;
+  const ci=document.getElementById('wCity');if(ci)wiz.city=ci.value;
+}
+function wizGo(d){wizSave();wiz.step=Math.min(4,Math.max(1,wiz.step+d));renderWiz()}
+function wizPickCat(i){wiz.catIdx=i;wiz.step=2;renderWiz()}
+function wizPickUrg(u){wiz.urg=u;renderWiz()}
+function renderWiz(){
+  const prog=[1,2,3,4].map(n=>`<div style="flex:1;height:4px;border-radius:999px;background:${n<=wiz.step?'var(--brand)':'rgba(255,255,255,.1)'}"></div>`).join("");
+  let body="";
+  if(wiz.step===1){
+    body=`<h4 style="margin:0 0 4px">${wz('s1')}</h4><p style="color:var(--muted);font-size:13px;margin:0 0 14px">${wz('s1d')}</p>
+      <div class="cats" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))">
+      ${CATS.map((c,i)=>`<div class="cat ${wiz.catIdx===i?'':''}" style="${wiz.catIdx===i?'border-color:var(--brand);background:rgba(255,122,26,.12)':''}" onclick="wizPickCat(${i})"><div class="ic">${c.icon}</div><div class="nm">${catName(c)}</div></div>`).join("")}
+      </div>`;
+  } else if(wiz.step===2){
+    const c=CATS[wiz.catIdx]||CATS[0];
+    body=`<h4 style="margin:0 0 4px">${c.icon} ${wz('s2')}</h4><p style="color:var(--muted);font-size:13px;margin:0 0 14px">${wz('s2d')}</p>
+      <div class="field"><label>${t('listing.title')}</label><input id="wTitle" value="${wiz.title.replace(/"/g,'&quot;')}" placeholder="${wz('titlePh')}"></div>
+      <div class="field"><label>${t('listing.description')}</label><textarea id="wDesc" placeholder="${wz('descPh')}">${wiz.desc}</textarea></div>`;
+  } else if(wiz.step===3){
+    body=`<h4 style="margin:0 0 4px">${wz('s3')}</h4><p style="color:var(--muted);font-size:13px;margin:0 0 14px">${wz('s3d')}</p>
+      <div class="field"><label>${t('common.city')}</label><select id="wCity">${CITIES.map(c=>`<option ${c===wiz.city?'selected':''}>${c}</option>`).join("")}</select></div>
+      <div class="field"><label>${t('listing.urgency')}</label>
+        <div class="seg">${["FLEXIBLE","WITHIN_WEEK","URGENT","EMERGENCY"].map(u=>`<div class="opt ${wiz.urg===u?'active':''}" onclick="wizPickUrg('${u}')">${t('urg.'+u)}</div>`).join("")}</div>
+      </div>`;
+  } else {
+    const c=CATS[wiz.catIdx]||CATS[0];
+    body=`<h4 style="margin:0 0 14px">${wz('s4')}</h4>
+      <div class="offer">
+        <div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--muted)">${t('common.category')}</span><b>${c.icon} ${catName(c)}</b></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--muted)">${t('listing.title')}</span><b>${(wiz.title||wz('titlePh'))}</b></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--muted)">${t('common.city')}</span><b>${wiz.city}</b></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--muted)">${t('listing.urgency')}</span><b>${t('urg.'+wiz.urg)}</b></div>
+      </div>
+      <p style="color:var(--muted);font-size:12px;margin-top:12px">${wz('privacy')}</p>
+      <p style="color:var(--brand2);font-size:12px">🎯 ${wz('cap')}</p>`;
+  }
+  const footer=`<div style="display:flex;gap:10px;margin-top:18px">
+    ${wiz.step>1?`<button class="btn btn-ghost" onclick="wizGo(-1)">← ${wz('back')}</button>`:''}
+    ${wiz.step<4?`<button class="btn btn-primary" style="flex:1" onclick="wizGo(1)">${wz('next')} →</button>`
+      :`<button class="btn btn-primary" style="flex:1" onclick="wizPublish()">✅ ${wz('publish')}</button>`}
+  </div>`;
+  openModal(`
+    <div class="mh"><h3>${t('listing.create')} · ${wz('step')} ${wiz.step}/4</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <div style="display:flex;gap:6px;margin-bottom:18px">${prog}</div>
+      ${body}
+      ${footer}
+    </div>`,true);
+}
+function wizPublish(){
+  wizSave();
+  const c=CATS[wiz.catIdx]||CATS[0];
+  const title=wiz.title||catName(c);
+  LISTINGS.unshift({id:Date.now(),icon:c.icon,cat:c.key,city:wiz.city,urg:wiz.urg,budget:"Görüşülür",offers:0,
+    title:{tr:title,en:title,de:title,fr:title,es:title},desc:{tr:wiz.desc||"—",en:wiz.desc||"—",de:wiz.desc||"—",fr:wiz.desc||"—",es:wiz.desc||"—"},offersList:[]});
+  closeModal();renderListings();toast("✅ "+t('msg.posted'));scrollToId('listGrid');
+}
+
+let authTab="login";
+function openAuth(tab){
+  authTab=tab;
+  openModal(`
+    <div class="mh"><h3 id="authTitle">${t(tab==='login'?'auth.loginTitle':'auth.registerTitle')}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <div class="tabs">
+        <div class="tab ${tab==='login'?'active':''}" onclick="openAuth('login')">${t('common.login')}</div>
+        <div class="tab ${tab==='register'?'active':''}" onclick="openAuth('register')">${t('common.register')}</div>
+      </div>
+      ${tab==='register'?`
+        <div class="field"><label>${t('auth.displayName')}</label><input></div>
+        <div class="field"><label>${t('auth.accountType')||''}</label>
+          <div class="seg">
+            <div class="opt active">${t('auth.customer')}</div>
+            <div class="opt">${t('auth.provider')}</div>
+            <div class="opt">${t('auth.company')}</div>
+          </div>
+        </div>
+        <div class="field"><label>${t('auth.phone')}</label><input placeholder="+90"></div>`:''}
+      <div class="field"><label>${t('auth.email')}</label><input type="email"></div>
+      <div class="field"><label>${t('auth.password')}</label><input type="password"></div>
+      <button class="btn btn-primary" style="width:100%" onclick="submitAuth()">${t(tab==='login'?'common.login':'common.register')}</button>
+      ${tab==='register'?`<p style="color:var(--muted);font-size:12px;margin-top:12px;text-align:center">🔒 ${t('auth.otpSent')}</p>`:''}
+    </div>`);
+}
+function submitAuth(){
+  if(authTab==='register'){closeModal();toast("📩 "+t('auth.otpSent'))}
+  else{closeModal();toast("👋 "+t('msg.loggedin'))}
+}
+
+/* ============ Toast ============ */
+let toastTimer;
+function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),2600)}
+
+/* init */
+applyI18n();
+</script>

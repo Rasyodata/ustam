@@ -1,0 +1,14 @@
+{
+  "generic": "Une erreur est survenue. Veuillez réessayer.",
+  "unauthorized": "Vous devez vous connecter pour cela.",
+  "forbidden": "Vous n'avez pas la permission pour cette action.",
+  "notFound": "Enregistrement introuvable.",
+  "invalidCredentials": "E-mail ou mot de passe invalide.",
+  "emailTaken": "Cet e-mail est déjà enregistré.",
+  "phoneTaken": "Ce téléphone est déjà enregistré.",
+  "weakPassword": "Le mot de passe doit contenir au moins 8 caractères avec une lettre et un chiffre.",
+  "otpInvalid": "Code de vérification invalide ou expiré.",
+  "otpTooMany": "Trop de tentatives. Veuillez réessayer plus tard.",
+  "rateLimited": "Trop de requêtes. Veuillez patienter.",
+  "offerLimit": "Cette demande a atteint le nombre maximum d'offres (5)."
+}

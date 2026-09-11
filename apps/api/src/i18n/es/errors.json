@@ -1,0 +1,14 @@
+{
+  "generic": "Algo salió mal. Inténtalo de nuevo.",
+  "unauthorized": "Debes iniciar sesión para hacer esto.",
+  "forbidden": "No tienes permiso para esta acción.",
+  "notFound": "Registro no encontrado.",
+  "invalidCredentials": "Correo o contraseña inválidos.",
+  "emailTaken": "Este correo ya está registrado.",
+  "phoneTaken": "Este teléfono ya está registrado.",
+  "weakPassword": "La contraseña debe tener al menos 8 caracteres con una letra y un número.",
+  "otpInvalid": "Código de verificación inválido o caducado.",
+  "otpTooMany": "Demasiados intentos. Inténtalo más tarde.",
+  "rateLimited": "Demasiadas solicitudes. Espera un momento.",
+  "offerLimit": "Esta solicitud alcanzó el número máximo de ofertas (5)."
+}
