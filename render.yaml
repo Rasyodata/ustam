@@ -1,10 +1,6 @@
-# Ustam — Render Blueprint (api + web + PostgreSQL). Ücretsiz plan.
-databases:
-  - name: ustam-db
-    plan: free
-    databaseName: ustam
-    user: ustam
-
+# Ustam — Render Blueprint (api + web). Ücretsiz planda tek DB olduğu için
+# mevcut ortakbul-db Postgres'i ?schema=ustam ile paylaşır. DATABASE_URL Render
+# panelinden elle girilir (gizli, public repoda tutulmaz).
 services:
   - type: web
     name: ustam-api
@@ -16,9 +12,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
-        fromDatabase:
-          name: ustam-db
-          property: connectionString
+        sync: false
       - key: WEB_URL
         value: https://ustam-web.onrender.com
       - key: ADMIN_URL
