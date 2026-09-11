@@ -782,30 +782,40 @@ function urgBadge(u){
   return `<span class="pill ${cls}">${t('urg.'+u)}</span>`;
 }
 let catFilter=null,cityFilter="";
+let favs={};
+function toggleFav(id,e){e.stopPropagation();favs[id]=!favs[id];renderListings()}
 function renderListings(){
   const gk=groupCatKeys();
   let data=LISTINGS.filter(l=>(!catFilter||l.cat===catFilter)&&(!cityFilter||l.city===cityFilter)&&(!gk||gk.includes(l.cat)));
   const grid=document.getElementById("listGrid");
   if(!data.length){grid.innerHTML=`<p style="color:var(--muted)">—</p>`;return}
-  grid.innerHTML=data.map(l=>`
-    <div class="lcard" onclick="openDetail(${l.id})">
-      <div class="ph" style="position:relative;height:120px">
-        <span>${l.icon}</span>
-        <span style="position:absolute;top:10px;inset-inline-start:10px">${urgBadge(l.urg)}</span>
-        <span class="pill badge-offers" style="position:absolute;top:10px;inset-inline-end:10px">${l.offers}/5</span>
-      </div>
-      <div class="bd">
-        <h4>${l.title[lang]||l.title.tr}</h4>
-        <div class="meta"><span>📍 ${l.city}</span><span>💰 ${l.budget}</span></div>
-        <div class="foot" style="border-top:1px solid var(--line);padding-top:10px;margin-top:2px">
-          <span style="display:flex;align-items:center;gap:8px;min-width:0">
-            <span style="width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#1a1205;font-weight:800;font-size:12px;flex-shrink:0">${(l.owner||'Ü').trim()[0]}</span>
-            <span style="font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${l.owner||'Üye'}</span>
+  grid.innerHTML=data.map(l=>{
+    const catObj=CATS.find(c=>c.key===l.cat)||{};
+    const cName=catObj.tr?catName(catObj):"";
+    const desc=(l.desc&&(l.desc[lang]||l.desc.tr))||"";
+    return `<div class="lcard" onclick="openDetail(${l.id})">
+      <div class="bd" style="padding:16px;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          ${urgBadge(l.urg)}
+          <span onclick="toggleFav(${l.id},event)" title="Favori" style="cursor:pointer;font-size:18px;line-height:1">${favs[l.id]?'❤️':'🤍'}</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="flex:1;min-width:0">
+            <h4 style="margin:0">${l.title[lang]||l.title.tr}</h4>
+            <div class="meta" style="margin-top:5px"><span>📍 ${l.city}</span>${cName?`<span>${catObj.icon||''} ${cName}</span>`:''}</div>
+          </div>
+          <div style="width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#fff1e6,#f3f5fa);flex-shrink:0">${l.icon}</div>
+        </div>
+        <p style="color:var(--muted);font-size:13px;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px">${desc}</p>
+        <div class="foot" style="border-top:1px solid var(--line);padding-top:12px;margin-top:2px">
+          <span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <b style="color:var(--brand2);font-size:14px">💰 ${l.budget}</b>
+            <span class="pill badge-offers">🗨 ${l.offers}/5</span>
           </span>
           <span class="btn btn-primary btn-sm" style="flex-shrink:0">${t('offer.make')} →</span>
         </div>
       </div>
-    </div>`).join("");
+    </div>`;}).join("");
 }
 function fillCities(){
   const sel=document.getElementById("cityF");
