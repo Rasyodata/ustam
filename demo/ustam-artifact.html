@@ -423,7 +423,7 @@ const EXTRA={
   en:{hours:"Working hours",days:"Working days",weekend:"I work on weekends",holiday:"I work on public holidays",evening:"Evening workers",h24:"24h / Night workers"}
 };
 function ex(k){return (EXTRA[lang]||EXTRA.en||EXTRA.tr)[k]}
-let prosQuery="",prosCat="";
+let prosQuery="",prosCat="",prosGroup2="";
 let provHours="",provDays=[],provWeekend=false,provHoliday=false;
 let prosReq={};
 function renderPros(){
@@ -452,7 +452,7 @@ function showProsView(){
   const hero=document.querySelector('.hero');if(hero)hero.style.display='none';
   document.querySelectorAll('main > section').forEach(s=>{s.style.display=(s.id==='prosPage')?'':'none';});
   document.querySelectorAll('.gnav').forEach(a=>a.classList.remove('active'));
-  prosQuery="";prosCat="";provGroup=(groupFilter&&SERVICES[groupFilter])?groupFilter:'repair';renderProsPage();window.scrollTo({top:0,behavior:'smooth'});
+  prosQuery="";prosCat="";prosGroup2="";provGroup=(groupFilter&&SERVICES[groupFilter])?groupFilter:'repair';renderProsPage();window.scrollTo({top:0,behavior:'smooth'});
 }
 function hideProsView(){
   const hero=document.querySelector('.hero');if(hero)hero.style.display='';
@@ -486,9 +486,12 @@ function renderProsPage(){
     <div class="hero-stats" style="justify-content:center;margin:12px 0 26px"><div style="text-align:center"><div class="n">${PROVIDERS.length}+</div><div class="l">${p2('total')}</div></div></div>
     <h2 class="sec-title">📊 ${p2('analysis')}</h2>
     <div class="cats" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr))">${analizTiles}</div>
-    <h2 class="sec-title" style="margin-top:30px" id="signupForm">🛠️ ${p2('formTitle')}</h2>
-    <div class="lcard" style="padding:20px">
-      <div class="field"><label>${p2('name')}</label><input id="pgName"></div>
+    <div id="signupForm" class="lcard" style="margin-top:30px;padding:26px;box-shadow:var(--shadow)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+        <div style="width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px;color:#1a1205;background:linear-gradient(135deg,var(--brand),var(--brand2))">🛠️</div>
+        <div><div style="font-weight:800;font-size:20px;letter-spacing:.2px">${p2('formTitle')}</div><div style="color:var(--muted);font-size:13px">🔒 ${p2('adminNote')}</div></div>
+      </div>
+      <div class="field"><label>${p2('name')}</label><input id="pgName" placeholder="${p2('name')}"></div>
       <div class="field"><label>${p2('cat')} — <span style="color:var(--brand);font-weight:600">${p2('pick3')}</span> <span id="provCount" style="color:var(--muted)"></span></label>
         <div id="provCats" style="display:flex;gap:6px;flex-wrap:wrap"></div></div>
       <div class="field"><label>${ex('hours')}</label><div id="provHoursBox" class="seg"></div></div>
@@ -500,8 +503,7 @@ function renderProsPage(){
       </div>
       <div class="field"><label>${p2('email')}</label><input id="pgEmail" type="email"></div>
       <div class="field"><label>${p2('exp')}</label><textarea id="pgExp"></textarea></div>
-      <button class="btn btn-primary" style="width:100%" onclick="submitProSignup()">${p2('apply')} →</button>
-      <p style="color:var(--muted);font-size:12px;margin-top:10px">🔒 ${p2('adminNote')}</p>
+      <button class="btn btn-primary" style="width:100%;padding:15px;font-size:16px;margin-top:4px;box-shadow:0 8px 22px rgba(255,122,26,.35)" onclick="submitProSignup()">${p2('apply')} →</button>
     </div>
     <h2 class="sec-title" style="margin-top:30px">${p2('page')}</h2>
     <div class="searchbar" style="margin-bottom:12px;max-width:100%"><input id="prosSearch" placeholder="${p2('searchPh')}" oninput="filterPros(this.value)"><button class="btn btn-primary">${t('common.search')} 🔎</button></div>
@@ -511,20 +513,36 @@ function renderProsPage(){
 }
 function renderProsChips(){
   const box=document.getElementById('prosChips');if(!box)return;
-  const counts={};PROVIDERS.forEach(p=>counts[p.cat]=(counts[p.cat]||0)+1);
-  const cats=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
-  box.innerHTML=`<span class="gnav ${prosCat===''?'active':''}" onclick="setProsCat('')">${p2('all')}</span>`+
-    cats.map(c=>`<span class="gnav ${prosCat===c?'active':''}" onclick="setProsCat('${c}')">${proCatLabel(c)}</span>`).join("");
+  const groups=['repair','cleaning','moving','tutoring','other'];
+  const allOn=prosGroup2==='';
+  const mainRow=`<span onclick="setProsGroup2('')" style="cursor:pointer;font-weight:800;font-size:14px;padding:8px 13px;border-radius:11px;color:${allOn?'#fff':'var(--muted)'};border:1.5px solid ${allOn?'var(--brand)':'var(--line)'};background:${allOn?'var(--brand)':'transparent'}">${p2('all')}</span>`+
+    groups.map(g=>{const col=GROUP_COLOR[g]||'#ea6a0e';const on=prosGroup2===g;
+      return `<span onclick="setProsGroup2('${g}')" style="cursor:pointer;font-weight:800;font-size:14px;padding:8px 13px;border-radius:11px;color:${on?'#fff':col};border:1.5px solid ${col};background:${on?col:'transparent'}">${GROUP_EMOJI[g]||''} ${gLabel(g)}</span>`;}).join("");
+  let subRow="";
+  if(prosGroup2){
+    const col=GROUP_COLOR[prosGroup2]||'#ea6a0e';
+    const subCats=[...new Set(PROVIDERS.filter(p=>catGroupOf(p.cat)===prosGroup2).map(p=>p.cat))];
+    if(subCats.length){
+      subRow=`<div style="margin-top:12px;background:${col}12;border:1.5px dashed ${col}55;border-radius:16px;padding:14px;display:flex;gap:8px;flex-wrap:wrap;backdrop-filter:blur(2px)">`+
+        `<span onclick="setProsCat('')" style="cursor:pointer;font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid ${col}66;color:${prosCat===''?'#fff':col};background:${prosCat===''?col:'rgba(255,255,255,.65)'};font-weight:600">${p2('all')}</span>`+
+        subCats.map(c=>`<span onclick="setProsCat('${c}')" style="cursor:pointer;font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid ${col}66;color:${prosCat===c?'#fff':col};background:${prosCat===c?col:'rgba(255,255,255,.65)'};font-weight:600">${proCatLabel(c)}</span>`).join("")+`</div>`;
+    }
+  }
+  box.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap">${mainRow}</div>${subRow}`;
 }
+function setProsGroup2(g){prosGroup2=g;prosCat='';renderProsChips();renderProsList()}
 let provGroup="repair";
 function renderProvCats(){
   const box=document.getElementById('provCats');if(!box)return;
   const groups=['repair','cleaning','moving','tutoring','other'];
-  const grpRow=groups.map(g=>`<span class="gnav ${provGroup===g?'active':''}" onclick="selectProvGroup('${g}')">${GROUP_EMOJI[g]||''} ${gLabel(g)}</span>`).join("");
+  const grpRow=groups.map(g=>{const col=GROUP_COLOR[g]||'#ea6a0e';const on=provGroup===g;
+    return `<span onclick="selectProvGroup('${g}')" style="cursor:pointer;font-weight:800;font-size:14px;padding:8px 13px;border-radius:11px;color:${on?'#fff':col};border:1.5px solid ${col};background:${on?col:'transparent'};transition:.15s">${GROUP_EMOJI[g]||''} ${gLabel(g)}</span>`;}).join("");
+  const col=GROUP_COLOR[provGroup]||'#ea6a0e';
   const svcs=(SERVICES[provGroup]||[]).map(s=>svcName(s));svcs.push(gLabel('other'));
-  const svcRow=svcs.map(nm=>`<span class="gnav ${provSelCats.includes(nm)?'active':''}" onclick='toggleProvSvc(${JSON.stringify(nm)})'>${nm}</span>`).join("");
-  box.innerHTML=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)">${grpRow}</div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">${svcRow}</div>`;
+  const svcRow=svcs.map(nm=>{const on=provSelCats.includes(nm);
+    return `<span onclick='toggleProvSvc(${JSON.stringify(nm)})' style="cursor:pointer;font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid ${col}66;color:${on?'#fff':col};background:${on?col:'rgba(255,255,255,.65)'};font-weight:600;transition:.15s">${on?'✓ ':''}${nm}</span>`;}).join("");
+  box.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">${grpRow}</div>
+    <div style="background:${col}12;border:1.5px dashed ${col}55;border-radius:16px;padding:16px;display:flex;gap:8px;flex-wrap:wrap;backdrop-filter:blur(2px)">${svcRow}</div>`;
   const cnt=document.getElementById('provCount');if(cnt)cnt.textContent=`(${provSelCats.length}/3 ${p2('picked')})`;
 }
 function selectProvGroup(g){provGroup=g;renderProvCats()}
@@ -551,7 +569,7 @@ function filterPros(v){prosQuery=v;renderProsList()}
 function renderProsList(){
   const box=document.getElementById('prosList');if(!box)return;
   const q=(prosQuery||"").toLocaleLowerCase('tr');
-  const list=PROVIDERS.filter(p=>(!prosCat||p.cat===prosCat)&&(!q||p.name.toLocaleLowerCase('tr').includes(q)))
+  const list=PROVIDERS.filter(p=>(!prosGroup2||catGroupOf(p.cat)===prosGroup2)&&(!prosCat||p.cat===prosCat)&&(!q||p.name.toLocaleLowerCase('tr').includes(q)))
     .sort((a,b)=>b.rating-a.rating);
   box.innerHTML=list.length?list.map(p=>`
     <div class="offer" style="display:flex;align-items:center;gap:12px">
@@ -597,6 +615,8 @@ function submitProSignup(){
 const JB_SUF={tr:"İlanları",en:"Listings",de:"Aufträge",fr:"Demandes",es:"Solicitudes",ru:"Заявки",ar:"إعلانات",fa:"آگهی‌ها"};
 const JB_ALL={tr:"📋 Güncel İlanlar",en:"📋 Recent Listings",de:"📋 Aktuelle Aufträge",fr:"📋 Demandes récentes",es:"📋 Solicitudes recientes",ru:"📋 Последние заявки",ar:"📋 أحدث الإعلانات",fa:"📋 آگهی‌های اخیر"};
 const GROUP_EMOJI={repair:"🔧",cleaning:"🧹",moving:"🚚",tutoring:"📚",other:"➕"};
+const GROUP_COLOR={repair:"#ea6a0e",cleaning:"#0d9488",moving:"#2563eb",tutoring:"#7c3aed",other:"#db2777"};
+function catGroupOf(cat){for(const k of ['repair','cleaning','moving','tutoring']){if((GROUPS[k].cats||[]).includes(cat))return k;}return 'other';}
 function renderJobBoard(){
   const e=document.getElementById('jbTitle');if(!e)return;
   if(groupFilter&&GROUPS[groupFilter]){
