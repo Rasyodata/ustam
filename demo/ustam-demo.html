@@ -1346,7 +1346,9 @@ function buildWizOpts(){
   opts.push({icon:"➕",name:gLabel('other'),cat:(groupFilter||'other'),other:true});
   return opts;
 }
-function openPost(){wiz={step:1,opts:buildWizOpts(),pickIdx:null,title:"",desc:"",city:(CITIES[0]||"Kayseri"),urg:"FLEXIBLE"};renderWiz()}
+function openPost(){wiz={step:1,group:(groupFilter&&SERVICES[groupFilter])?groupFilter:'repair',pick:null,title:"",desc:"",city:(CITIES[0]||"Kayseri"),urg:"FLEXIBLE"};renderWiz()}
+function wizPickGroup(g){wiz.group=g;renderWiz()}
+function wizPickService(icon,name,cat){wiz.pick={icon,name,cat};wiz.step=2;renderWiz()}
 function wizSave(){
   const ti=document.getElementById('wTitle');if(ti)wiz.title=ti.value;
   const de=document.getElementById('wDesc');if(de)wiz.desc=de.value;
@@ -1357,13 +1359,17 @@ function wizPickCat(i){wiz.pickIdx=i;wiz.step=2;renderWiz()}
 function wizPickUrg(u){wiz.urg=u;renderWiz()}
 function renderWiz(){
   const prog=[1,2,3,4].map(n=>`<div style="flex:1;height:4px;border-radius:999px;background:${n<=wiz.step?'var(--brand)':'rgba(20,26,38,.1)'}"></div>`).join("");
-  const pick=wiz.opts[wiz.pickIdx]||wiz.opts[0];
+  const pick=wiz.pick||{icon:'🔧',name:''};
   let body="";
   if(wiz.step===1){
+    const gcol=GROUP_COLOR[wiz.group]||'#ea6a0e';
+    const groups=['repair','cleaning','moving','tutoring','other'];
+    const grpRow=groups.map(g=>{const col=GROUP_COLOR[g];const on=wiz.group===g;return `<span onclick="wizPickGroup('${g}')" style="cursor:pointer;font-weight:800;font-size:14px;padding:8px 13px;border-radius:11px;color:${on?'#fff':col};border:1.5px solid ${col};background:${on?col:'transparent'}">${GROUP_EMOJI[g]||''} ${gLabel(g)}</span>`;}).join("");
+    const svcs=(SERVICES[wiz.group]||[]).map(s=>({icon:s.icon,name:svcName(s)}));svcs.push({icon:'➕',name:gLabel('other')});
+    const svcRow=svcs.map(o=>{const on=wiz.pick&&wiz.pick.name===o.name;return `<span onclick='wizPickService(${JSON.stringify(o.icon)},${JSON.stringify(o.name)},${JSON.stringify(wiz.group)})' style="cursor:pointer;font-size:13px;padding:8px 12px;border-radius:999px;border:1px solid ${gcol}66;color:${on?'#fff':gcol};background:${on?gcol:'rgba(255,255,255,.65)'};font-weight:600">${o.icon} ${o.name}</span>`;}).join("");
     body=`<h4 style="margin:0 0 4px">${wz('s1')}</h4><p style="color:var(--muted);font-size:13px;margin:0 0 14px">${wz('s1d')}</p>
-      <div class="cats" style="grid-template-columns:repeat(auto-fill,minmax(108px,1fr))">
-      ${wiz.opts.map((o,i)=>`<div class="cat" style="align-items:center;text-align:center;gap:4px;padding:12px 8px;${wiz.pickIdx===i?'border-color:var(--brand);background:rgba(255,122,26,.12)':''}" onclick="wizPickCat(${i})"><div style="font-size:26px">${o.icon}</div><div class="nm" style="text-align:center;font-size:13px">${o.name}</div></div>`).join("")}
-      </div>`;
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">${grpRow}</div>
+      <div style="background:${gcol}12;border:1.5px dashed ${gcol}55;border-radius:16px;padding:16px;display:flex;gap:8px;flex-wrap:wrap">${svcRow}</div>`;
   } else if(wiz.step===2){
     body=`<h4 style="margin:0 0 4px">${pick.icon} ${wz('s2')}</h4><p style="color:var(--muted);font-size:13px;margin:0 0 14px">${wz('s2d')}</p>
       <div class="field"><label>${t('listing.title')}</label><input id="wTitle" value="${wiz.title.replace(/"/g,'&quot;')}" placeholder="${wz('titlePh')}"></div>
@@ -1387,8 +1393,8 @@ function renderWiz(){
   }
   const footer=`<div style="display:flex;gap:10px;margin-top:18px">
     ${wiz.step>1?`<button class="btn btn-ghost" onclick="wizGo(-1)">← ${wz('back')}</button>`:''}
-    ${wiz.step<4?`<button class="btn btn-primary" style="flex:1" onclick="wizGo(1)">${wz('next')} →</button>`
-      :`<button class="btn btn-primary" style="flex:1" onclick="wizPublish()">✅ ${wz('publish')}</button>`}
+    ${wiz.step===1?'':(wiz.step<4?`<button class="btn btn-primary" style="flex:1" onclick="wizGo(1)">${wz('next')} →</button>`
+      :`<button class="btn btn-primary" style="flex:1" onclick="wizPublish()">✅ ${wz('publish')}</button>`)}
   </div>`;
   openModal(`
     <div class="mh"><h3>${t('listing.create')} · ${wz('step')} ${wiz.step}/4</h3><button class="x" onclick="closeModal()">×</button></div>
@@ -1400,7 +1406,7 @@ function renderWiz(){
 }
 function wizPublish(){
   wizSave();
-  const pick=wiz.opts[wiz.pickIdx]||wiz.opts[0];
+  const pick=wiz.pick||{icon:'🔧',name:t('listing.title'),cat:'other'};
   const title=wiz.title||pick.name;
   LISTINGS.unshift({id:Date.now(),icon:pick.icon,cat:pick.cat,city:wiz.city,urg:wiz.urg,budget:"Görüşülür",offers:0,owner:"Sen",
     title:{tr:title,en:title,de:title,fr:title,es:title},desc:{tr:wiz.desc||"—",en:wiz.desc||"—",de:wiz.desc||"—",fr:wiz.desc||"—",es:wiz.desc||"—"},offersList:[]});
