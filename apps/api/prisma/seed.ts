@@ -219,6 +219,99 @@ async function main() {
   }
   console.log("  ✓ Demo kullanıcılar: musteri@ustam.app, usta@ustam.app / Demo123!");
 
+  // --- Üyeler + 30 küçük tamir ilanı (üyeler açmış gibi) ---
+  const memberNames = ["Ayşe K.", "Mehmet D.", "Zeynep A.", "Can B.", "Elif S.", "Murat T.", "Fatma Ö.", "Emre G.", "Selin U.", "Hakan V."];
+  const members: { id: string }[] = [];
+  for (let i = 0; i < memberNames.length; i++) {
+    const m = await prisma.user.upsert({
+      where: { email: `uye${i + 1}@ustam.app` },
+      update: {},
+      create: {
+        email: `uye${i + 1}@ustam.app`,
+        phone: `+9055500${String(10000 + i)}`,
+        passwordHash: pass,
+        displayName: memberNames[i],
+        status: "ACTIVE",
+        emailVerifiedAt: new Date(),
+        roles: { create: [{ role: "CUSTOMER" }] },
+      },
+    });
+    members.push(m);
+  }
+
+  // [kategori slug, başlık, açıklama, şehir, aciliyet, minBütçe, maxBütçe] — küçük tamiratlar
+  const SEED: [string, string, string, string, string, number, number][] = [
+    ["plumbing", "Banyo lavabosu tıkandı, açılsın", "Banyo lavabosu tıkandı, acil açılması gerekiyor.", "İstanbul", "URGENT", 250, 500],
+    ["plumbing", "Musluk contası değişimi", "Mutfak musluğu damlatıyor, conta değişimi yeterli.", "Ankara", "WITHIN_WEEK", 200, 450],
+    ["plumbing", "Acil gider açma", "Tuvalet gideri tıkalı, acil müdahale lazım.", "İzmir", "EMERGENCY", 300, 650],
+    ["plumbing", "Klozet iç takım değişimi", "Rezervuar akıtıyor, iç takım değişsin.", "İstanbul", "FLEXIBLE", 300, 700],
+    ["electrical", "Salon avizesi montajı", "Yeni aldığım avizenin montajını istiyorum.", "Bursa", "FLEXIBLE", 300, 600],
+    ["electrical", "2 priz + 1 anahtar değişimi", "Yanmış priz ve anahtarların değişimi.", "İstanbul", "WITHIN_WEEK", 250, 550],
+    ["electrical", "Sigorta atıyor, kontrol", "Sigorta sürekli atıyor, kontrol edilsin.", "Adana", "URGENT", 300, 700],
+    ["painting", "Tek oda boya rötuşu", "Bir odanın duvarlarında rötuş boyası.", "İzmir", "WITHIN_WEEK", 800, 1800],
+    ["painting", "Tavan rutubet lekesi boyası", "Tavandaki rutubet lekesi boyanacak.", "Antalya", "FLEXIBLE", 600, 1400],
+    ["painting", "Çocuk odası boyama", "Çocuk odası tek renk boyanacak.", "Bursa", "FLEXIBLE", 900, 2000],
+    ["construction", "Duvarda çatlak sıva tamiri", "Salon duvarındaki çatlak sıva tamiri.", "İstanbul", "FLEXIBLE", 500, 1500],
+    ["construction", "Kırık fayans değişimi (3 adet)", "Banyoda 3 kırık fayans değişecek.", "Konya", "WITHIN_WEEK", 400, 900],
+    ["construction", "Kapı pervazı tamiri", "Şişen kapı pervazı tamir/ayar edilecek.", "Ankara", "FLEXIBLE", 350, 800],
+    ["appliance", "Çamaşır makinesi tamiri", "Çamaşır makinesi su almıyor, tamir.", "Adana", "URGENT", 400, 1000],
+    ["appliance", "Buzdolabı soğutmuyor", "Buzdolabı soğutmuyor, servis gerekiyor.", "İstanbul", "EMERGENCY", 500, 1200],
+    ["appliance", "Bulaşık makinesi kurulumu", "Yeni bulaşık makinesi kurulumu.", "Konya", "FLEXIBLE", 300, 600],
+    ["appliance", "Klima montajı (1 adet)", "1 adet split klima montajı.", "İzmir", "WITHIN_WEEK", 900, 1800],
+    ["appliance", "Kombi bakımı", "Yıllık kombi bakımı yapılacak.", "İstanbul", "FLEXIBLE", 500, 1000],
+    ["appliance", "Klima gazı dolumu", "Klima soğutmuyor, gaz dolumu lazım.", "İzmir", "WITHIN_WEEK", 600, 1100],
+    ["ironwork", "Balkon korkuluğu kaynak tamiri", "Gevşeyen korkuluk kaynakla sabitlensin.", "Ankara", "FLEXIBLE", 500, 1200],
+    ["ironwork", "Demir kapı menteşe tamiri", "Demir kapı menteşesi sarktı, tamir.", "İzmir", "WITHIN_WEEK", 400, 900],
+    ["roofing", "Çatı kiremit değişimi", "Birkaç kırık kiremit değişecek.", "Bursa", "URGENT", 800, 2000],
+    ["roofing", "Dere oluk temizliği/onarım", "Tıkalı oluk temizlenip onarılacak.", "Antalya", "WITHIN_WEEK", 500, 1200],
+    ["roofing", "Çatı akıntısı küçük onarım", "Yağmurda az su alıyor, küçük onarım.", "Bursa", "WITHIN_WEEK", 1000, 2500],
+    ["manufacturing", "Ahşap raf imalatı (küçük)", "Duvara monte 2 küçük ahşap raf.", "Gaziantep", "FLEXIBLE", 700, 1500],
+    ["manufacturing", "Ferforje küçük pencere kafesi", "1 pencere için ferforje kafes.", "Gaziantep", "FLEXIBLE", 1200, 2500],
+    ["plumbing", "Şofben/su ısıtıcı montajı", "Yeni şofben montajı yapılacak.", "İstanbul", "FLEXIBLE", 400, 900],
+    ["electrical", "Spot aydınlatma montajı (5 adet)", "Salona 5 adet spot montajı.", "Ankara", "FLEXIBLE", 500, 1100],
+    ["painting", "Kapı/pervaz vernik", "İç kapılara vernik/rötuş.", "İzmir", "FLEXIBLE", 500, 1200],
+    ["construction", "Silikon/derz yenileme (banyo)", "Banyo küvet çevresi silikon yenileme.", "İstanbul", "FLEXIBLE", 300, 700],
+  ];
+
+  const catCache: Record<string, string | undefined> = {};
+  const cityCache: Record<string, string | undefined> = {};
+  const catId = async (slug: string) => {
+    if (!(slug in catCache)) catCache[slug] = (await prisma.category.findUnique({ where: { slug } }))?.id;
+    return catCache[slug];
+  };
+  const cityId = async (name: string) => {
+    if (!(name in cityCache)) cityCache[name] = (await prisma.city.findFirst({ where: { name } }))?.id;
+    return cityCache[name];
+  };
+
+  let created = 0;
+  for (let i = 0; i < SEED.length; i++) {
+    const [slug, title, desc, city, urg, min, max] = SEED[i];
+    const cid = await catId(slug);
+    const cyid = await cityId(city);
+    if (!cid || !cyid) continue;
+    const owner = members[i % members.length];
+    const exists = await prisma.listing.findFirst({ where: { ownerId: owner.id, title } });
+    if (exists) continue;
+    await prisma.listing.create({
+      data: {
+        ownerId: owner.id,
+        categoryId: cid,
+        cityId: cyid,
+        title,
+        description: desc,
+        urgency: urg as any,
+        budgetType: "RANGE",
+        budgetMin: new Prisma.Decimal(min),
+        budgetMax: new Prisma.Decimal(max),
+        status: "PUBLISHED",
+        publishedAt: new Date(),
+      },
+    });
+    created++;
+  }
+  console.log(`  ✓ ${members.length} üye + ${created} küçük tamir ilanı (üyeler tarafından) oluşturuldu`);
+
   console.log("🌱 Seed tamam.");
 }
 
