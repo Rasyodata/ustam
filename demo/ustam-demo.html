@@ -421,11 +421,20 @@ const PROVIDERS=[
 ];
 const ADMIN_REQUESTS=[]; // teklif talepleri + usta başvuruları + puan/soru (admine düşer)
 const REVIEWS={},QA={};
-PROVIDERS.forEach(p=>{
+PROVIDERS.forEach((p,i)=>{
   p.cert=(p.reviews>30); // örnek: köklü ustalar belgeli
+  p.plan=(i%5===0)?"premium":(i%3===0?"pro":"free"); // üyelik paketi (gelir modeli)
   REVIEWS[p.name]=[{author:"Ahmet Y.",rating:Math.min(5,Math.round(p.rating)),text:"İşini zamanında ve temiz yaptı, teşekkürler.",status:"approved"}];
   QA[p.name]=[{q:"Fiyatı nasıl belirliyorsunuz?",a:"Keşif sonrası net fiyat veriyorum.",status:"approved"}];
 });
+/* Ustam Pro — üyelik paketleri (gelir modeli) */
+const PLANS=[
+  {key:"free",price:0,color:"#6b7688",name:{tr:"Ücretsiz",en:"Free"},feats:{tr:["Profil oluştur","Ayda 5 teklif hakkı","Temel görünürlük"],en:["Create profile","5 offers/month","Basic visibility"]}},
+  {key:"pro",price:299,color:"#ea6a0e",popular:true,name:{tr:"Pro",en:"Pro"},feats:{tr:["Sınırsız teklif","⭐ Öne çıkan rozet","2x daha fazla görünürlük","Öncelikli destek"],en:["Unlimited offers","⭐ Featured badge","2x more visibility","Priority support"]}},
+  {key:"premium",price:599,color:"#7c3aed",name:{tr:"Premium",en:"Premium"},feats:{tr:["Pro'daki her şey","Aramada üst sıralarda","Ana sayfada öne çıkma","Doğrulanmış rozet","Aylık reklam kredisi"],en:["Everything in Pro","Top of search results","Homepage spotlight","Verified badge","Monthly ad credit"]}}
+];
+const PLAN_TXT={tr:{title:"💎 Ustam Pro — Üyelik Paketleri",sub:"Daha çok iş al, öne çık. İstediğin zaman iptal et.",month:"/ay",popular:"EN POPÜLER",choose:"Paketi Seç",chosen:"✅ Paket talebin alındı (admin onayına düştü)",featured:"⭐ Öne Çıkan"},en:{title:"💎 Ustam Pro — Membership Plans",sub:"Get more jobs, stand out. Cancel anytime.",month:"/mo",popular:"MOST POPULAR",choose:"Choose plan",chosen:"✅ Plan request received (sent to admin)",featured:"⭐ Featured"}};
+function pl(k){return (PLAN_TXT[lang]||PLAN_TXT.en)[k]}
 const PROS2={
   tr:{page:"Ustalar",be:"Usta Ol",searchPh:"Usta ara…",all:"Tüm kategoriler",analysis:"Usta Analizi (kayıtlı usta / kategori)",quoteTitle:"Teklif Al",signupTitle:"Usta Ol — Üyelik Başvurusu",name:"Ad Soyad / İşletme adı",phone:"Telefon",email:"E-posta",cat:"Kategori",city:"Şehir",desc:"İhtiyacınızı kısaca yazın",exp:"Deneyim / hizmet açıklaması",send:"Talebi gönder",apply:"Başvuruyu gönder",sentAdmin:"✅ Talebiniz Ustam yönetimine (admin) iletildi.",applied:"✅ Başvurunuz alındı, admin onayına düştü.",adminNote:"Talepler yönetim paneline düşer",heroTitle:"İşin ehli ustalar Ustam'da",heroSub:"Binlerce doğrulanmış usta; ara, karşılaştır, güvenle teklif al. Ustaysan hemen kaydol, iş almaya başla.",formTitle:"Hizmet Ver — Hemen Kaydol",byCat:"Kategoriye göre usta sayısı",total:"Toplam kayıtlı usta",pick3:"En fazla 3 meslek seçebilirsiniz",picked:"seçildi"},
   en:{page:"Pros",be:"Become a Pro",searchPh:"Search pro…",all:"All categories",analysis:"Pro Analytics (registered pros / category)",quoteTitle:"Request a Quote",signupTitle:"Become a Pro — Application",name:"Full name / Business",phone:"Phone",email:"Email",cat:"Category",city:"City",desc:"Describe your need briefly",exp:"Experience / service description",send:"Send request",apply:"Submit application",sentAdmin:"✅ Your request was sent to Ustam admin.",applied:"✅ Application received, pending admin approval.",adminNote:"Requests go to the admin panel",heroTitle:"Skilled pros are on Ustam",heroSub:"Thousands of verified pros; search, compare, get quotes with confidence. If you're a pro, sign up and start getting jobs.",formTitle:"Provide a Service — Sign Up Now",byCat:"Number of pros by category",total:"Total registered pros",pick3:"You can pick up to 3 professions",picked:"selected"}
@@ -495,6 +504,14 @@ function renderProsPage(){
       <div style="font-size:32px">${b.icon}</div>
       <div class="nm" style="text-align:center;font-size:13px">${b.label}</div>
       <div class="ct" style="text-align:center"><b style="color:#14b8a6;font-size:18px">${b.n}</b> ${p2('page').toLowerCase()}</div></div>`).join("");
+  const pricing=PLANS.map(P=>{const c=P.color;const nm=P.name[lang]||P.name.en||P.name.tr;const fs=(P.feats[lang]||P.feats.en);
+    return `<div class="lcard" style="padding:22px;border:2px solid ${P.popular?c:'var(--line)'};position:relative;display:flex;flex-direction:column;gap:12px">
+      ${P.popular?`<span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:${c};color:#fff;font-size:11px;font-weight:800;padding:3px 12px;border-radius:999px;white-space:nowrap">${pl('popular')}</span>`:''}
+      <div style="font-weight:800;font-size:18px;color:${c}">${nm}</div>
+      <div style="font-size:30px;font-weight:900">${P.price===0?(lang==='en'?'Free':'Ücretsiz'):P.price+' ₺'}<span style="font-size:13px;color:var(--muted);font-weight:600">${P.price===0?'':pl('month')}</span></div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--text)">${fs.map(f=>`<li>✓ ${f}</li>`).join('')}</ul>
+      <button class="btn ${P.popular?'btn-primary':'btn-ghost'}" style="margin-top:auto;${P.popular?'':`color:${c};border:1.5px solid ${c}`}" onclick="choosePlan('${P.key}')">${pl('choose')}</button>
+    </div>`;}).join("");
   inner.innerHTML=`
     <div style="display:flex;justify-content:flex-start;padding-top:16px">
       <span class="btn btn-primary btn-sm" style="cursor:pointer" onclick="document.getElementById('signupForm').scrollIntoView({behavior:'smooth',block:'start'})">🛠️ ${p2('be')} →</span>
@@ -504,7 +521,10 @@ function renderProsPage(){
       <p style="color:var(--muted);max-width:640px;margin:0 auto">${p2('heroSub')}</p>
     </div>
     <div class="hero-stats" style="justify-content:center;margin:12px 0 26px"><div style="text-align:center"><div class="n">${PROVIDERS.length}+</div><div class="l">${p2('total')}</div></div></div>
-    <h2 class="sec-title">📊 ${p2('analysis')}</h2>
+    <h2 class="sec-title">${pl('title')}</h2>
+    <p style="color:var(--muted);font-size:14px;margin:0 0 18px">${pl('sub')}</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:6px">${pricing}</div>
+    <h2 class="sec-title" style="margin-top:30px">📊 ${p2('analysis')}</h2>
     <div class="cats" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr))">${analizTiles}</div>
     <div id="signupForm" class="lcard" style="margin-top:30px;padding:26px;box-shadow:var(--shadow)">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
@@ -600,13 +620,14 @@ function filterPros(v){prosQuery=v;renderProsList()}
 function renderProsList(){
   const box=document.getElementById('prosList');if(!box)return;
   const q=(prosQuery||"").toLocaleLowerCase('tr');
+  const rank=p=>p.plan==='premium'?2:(p.plan==='pro'?1:0);
   const list=PROVIDERS.filter(p=>(!prosGroup2||catGroupOf(p.cat)===prosGroup2)&&(!prosCat||p.cat===prosCat)&&(!q||p.name.toLocaleLowerCase('tr').includes(q)))
-    .sort((a,b)=>b.rating-a.rating);
+    .sort((a,b)=>rank(b)-rank(a)||b.rating-a.rating);
   box.innerHTML=list.length?list.map(p=>`
     <div class="offer" style="display:flex;align-items:center;gap:12px;cursor:pointer" onclick='openProProfile(${JSON.stringify(p.name)})'>
       <div style="width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#1a1205;background:linear-gradient(135deg,var(--brand),var(--brand2));flex-shrink:0">${p.name.trim()[0]}</div>
       <div style="flex:1;min-width:0">
-        <div style="font-weight:700">${p.name} ${tierBadge(p.rating)} ${p.cert?`<span class="pill" style="background:#16a34a22;color:#16a34a">${p3('certBadge')}</span>`:''}</div>
+        <div style="font-weight:700">${p.name} ${p.plan==='premium'?`<span class="pill" style="background:#7c3aed22;color:#7c3aed">${pl('featured')}</span>`:''} ${tierBadge(p.rating)} ${p.cert?`<span class="pill" style="background:#16a34a22;color:#16a34a">${p3('certBadge')}</span>`:''}</div>
         <div style="color:var(--muted);font-size:13px"><span class="stars">★ ${p.rating.toFixed(1)}</span> · ${p.reviews} ${pr('reviews')} · ${p.jobs} ${pr('jobs')} · ${proCatLabel(p.cat)}</div>
       </div>
       <button class="btn btn-primary btn-sm" style="flex-shrink:0" onclick='event.stopPropagation();openProQuote(${JSON.stringify(p.name)},${JSON.stringify(p.cat)})'>📨 ${pr('req')}</button>
@@ -676,6 +697,7 @@ function submitQuestion(){
   ADMIN_REQUESTS.push({type:"question",provider:p.name,q,status:"pending_admin",ts:Date.now()});
   toast(p3('qSent'));renderProProfile();
 }
+function choosePlan(k){ADMIN_REQUESTS.push({type:"plan",plan:k,status:"pending_admin",ts:Date.now()});toast(pl('chosen'));}
 function openProSignup(){
   closeModal();provSelCats=[];showProsView();
   setTimeout(()=>{const f=document.getElementById('signupForm');if(f)f.scrollIntoView({behavior:'smooth',block:'start'});},120);
@@ -1059,20 +1081,23 @@ function catName(c){return c[lang]||c.tr}
 function renderCats(){
   const grid0=document.getElementById("catGrid");
   if(groupFilter&&SERVICES[groupFilter]){renderServiceCards(groupFilter);return;}
-  if(grid0){grid0.className="cats";grid0.style.gridTemplateColumns="";}
+  if(grid0){grid0.className="cats";grid0.style.gridTemplateColumns="repeat(auto-fill,minmax(160px,1fr))";}
   const _w=document.getElementById('svcSearchWrap');if(_w)_w.innerHTML="";
-  const keys=groupCatKeys();
-  const list=keys?CATS.filter(c=>keys.includes(c.key)):CATS;
-  const maxJ=Math.max(1,...list.map(jobsOf));const maxP=Math.max(1,...list.map(prosOf));
-  const bar=(w,col)=>`<div style="height:6px;border-radius:999px;background:rgba(20,26,38,.06);overflow:hidden"><div style="height:100%;width:${w}%;background:${col}"></div></div>`;
-  document.getElementById("catGrid").innerHTML=list.map(c=>`
-    <div class="cat" onclick="filterCat('${c.key}')">
-      <div style="display:flex;align-items:center;gap:8px"><span class="ic">${c.icon}</span><span class="nm">${catName(c)}</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px"><span>📋 ${an('jobs')}</span><b style="color:var(--brand2)">${jobsOf(c).toLocaleString()}</b></div>
-      ${bar(Math.round(jobsOf(c)/maxJ*100),"linear-gradient(90deg,var(--brand),var(--brand2))")}
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px"><span>🛠️ ${an('pros')}</span><b style="color:#5eead4">${prosOf(c).toLocaleString()}</b></div>
-      ${bar(Math.round(prosOf(c)/maxP*100),"linear-gradient(90deg,#2dd4bf,#34d399)")}
-    </div>`).join("");
+  // ANA SAYFA: 5 ana grup (Tamirat/Temizlik/Nakliyat/Özel Ders/Diğer) — toplam iş + usta, grup renkli
+  const groups=['repair','cleaning','moving','tutoring','other'];
+  document.getElementById("catGrid").innerHTML=groups.map(g=>{
+    const col=GROUP_COLOR[g]||'#ea6a0e';
+    const members=CATS.filter(c=>(GROUPS[g].cats||[]).includes(c.key));
+    const jobs=members.reduce((a,c)=>a+jobsOf(c),0);
+    const pros=members.reduce((a,c)=>a+prosOf(c),0);
+    return `<div class="cat" onclick="selectGroup('${g}')" style="align-items:center;text-align:center;gap:8px;padding:20px 12px;border-color:${col}33;background:${col}0d">
+      <div style="width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:30px;background:${col}1f;color:${col}">${GROUP_EMOJI[g]}</div>
+      <div class="nm" style="text-align:center;font-size:15px;font-weight:800;color:${col}">${gLabel(g)}</div>
+      <div style="display:flex;gap:16px;margin-top:2px">
+        <div style="text-align:center"><div style="font-size:11px;color:var(--muted)">📋 ${an('jobs')}</div><b style="color:${col};font-size:16px">${jobs.toLocaleString()}</b></div>
+        <div style="text-align:center"><div style="font-size:11px;color:var(--muted)">🛠️ ${an('pros')}</div><b style="color:#14b8a6;font-size:16px">${pros.toLocaleString()}</b></div>
+      </div>
+    </div>`;}).join("");
 }
 function urgBadge(u){
   const cls=u==="URGENT"||u==="EMERGENCY"?"badge-urgent":u==="WITHIN_WEEK"?"badge-week":"badge-flex";
