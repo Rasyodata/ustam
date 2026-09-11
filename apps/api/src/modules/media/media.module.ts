@@ -15,7 +15,7 @@ class MediaController {
   ) {
     const result = await this.media.createUploadUrl(user.id, body.mime, body.size);
     if ("error" in result) {
-      throw new BadRequestException({ code: result.error.toUpperCase(), message: "errors.generic" });
+      throw new BadRequestException({ code: result.error!.toUpperCase(), message: "errors.generic" });
     }
     return result;
   }

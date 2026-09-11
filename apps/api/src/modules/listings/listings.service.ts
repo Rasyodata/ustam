@@ -14,7 +14,7 @@ import {
 export class ListingsService {
   constructor(
     private prisma: PrismaService,
-    private search: SearchService,
+    private searchService: SearchService,
     private push: PushService,
   ) {}
 
@@ -63,7 +63,7 @@ export class ListingsService {
 
   /** İlanı Meilisearch'e indeksle (hata-toleranslı). */
   private async indexListing(listing: any) {
-    await this.search.indexListing({
+    await this.searchService.indexListing({
       id: listing.id,
       title: listing.title,
       description: listing.description,

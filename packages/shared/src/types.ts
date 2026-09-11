@@ -12,7 +12,7 @@ import type {
   NotificationType,
   ReviewDirection,
   MediaType,
-} from "./enums.js";
+} from "./enums";
 
 /** Cursor tabanlı sayfalı yanıt. */
 export interface Paginated<T> {

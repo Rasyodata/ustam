@@ -3,8 +3,8 @@
  * Backend DTO doğrulaması ve frontend form doğrulaması aynı kuralları kullanır.
  */
 import { z } from "zod";
-import { LOCALES } from "./enums.js";
-import { PASSWORD, LISTING, OFFER } from "./constants.js";
+import { LOCALES } from "./enums";
+import { PASSWORD, LISTING, OFFER } from "./constants";
 
 export const localeSchema = z.enum(LOCALES);
 

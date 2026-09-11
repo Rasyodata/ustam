@@ -1,12 +1,12 @@
-# Ustam — Render Blueprint (api + web). Ücretsiz planda tek DB olduğu için
-# mevcut ortakbul-db Postgres'i ?schema=ustam ile paylaşır. DATABASE_URL Render
-# panelinden elle girilir (gizli, public repoda tutulmaz).
+# Ustam — Render Blueprint (api + web). DATABASE_URL = ayrı Neon Postgres
+# (Render panelinden elle girilir, gizli). Her iki servis de önce @ustam/shared
+# paketini derler (CJS dist), sonra kendi build'ini yapar.
 services:
   - type: web
     name: ustam-api
     runtime: node
     plan: free
-    buildCommand: npm install -g pnpm@9.12.0 && pnpm install --no-frozen-lockfile --prod=false && pnpm --filter @ustam/api exec prisma generate && pnpm --filter @ustam/api build
+    buildCommand: npm install -g pnpm@9.12.0 && pnpm install --no-frozen-lockfile --prod=false && pnpm --filter @ustam/shared build && pnpm --filter @ustam/api exec prisma generate && pnpm --filter @ustam/api build
     startCommand: pnpm --filter @ustam/api exec prisma db push --accept-data-loss && (pnpm --filter @ustam/api exec prisma db seed || true) && node apps/api/dist/main.js
     envVars:
       - key: NODE_ENV
@@ -26,7 +26,7 @@ services:
     name: ustam-web
     runtime: node
     plan: free
-    buildCommand: npm install -g pnpm@9.12.0 && pnpm install --no-frozen-lockfile --prod=false && pnpm --filter @ustam/web build
+    buildCommand: npm install -g pnpm@9.12.0 && pnpm install --no-frozen-lockfile --prod=false && pnpm --filter @ustam/shared build && pnpm --filter @ustam/web build
     startCommand: pnpm --filter @ustam/web exec next start -p $PORT
     envVars:
       - key: NODE_ENV

@@ -335,6 +335,7 @@ model Listing {
   offers        Offer[]
   conversations Conversation[]
   reviews       Review[]
+  payments      Payment[]
 
   publishedAt DateTime?
   expiresAt   DateTime?
@@ -505,6 +506,7 @@ model Media {
 model Payment {
   id          String        @id @default(uuid())
   listingId   String
+  listing     Listing       @relation(fields: [listingId], references: [id])
   offerId     String        @unique
   payerId     String // müşteri
   payer       User          @relation("PaymentPayer", fields: [payerId], references: [id])
