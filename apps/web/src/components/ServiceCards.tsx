@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { SERVICES, POP_LABEL, type ServiceItem } from "@/lib/services";
+import { SERVICES, POP_LABEL, serviceImage, type ServiceItem } from "@/lib/services";
 
 const SEARCH_PH: Record<string, string> = {
   tr: "hizmeti ara…",
@@ -57,8 +57,17 @@ export function ServiceCards({ group, groupLabel }: { group: string; groupLabel?
             href="/post"
             className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand hover:-translate-y-1 transition flex flex-col"
           >
-            <div className="h-28 grid place-items-center text-6xl" style={{ background: GRADS[i % GRADS.length] }}>
-              {s.icon}
+            <div className="h-28 relative grid place-items-center text-6xl overflow-hidden" style={{ background: GRADS[i % GRADS.length] }}>
+              <span>{s.icon}</span>
+              <img
+                src={serviceImage(s.q)}
+                alt={name(s)}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.display = "none";
+                }}
+              />
             </div>
             <div className="p-3 flex flex-col gap-1 flex-1">
               <div className="font-semibold text-sm leading-tight">{name(s)}</div>
