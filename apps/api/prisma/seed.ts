@@ -84,15 +84,9 @@ const CATEGORIES: CatSeed[] = [
   { slug: "photo", icon: "📸", names: { tr: "Fotoğraf & Video", en: "Photo & Video", de: "Foto & Video", fr: "Photo & Vidéo", es: "Foto y Vídeo" } },
 ];
 
+// Şimdilik sadece Kayseri
 const CITIES: { name: string; code: string; districts: string[] }[] = [
-  { name: "İstanbul", code: "34", districts: ["Kadıköy", "Beşiktaş", "Üsküdar", "Şişli", "Bakırköy"] },
-  { name: "Ankara", code: "06", districts: ["Çankaya", "Keçiören", "Yenimahalle", "Mamak"] },
-  { name: "İzmir", code: "35", districts: ["Konak", "Karşıyaka", "Bornova", "Buca"] },
-  { name: "Bursa", code: "16", districts: ["Osmangazi", "Nilüfer", "Yıldırım"] },
-  { name: "Antalya", code: "07", districts: ["Muratpaşa", "Kepez", "Konyaaltı"] },
-  { name: "Adana", code: "01", districts: ["Seyhan", "Çukurova"] },
-  { name: "Konya", code: "42", districts: ["Selçuklu", "Meram"] },
-  { name: "Gaziantep", code: "27", districts: ["Şahinbey", "Şehitkamil"] },
+  { name: "Kayseri", code: "38", districts: ["Melikgazi", "Kocasinan", "Talas", "Hacılar", "İncesu", "Develi"] },
 ];
 
 const LOCALES = ["tr", "en", "de", "fr", "es"] as const;
@@ -200,7 +194,7 @@ async function main() {
   });
 
   const plumbing = await prisma.category.findUnique({ where: { slug: "plumbing" } });
-  const istanbul = await prisma.city.findUnique({ where: { code: "34" } });
+  const istanbul = await prisma.city.findUnique({ where: { code: "38" } }); // Kayseri
   if (plumbing && istanbul) {
     const existing = await prisma.listing.findFirst({ where: { ownerId: customer.id } });
     if (!existing) {
@@ -318,7 +312,7 @@ async function main() {
   for (let i = 0; i < SEED.length; i++) {
     const [slug, title, desc, city, urg, min, max] = SEED[i];
     const cid = await catId(slug);
-    const cyid = await cityId(city);
+    const cyid = await cityId("Kayseri"); // şimdilik tüm ilanlar Kayseri
     if (!cid || !cyid) continue;
     const owner = members[i % members.length];
     const exists = await prisma.listing.findFirst({ where: { ownerId: owner.id, title } });
@@ -378,7 +372,8 @@ async function main() {
     const [email, name, slug, cities, kind, rating, reviews, jobs, verified] = PROVIDERS[i];
     const cid = await catId(slug);
     if (!cid) continue;
-    const cityIds = (await Promise.all(cities.map((c) => cityId(c)))).filter(Boolean) as string[];
+    const cityIds = (await Promise.all(["Kayseri"].map((c) => cityId(c)))).filter(Boolean) as string[];
+    void cities;
     await prisma.user.upsert({
       where: { email },
       update: {},

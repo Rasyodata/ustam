@@ -162,6 +162,9 @@
           <button onclick="setLang('de')">🇩🇪 Deutsch</button>
           <button onclick="setLang('fr')">🇫🇷 Français</button>
           <button onclick="setLang('es')">🇪🇸 Español</button>
+          <button onclick="setLang('ru')">🇷🇺 Русский</button>
+          <button onclick="setLang('ar')">🇸🇦 العربية</button>
+          <button onclick="setLang('fa')">🇮🇷 فارسی</button>
         </div>
       </div>
     </nav>
@@ -306,10 +309,35 @@ const I18N = {
     auth:{loginTitle:"Inicia sesión en tu cuenta",registerTitle:"Crear una cuenta nueva",email:"Correo",phone:"Teléfono",password:"Contraseña",displayName:"Nombre / Empresa",customer:"Cliente (publico)",provider:"Profesional / Proveedor",company:"Empresa",otpSent:"Código de verificación enviado (SMS + correo)."},
     offer:{make:"Hacer una oferta",price:"Importe de la oferta",message:"Tu mensaje",accept:"Aceptar oferta",statusPending:"Pendiente"},
     urg:{FLEXIBLE:"Flexible",WITHIN_WEEK:"Esta semana",URGENT:"Urgente",EMERGENCY:"Muy urgente"},
-    msg:{posted:"¡Tu solicitud está publicada! Los profesionales fueron notificados.",offered:"¡Tu oferta fue enviada!",accepted:"¡Oferta aceptada!",loggedin:"¡Bienvenido!"}}
+    msg:{posted:"¡Tu solicitud está publicada! Los profesionales fueron notificados.",offered:"¡Tu oferta fue enviada!",accepted:"¡Oferta aceptada!",loggedin:"¡Bienvenido!"}},
+  ru:{common:{appName:"Ustam",tagline:"Доверьте работу мастерам.",search:"Поиск",searchPlaceholder:"Что нужно сделать? (напр. починить кран)",login:"Войти",register:"Регистрация",city:"Город",category:"Категория",submit:"Отправить",cancel:"Отмена"},
+    nav:{home:"Главная",categories:"Категории",howItWorks:"Как это работает",becomeProvider:"Стать мастером",myListings:"Последние заявки"},
+    home:{heroTitle:"Мелкий ремонт или крупные проекты — найдите мастера за минуты.",heroSubtitle:"Опубликуйте заявку, получите предложения, выберите лучшее.",popularCategories:"Популярные категории",howTitle:"Как это работает",step1Title:"Опубликуйте заявку",step1Desc:"Опишите задачу в нескольких предложениях.",step2Title:"Соберите предложения",step2Desc:"Подходящие мастера пришлют предложения.",step3Title:"Выберите мастера",step3Desc:"Сравните рейтинги и отзывы и начните.",statsProviders:"Зарегистрированные мастера",statsListings:"Опубликованные заявки",statsCities:"Города обслуживания"},
+    listing:{create:"Разместить заявку",title:"Заголовок",description:"Описание работы",urgency:"Срочность",offers:"предложений",make:"Сделать предложение"},
+    auth:{loginTitle:"Войдите в аккаунт",registerTitle:"Создать аккаунт",email:"Эл. почта",phone:"Телефон",password:"Пароль",displayName:"Имя / Название компании",customer:"Клиент (размещаю заявки)",provider:"Мастер / Исполнитель",company:"Компания",otpSent:"Код подтверждения отправлен (SMS + эл. почта)."},
+    offer:{make:"Сделать предложение",price:"Сумма предложения",message:"Ваше сообщение",accept:"Принять предложение",statusPending:"Ожидает"},
+    urg:{FLEXIBLE:"Гибко",WITHIN_WEEK:"На этой неделе",URGENT:"Срочно",EMERGENCY:"Очень срочно"},
+    msg:{posted:"Ваша заявка опубликована! Мастера уведомлены.",offered:"Ваше предложение отправлено!",accepted:"Предложение принято!",loggedin:"Добро пожаловать!"}},
+  ar:{common:{appName:"Ustam",tagline:"اترك العمل للمحترفين.",search:"بحث",searchPlaceholder:"ما الذي تريد إنجازه؟ (مثل إصلاح الصنبور)",login:"تسجيل الدخول",register:"إنشاء حساب",city:"المدينة",category:"الفئة",submit:"إرسال",cancel:"إلغاء"},
+    nav:{home:"الرئيسية",categories:"الفئات",howItWorks:"كيف يعمل",becomeProvider:"كن محترفًا",myListings:"أحدث الطلبات"},
+    home:{heroTitle:"إصلاحات صغيرة أو مشاريع كبيرة — اعثر على محترفك خلال دقائق.",heroSubtitle:"انشر طلبك، اجمع العروض، اختر الأفضل.",popularCategories:"الفئات الشائعة",howTitle:"كيف يعمل",step1Title:"انشر طلبك",step1Desc:"صف ما تحتاجه في بضع جمل.",step2Title:"اجمع العروض",step2Desc:"يرسل لك المحترفون المناسبون عروضهم.",step3Title:"اختر محترفك",step3Desc:"قارن التقييمات والمراجعات ثم ابدأ.",statsProviders:"محترفون مسجلون",statsListings:"طلبات منشورة",statsCities:"مدن الخدمة"},
+    listing:{create:"نشر طلب",title:"العنوان",description:"وصف العمل",urgency:"الاستعجال",offers:"عروض",make:"تقديم عرض"},
+    auth:{loginTitle:"سجّل الدخول إلى حسابك",registerTitle:"إنشاء حساب جديد",email:"البريد الإلكتروني",phone:"الهاتف",password:"كلمة المرور",displayName:"الاسم / اسم الشركة",customer:"عميل (أنشر الطلبات)",provider:"محترف / مزوّد خدمة",company:"شركة",otpSent:"تم إرسال رمز التحقق (SMS + بريد)."},
+    offer:{make:"تقديم عرض",price:"قيمة العرض",message:"رسالتك",accept:"قبول العرض",statusPending:"قيد الانتظار"},
+    urg:{FLEXIBLE:"مرن",WITHIN_WEEK:"هذا الأسبوع",URGENT:"عاجل",EMERGENCY:"عاجل جدًا"},
+    msg:{posted:"تم نشر طلبك! تم إخطار المحترفين.",offered:"تم إرسال عرضك!",accepted:"تم قبول العرض!",loggedin:"مرحبًا بك!"}},
+  fa:{common:{appName:"Ustam",tagline:"کار را به استادها بسپار.",search:"جستجو",searchPlaceholder:"چه کاری می‌خواهید انجام شود؟ (مثلاً تعمیر شیر آب)",login:"ورود",register:"ثبت‌نام",city:"شهر",category:"دسته",submit:"ارسال",cancel:"انصراف"},
+    nav:{home:"خانه",categories:"دسته‌ها",howItWorks:"چگونه کار می‌کند",becomeProvider:"استاد شوید",myListings:"درخواست‌های اخیر"},
+    home:{heroTitle:"تعمیرات کوچک یا پروژه‌های بزرگ — استادت را در چند دقیقه پیدا کن.",heroSubtitle:"درخواستت را ثبت کن، پیشنهاد بگیر، بهترین را انتخاب کن.",popularCategories:"دسته‌های محبوب",howTitle:"چگونه کار می‌کند",step1Title:"درخواستت را ثبت کن",step1Desc:"نیازت را در چند جمله شرح بده.",step2Title:"پیشنهادها را جمع کن",step2Desc:"استادهای مرتبط برایت پیشنهاد می‌فرستند.",step3Title:"استادت را انتخاب کن",step3Desc:"امتیازها و نظرها را مقایسه کن و شروع کن.",statsProviders:"استادهای ثبت‌شده",statsListings:"درخواست‌های منتشرشده",statsCities:"شهرهای خدمات"},
+    listing:{create:"ثبت درخواست",title:"عنوان",description:"شرح کار",urgency:"فوریت",offers:"پیشنهاد",make:"ارائه پیشنهاد"},
+    auth:{loginTitle:"به حسابت وارد شو",registerTitle:"ایجاد حساب جدید",email:"ایمیل",phone:"تلفن",password:"رمز عبور",displayName:"نام / نام کسب‌وکار",customer:"کارفرما (درخواست می‌دهم)",provider:"استاد / ارائه‌دهنده",company:"شرکت",otpSent:"کد تأیید ارسال شد (پیامک + ایمیل)."},
+    offer:{make:"ارائه پیشنهاد",price:"مبلغ پیشنهاد",message:"پیام شما",accept:"پذیرش پیشنهاد",statusPending:"در انتظار"},
+    urg:{FLEXIBLE:"انعطاف‌پذیر",WITHIN_WEEK:"این هفته",URGENT:"فوری",EMERGENCY:"خیلی فوری"},
+    msg:{posted:"درخواستت منتشر شد! استادها مطلع شدند.",offered:"پیشنهادت ارسال شد!",accepted:"پیشنهاد پذیرفته شد!",loggedin:"خوش آمدی!"}}
 };
 
-const FLAGS={tr:"🇹🇷",en:"🇬🇧",de:"🇩🇪",fr:"🇫🇷",es:"🇪🇸"};
+const FLAGS={tr:"🇹🇷",en:"🇬🇧",de:"🇩🇪",fr:"🇫🇷",es:"🇪🇸",ru:"🇷🇺",ar:"🇸🇦",fa:"🇮🇷"};
+const RTL_LANGS=["ar","fa"];
 
 /* Ödeme/taahhüt (escrow) sözlüğü */
 const PAY={
@@ -319,7 +347,7 @@ const PAY={
   fr:{secure:"Paiement sécurisé",escrowInfo:"Votre paiement est conservé en séquestre Ustam jusqu'à la fin du travail.",amount:"Montant de l'offre",commission:"Frais de plateforme (10%)",net:"À verser au pro",payBtn:"Séquestrer & Payer",held:"💰 Paiement en séquestre",heldDesc:"Confirmez à la fin ; le montant est versé au pro moins les frais.",release:"Terminer & Verser au pro",released:"🎉 Paiement versé au pro !",refund:"Rembourser"},
   es:{secure:"Pago seguro",escrowInfo:"Tu pago se mantiene en depósito de Ustam hasta terminar el trabajo.",amount:"Importe de la oferta",commission:"Comisión de plataforma (10%)",net:"A pagar al profesional",payBtn:"Depositar y Pagar",held:"💰 Pago en depósito",heldDesc:"Confirma al terminar; el importe se paga al profesional menos la comisión.",release:"Completar y Pagar al profesional",released:"🎉 ¡Pago liberado al profesional!",refund:"Reembolsar"}
 };
-function p(k){return (PAY[lang]||PAY.tr)[k]}
+function p(k){return (PAY[lang]||PAY.en||PAY.tr)[k]}
 
 /* Değerlendirme/puanlama sözlüğü */
 const RATE={
@@ -329,7 +357,7 @@ const RATE={
   fr:{title:"Évaluer le pro",desc:"Comment s'est passé le travail ? Votre note aide les autres.",comment:"Votre commentaire (facultatif)",send:"Envoyer l'avis",thanks:"Merci ! Votre avis a été enregistré.",selectStars:"Veuillez choisir une note"},
   es:{title:"Califica al profesional",desc:"¿Cómo fue el trabajo? Tu calificación ayuda a otros.",comment:"Tu comentario (opcional)",send:"Enviar reseña",thanks:"¡Gracias! Tu reseña se guardó.",selectStars:"Selecciona una calificación"}
 };
-function r(k){return (RATE[lang]||RATE.tr)[k]}
+function r(k){return (RATE[lang]||RATE.en||RATE.tr)[k]}
 let ratingValue=0;
 
 /* Usta seviye rozeti (demoda puana göre) */
@@ -347,7 +375,7 @@ function tierFor(rating){
   return{e:"📈",k:"rising",c:"#5eead4"};
 }
 function tierBadge(rating){
-  const m=tierFor(rating);const lbl=(BADGE[lang]||BADGE.tr)[m.k];
+  const m=tierFor(rating);const lbl=(BADGE[lang]||BADGE.en||BADGE.tr)[m.k];
   return `<span class="pill" style="color:${m.c};background:${m.c}22;margin-inline-start:6px">${m.e} ${lbl}</span>`;
 }
 
@@ -359,7 +387,7 @@ const PROS_I18N={
   fr:{title:"Pros",subtitle:"Les meilleurs — classés selon les avis clients.",req:"Demander un devis",reqd:"Demandé ✓",jobs:"travaux",reviews:"avis"},
   es:{title:"Profesionales",subtitle:"Los mejores — ordenados por valoraciones.",req:"Solicitar presupuesto",reqd:"Solicitado ✓",jobs:"trabajos",reviews:"reseñas"}
 };
-function pr(k){return (PROS_I18N[lang]||PROS_I18N.tr)[k]}
+function pr(k){return (PROS_I18N[lang]||PROS_I18N.en||PROS_I18N.tr)[k]}
 const PROVIDERS=[
   {name:"Metal İmalat A.Ş.",cat:"manufacturing",rating:5.0,reviews:64,jobs:210},
   {name:"Mehmet Usta Tesisat",cat:"plumbing",rating:4.9,reviews:37,jobs:152},
@@ -390,7 +418,7 @@ function reqQuote(name){prosReq[name]=true;renderPros();toast("📨 "+pr('reqd')
 
 /* Tamirat İlanları başlığı */
 const JB={tr:"🔧 Tamirat İlanları",en:"🔧 Repair Jobs",de:"🔧 Reparaturaufträge",fr:"🔧 Demandes de réparation",es:"🔧 Solicitudes de reparación"};
-function renderJobBoard(){const e=document.getElementById('jbTitle');if(e)e.textContent=JB[lang]||JB.tr}
+function renderJobBoard(){const e=document.getElementById('jbTitle');if(e)e.textContent=JB[lang]||JB.en||JB.tr}
 
 /* ============ Örnek veri ============ */
 const CATS=[
@@ -424,7 +452,7 @@ const GROUPS={
   other:{tr:"Diğer",en:"Other",de:"Andere",fr:"Autre",es:"Otros",cats:["manufacturing","events","photo"]}
 };
 let groupFilter=null; // null = tümü (ana sayfa)
-function gLabel(g){return (GROUPS[g][lang]||GROUPS[g].tr)}
+function gLabel(g){return (GROUPS[g][lang]||GROUPS[g].en||GROUPS[g].tr)}
 function selectGroup(g){
   groupFilter=(g==="home")?null:g;
   document.querySelectorAll('.gnav').forEach(a=>a.classList.toggle('active',a.dataset.g===g));
@@ -441,7 +469,7 @@ const TRUST={
   fr:{escrow:"Protection des paiements",escrowD:"Votre argent est en séquestre jusqu'à la fin",verified:"Pros vérifiés",verifiedD:"Identité & documents vérifiés",free:"Devis gratuits",freeD:"Recevoir des devis est gratuit",estTitle:"Combien ça coûte ?",estDesc:"Voir la fourchette de prix moyenne (estimation) :",estPick:"Choisir une catégorie",estRange:"Fourchette de prix estimée"},
   es:{escrow:"Protección de pago",escrowD:"Tu dinero se retiene hasta terminar",verified:"Profesionales verificados",verifiedD:"Identidad y documentos verificados",free:"Presupuestos gratis",freeD:"Pedir presupuestos es gratis",estTitle:"¿Cuánto cuesta?",estDesc:"Ver el rango de precio medio (estimado):",estPick:"Elegir categoría",estRange:"Rango de precio estimado"}
 };
-function tr_(k){return (TRUST[lang]||TRUST.tr)[k]}
+function tr_(k){return (TRUST[lang]||TRUST.en||TRUST.tr)[k]}
 
 /* Ustam Güvencesi (garanti programı) */
 const GUAR={
@@ -452,7 +480,7 @@ const GUAR={
   es:{title:"🛡️ Garantía Ustam",sub:"Cada trabajo está cubierto hasta 10.000 ₺. Pago protegido y reembolsado si no quedas satisfecho.",p:[["🔒","Protección de pago","En depósito hasta tu aprobación."],["💸","Garantía de devolución","Reembolso si no es lo acordado."],["✅","Profesionales verificados","Controles de identidad y documentos."],["🤝","Resolución de disputas","El soporte interviene ante problemas."]]}
 };
 function renderGuarantee(){
-  const g=GUAR[lang]||GUAR.tr;
+  const g=GUAR[lang]||GUAR.en||GUAR.tr;
   const tt=document.getElementById('guarTitle');if(!tt)return;
   tt.textContent=g.title;document.getElementById('guarSub').textContent=g.sub;
   document.getElementById('guarGrid').innerHTML=g.p.map(([e,t2,d])=>`
@@ -469,9 +497,9 @@ const ANA={
   fr:{catTitle:"📊 Catégories de demandes",catSub:"Combien de demandes ouvertes et de pros par catégorie ?",proTitle:"🛠️ Analyse des pros",proSub:"Pros inscrits par catégorie.",jobs:"demandes",pros:"pros"},
   es:{catTitle:"📊 Categorías de trabajos",catSub:"¿Cuántos trabajos abiertos y profesionales por categoría?",proTitle:"🛠️ Análisis de profesionales",proSub:"Profesionales registrados por categoría.",jobs:"trabajos",pros:"profesionales"}
 };
-function an(k){return (ANA[lang]||ANA.tr)[k]}
+function an(k){return (ANA[lang]||ANA.en||ANA.tr)[k]}
 /* Şehir bazlı ölçek (demoda simüle) */
-const CITY_FACTORS={"":1,"İstanbul":0.42,"Ankara":0.18,"İzmir":0.14,"Bursa":0.08,"Antalya":0.07,"Adana":0.05,"Konya":0.04,"Gaziantep":0.03};
+const CITY_FACTORS={"":1,"Kayseri":1};
 let cityFactor=1;
 const CITY_LBL={tr:"🏙️ Şehir",en:"🏙️ City",de:"🏙️ Stadt",fr:"🏙️ Ville",es:"🏙️ Ciudad"};
 const ALLCITY={tr:"Tüm Türkiye",en:"All cities",de:"Alle Städte",fr:"Toutes les villes",es:"Todas las ciudades"};
@@ -485,12 +513,12 @@ function renderAnalytics(){
   document.getElementById('anaProTitle').textContent=an('proTitle');
   document.getElementById('anaProSub').textContent=an('proSub');
   // Şehir seçici doldur
-  const lbl=document.getElementById('anaCityLbl');if(lbl)lbl.textContent=CITY_LBL[lang]||CITY_LBL.tr;
+  const lbl=document.getElementById('anaCityLbl');if(lbl)lbl.textContent=CITY_LBL[lang]||CITY_LBL.en||CITY_LBL.tr;
   const sel=document.getElementById('anaCity');
   if(sel&&!sel.dataset.filled){
-    sel.innerHTML=`<option value="">${ALLCITY[lang]||ALLCITY.tr}</option>`+CITIES.map(c=>`<option value="${c}">${c}</option>`).join("");
+    sel.innerHTML=`<option value="">${ALLCITY[lang]||ALLCITY.en||ALLCITY.tr}</option>`+CITIES.map(c=>`<option value="${c}">${c}</option>`).join("");
     sel.dataset.filled="1";
-  } else if(sel){ sel.options[0].textContent=ALLCITY[lang]||ALLCITY.tr; }
+  } else if(sel){ sel.options[0].textContent=ALLCITY[lang]||ALLCITY.en||ALLCITY.tr; }
   const sorted=[...CATS].sort((a,b)=>prosOf(b)-prosOf(a)).slice(0,8);
   const max=Math.max(...sorted.map(prosOf));
   el.innerHTML=sorted.map(c=>`
@@ -503,7 +531,7 @@ function renderAnalytics(){
     </div>`).join("");
 }
 
-const CITIES=["İstanbul","Ankara","İzmir","Bursa","Antalya","Adana","Konya","Gaziantep"];
+const CITIES=["Kayseri"];
 
 let LISTINGS=[
   {id:1,icon:"🚰",cat:"plumbing",city:"İstanbul",urg:"URGENT",budget:"1.500–2.500 ₺",offers:5,
@@ -561,11 +589,11 @@ const SEED_LISTINGS=[
 ];
 (function seedListings(){
   const iconOf=k=>(CATS.find(c=>c.key===k)||{}).icon||"🔧";
-  LISTINGS.forEach((l,i)=>{ if(!l.owner) l.owner=MEMBERS[i%MEMBERS.length]; });
+  LISTINGS.forEach((l,i)=>{ if(!l.owner) l.owner=MEMBERS[i%MEMBERS.length]; l.city="Kayseri"; });
   SEED_LISTINGS.forEach((s,i)=>{
     const [cat,tr2,en2,city,urg,budget,offers]=s;
     LISTINGS.push({
-      id:100+i, icon:iconOf(cat), cat, city, urg, budget, offers,
+      id:100+i, icon:iconOf(cat), cat, city:"Kayseri", urg, budget, offers,
       owner:MEMBERS[i%MEMBERS.length],
       title:{tr:tr2,en:en2},
       desc:{tr:`${tr2} için tecrübeli usta arıyorum. Uygun fiyatlı teklifleri değerlendireceğim.`,
@@ -587,6 +615,7 @@ function t(path){
 }
 function applyI18n(){
   document.documentElement.lang=lang;
+  document.documentElement.dir=RTL_LANGS.includes(lang)?"rtl":"ltr";
   document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.getAttribute("data-i18n"))});
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>{el.setAttribute("placeholder",t(el.getAttribute("data-i18n-ph")))});
   document.getElementById("langFlag").textContent=FLAGS[lang];
@@ -710,7 +739,7 @@ const CHAT={
   fr:{title:"Messages",ph:"Écrire un message…",send:"Envoyer",greet:"Bonjour, je peux répondre à vos questions sur mon offre. Quand êtes-vous disponible ?",typing:"écrit…"},
   es:{title:"Mensajes",ph:"Escribe un mensaje…",send:"Enviar",greet:"Hola, puedo responder tus dudas sobre mi oferta. ¿Cuándo te viene bien?",typing:"escribiendo…"}
 };
-function ch(k){return (CHAT[lang]||CHAT.tr)[k]}
+function ch(k){return (CHAT[lang]||CHAT.en||CHAT.tr)[k]}
 let chatMsgs=[];let chatWho="";
 function openChat(who){
   chatWho=who;chatMsgs=[{me:false,text:ch('greet')}];
@@ -815,7 +844,7 @@ const WIZ={
   fr:{step:"Étape",next:"Suivant",back:"Retour",publish:"Publier la demande",s1:"De quoi avez-vous besoin ?",s1d:"Choisissez une catégorie.",s2:"Décrivez le travail",s2d:"Un titre et quelques phrases suffisent.",s3:"Où et quand ?",s3d:"Choisissez ville et urgence.",s4:"Vérifier et publier",titlePh:"ex. Remplacement de robinet",descPh:"Décrivez les détails…",privacy:"🔒 Vos coordonnées restent privées ; partagées seulement avec le pro choisi.",cap:"Cette demande reçoit jusqu'à 5 offres."},
   es:{step:"Paso",next:"Siguiente",back:"Atrás",publish:"Publicar solicitud",s1:"¿Qué necesitas hacer?",s1d:"Elige una categoría.",s2:"Describe el trabajo",s2d:"Un título y unas frases bastan.",s3:"¿Dónde y cuándo?",s3d:"Elige ciudad y urgencia.",s4:"Revisar y publicar",titlePh:"ej. Cambio de grifo de cocina",descPh:"Describe los detalles…",privacy:"🔒 Tu contacto es privado; se comparte solo con el profesional elegido.",cap:"Esta solicitud recibe hasta 5 ofertas."}
 };
-function wz(k){return (WIZ[lang]||WIZ.tr)[k]}
+function wz(k){return (WIZ[lang]||WIZ.en||WIZ.tr)[k]}
 let wiz={step:1,catIdx:null,title:"",desc:"",city:"İstanbul",urg:"FLEXIBLE"};
 function openPost(){wiz={step:1,catIdx:null,title:"",desc:"",city:"İstanbul",urg:"FLEXIBLE"};renderWiz()}
 function wizSave(){
