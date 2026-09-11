@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { SERVICES, POP_LABEL, serviceImage, type ServiceItem } from "@/lib/services";
+import { SERVICES, POP_LABEL, type ServiceItem } from "@/lib/services";
 
 const SEARCH_PH: Record<string, string> = {
   tr: "hizmeti ara…",
@@ -13,7 +13,18 @@ const SEARCH_PH: Record<string, string> = {
   es: "buscar servicio…",
 };
 
-/** armut.com tarzı: arama çubuğu + altında resimli popüler hizmet kartları. */
+const GRADS = [
+  "linear-gradient(135deg,#ffe4cf,#ffcfa1)",
+  "linear-gradient(135deg,#d7f0ff,#a9deff)",
+  "linear-gradient(135deg,#e3ffe0,#b8f5bd)",
+  "linear-gradient(135deg,#ffe0ec,#ffc2da)",
+  "linear-gradient(135deg,#ece2ff,#d0c2ff)",
+  "linear-gradient(135deg,#fff3c4,#ffe08a)",
+  "linear-gradient(135deg,#d9fff4,#a9f0e0)",
+  "linear-gradient(135deg,#ffe0e0,#ffc2c2)",
+];
+
+/** armut.com tarzı: arama çubuğu + kompakt ikon kategori tile'ları. */
 export function ServiceCards({ group, groupLabel }: { group: string; groupLabel?: string }) {
   const t = useTranslations();
   const locale = useLocale();
@@ -22,16 +33,6 @@ export function ServiceCards({ group, groupLabel }: { group: string; groupLabel?
   if (!list?.length) return null;
 
   const name = (s: ServiceItem) => (s as any)[locale] ?? s.en ?? s.tr;
-  const GRADS = [
-    "linear-gradient(135deg,#ffe4cf,#ffcfa1)",
-    "linear-gradient(135deg,#d7f0ff,#a9deff)",
-    "linear-gradient(135deg,#e3ffe0,#b8f5bd)",
-    "linear-gradient(135deg,#ffe0ec,#ffc2da)",
-    "linear-gradient(135deg,#ece2ff,#d0c2ff)",
-    "linear-gradient(135deg,#fff3c4,#ffe08a)",
-    "linear-gradient(135deg,#d9fff4,#a9f0e0)",
-    "linear-gradient(135deg,#ffe0e0,#ffc2c2)",
-  ];
   const filtered = q
     ? list.filter((s) => name(s).toLocaleLowerCase("tr").includes(q.toLocaleLowerCase("tr")))
     : list;
@@ -50,34 +51,22 @@ export function ServiceCards({ group, groupLabel }: { group: string; groupLabel?
       </div>
 
       <h2 className="text-xl font-bold mb-4">{POP_LABEL[locale] ?? POP_LABEL.en}</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
         {filtered.map((s, i) => (
           <Link
             key={i}
             href="/post"
-            className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand hover:-translate-y-1 transition flex flex-col"
+            className="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-brand hover:-translate-y-1 transition"
           >
-            <div className="h-28 relative grid place-items-center text-6xl overflow-hidden" style={{ background: GRADS[i % GRADS.length] }}>
-              <span>{s.icon}</span>
-              <img
-                src={serviceImage(s.q)}
-                alt={name(s)}
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = "none";
-                }}
-              />
+            <div
+              className="w-16 h-16 rounded-2xl grid place-items-center text-3xl"
+              style={{ background: GRADS[i % GRADS.length] }}
+            >
+              {s.icon}
             </div>
-            <div className="p-3 flex flex-col gap-1 flex-1">
-              <div className="font-semibold text-sm leading-tight">{name(s)}</div>
-              <div className="text-slate-500 text-xs flex items-center gap-1.5">
-                <span className="text-amber-500 font-bold">★ {s.rating}</span>
-                <span>· {s.pros} {t("analytics.pros")}</span>
-              </div>
-              <div className="mt-auto pt-1">
-                <span className="text-xs font-bold text-brand">{t("pros.requestQuote")} →</span>
-              </div>
+            <div className="font-semibold text-sm leading-tight">{name(s)}</div>
+            <div className="text-slate-500 text-xs">
+              <span className="text-amber-500 font-bold">★ {s.rating}</span> · {s.pros} {t("analytics.pros")}
             </div>
           </Link>
         ))}

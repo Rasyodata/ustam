@@ -549,7 +549,7 @@ function renderServiceCards(group){
   svcGroup=group; svcQuery="";
   const tt=document.getElementById('anaCatTitle');if(tt)tt.textContent=`${gLabel(group)} · ${POP[lang]||POP.en}`;
   const cs=document.getElementById('anaCatSub');if(cs)cs.textContent="";
-  const grid=document.getElementById('catGrid');if(grid)grid.className="listings";
+  const grid=document.getElementById('catGrid');if(grid)grid.className="cats";
   const wrap=document.getElementById('svcSearchWrap');
   if(wrap){
     const ph=`${gLabel(group)} ${SVC_SEARCH[lang]||SVC_SEARCH.en}`;
@@ -562,17 +562,10 @@ function renderServiceCards(group){
 }
 const GRADS=["linear-gradient(135deg,#ffe4cf,#ffcfa1)","linear-gradient(135deg,#d7f0ff,#a9deff)","linear-gradient(135deg,#e3ffe0,#b8f5bd)","linear-gradient(135deg,#ffe0ec,#ffc2da)","linear-gradient(135deg,#ece2ff,#d0c2ff)","linear-gradient(135deg,#fff3c4,#ffe08a)","linear-gradient(135deg,#d9fff4,#a9f0e0)","linear-gradient(135deg,#ffe0e0,#ffc2c2)"];
 function svcCard(s,i){
-  const q=encodeURIComponent((s.en||s.tr).toLowerCase().replace(/\s*&\s*/g,",").replace(/\s+/g,","));
-  return `<div class="lcard" onclick="openPost()">
-      <div class="ph" style="position:relative;overflow:hidden;font-size:58px;background:${GRADS[i%GRADS.length]}">
-        <span>${s.icon}</span>
-        <img src="https://loremflickr.com/600/400/${q}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">
-      </div>
-      <div class="bd">
-        <h4>${svcName(s)}</h4>
-        <div class="meta"><span>👤 ${s.pros} ${an('pros')}</span><span class="stars">★ ${s.rating}</span></div>
-        <div class="foot"><span class="pill badge-offers">${pr('req')}</span><span style="color:var(--muted);font-size:13px">→</span></div>
-      </div>
+  return `<div class="cat" onclick="openPost()" style="align-items:center;text-align:center;gap:6px">
+      <div style="width:64px;height:64px;border-radius:16px;display:grid;place-items:center;font-size:32px;background:${GRADS[i%GRADS.length]}">${s.icon}</div>
+      <div class="nm" style="text-align:center">${svcName(s)}</div>
+      <div class="ct" style="text-align:center">★ ${s.rating} · ${s.pros} ${an('pros')}</div>
     </div>`;
 }
 function renderServiceGrid(){
