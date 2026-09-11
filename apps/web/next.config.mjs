@@ -5,6 +5,8 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Ücretsiz planda api cold-start (~50sn) olabilir; SSG fetch'leri timeout'a düşmesin.
+  staticPageGenerationTimeout: 240,
   transpilePackages: ["@ustam/shared", "@ustam/config"],
   images: { remotePatterns: [{ protocol: "http", hostname: "**" }, { protocol: "https", hostname: "**" }] },
   eslint: { ignoreDuringBuilds: true },
