@@ -51,22 +51,22 @@ export function ServiceCards({ group, groupLabel }: { group: string; groupLabel?
       </div>
 
       <h2 className="text-xl font-bold mb-4">{POP_LABEL[locale] ?? POP_LABEL.en}</h2>
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2.5">
         {filtered.map((s, i) => (
           <Link
             key={i}
             href="/post"
-            className="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-brand hover:-translate-y-1 transition"
+            className="bg-white border border-slate-200 rounded-xl p-2.5 flex flex-col items-center text-center gap-1 hover:border-brand hover:-translate-y-0.5 transition"
           >
             <div
-              className="w-16 h-16 rounded-2xl grid place-items-center text-3xl"
+              className="w-11 h-11 rounded-xl grid place-items-center text-xl"
               style={{ background: GRADS[i % GRADS.length] }}
             >
               {s.icon}
             </div>
-            <div className="font-semibold text-sm leading-tight">{name(s)}</div>
-            <div className="text-slate-500 text-xs">
-              <span className="text-amber-500 font-bold">★ {s.rating}</span> · {s.pros} {t("analytics.pros")}
+            <div className="font-semibold text-[13px] leading-tight">{name(s)}</div>
+            <div className="text-slate-500 text-[11px]">
+              <span className="text-amber-500 font-bold">★ {s.rating}</span> · {s.pros}
             </div>
           </Link>
         ))}
