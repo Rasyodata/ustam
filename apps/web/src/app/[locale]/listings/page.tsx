@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { api } from "@/lib/api";
+import { ServiceCards } from "@/components/ServiceCards";
+import { SERVICES } from "@/lib/services";
 import type { Locale, ListingView, CategoryView } from "@ustam/shared";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -75,6 +77,9 @@ export default async function JobBoardPage({
         </Link>
       </div>
       <p className="text-slate-500 mb-6">{t("jobBoard.subtitle")}</p>
+
+      {/* armut tarzı resimli hizmet kartları (grup seçiliyse) */}
+      {g && SERVICES[g] && <ServiceCards group={g} />}
 
       {/* Kategori filtresi */}
       <div className="flex gap-2 flex-wrap mb-3 overflow-x-auto">
