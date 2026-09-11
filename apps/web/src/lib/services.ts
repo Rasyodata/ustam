@@ -58,6 +58,10 @@ export const SERVICES: Record<string, ServiceItem[]> = {
     { icon: "📚", tr: "LGS / YKS Hazırlık", en: "Exam Prep", q: "exam,study", pros: 110, rating: 4.9 },
     { icon: "🏊", tr: "Yüzme Dersi", en: "Swimming", q: "swimming,pool", pros: 40, rating: 4.8 },
     { icon: "🇩🇪", tr: "Almanca Dersi", en: "German", q: "german,books", pros: 45, rating: 4.7 },
+    { icon: "🇸🇦", tr: "Arapça Dersi", en: "Arabic Tutoring", q: "arabic,book", pros: 60, rating: 4.8 },
+    { icon: "🇮🇷", tr: "Farsça Dersi", en: "Persian Tutoring", q: "persian,book", pros: 35, rating: 4.7 },
+    { icon: "🛒", tr: "E-ticaret Eğitimi", en: "E-commerce Training", q: "ecommerce,online", pros: 70, rating: 4.8 },
+    { icon: "🧾", tr: "Muhasebe Dersi", en: "Accounting Course", q: "accounting,finance", pros: 55, rating: 4.7 },
   ],
   other: [
     { icon: "📸", tr: "Fotoğrafçı", en: "Photographer", q: "photographer,camera", pros: 120, rating: 4.8 },
