@@ -470,6 +470,41 @@ function selectGroup(g){
 }
 function groupCatKeys(){return groupFilter?GROUPS[groupFilter].cats:null}
 
+/* armut.com/g/temizlik-1 — popüler temizlik hizmetleri (resimli kartlar) */
+const CLEANING_SERVICES=[
+  {icon:"🏠",tr:"Ev Temizliği",en:"Home Cleaning",pros:320,rating:4.8},
+  {icon:"📦",tr:"Boş Ev Temizliği",en:"Empty Home Cleaning",pros:180,rating:4.7},
+  {icon:"🛋️",tr:"Koltuk Yıkama",en:"Sofa Washing",pros:240,rating:4.9},
+  {icon:"🧶",tr:"Halı Yıkama",en:"Carpet Washing",pros:210,rating:4.8},
+  {icon:"🏢",tr:"Apartman Temizliği",en:"Apartment Cleaning",pros:130,rating:4.6},
+  {icon:"🏗️",tr:"İnşaat Sonrası Temizlik",en:"Post-Construction Cleaning",pros:160,rating:4.7},
+  {icon:"🐛",tr:"Böcek İlaçlama",en:"Pest Control",pros:140,rating:4.8},
+  {icon:"🪟",tr:"Cam Temizliği",en:"Window Cleaning",pros:120,rating:4.7},
+  {icon:"♨️",tr:"Petek Temizliği",en:"Radiator Cleaning",pros:95,rating:4.6},
+  {icon:"💼",tr:"Ofis Temizliği",en:"Office Cleaning",pros:110,rating:4.7},
+  {icon:"👕",tr:"Evde Ütü Hizmeti",en:"In-Home Ironing",pros:70,rating:4.8},
+  {icon:"🪜",tr:"Merdiven Temizliği",en:"Staircase Cleaning",pros:60,rating:4.5},
+  {icon:"🧴",tr:"Dezenfeksiyon",en:"Disinfection",pros:80,rating:4.7},
+  {icon:"✨",tr:"Cam Silme",en:"Window Wiping",pros:90,rating:4.6}
+];
+const CLEAN_TITLE={tr:"🧹 Popüler Temizlik Hizmetleri",en:"🧹 Popular Cleaning Services",de:"🧹 Beliebte Reinigungsdienste",fr:"🧹 Services de nettoyage populaires",es:"🧹 Servicios de limpieza populares",ru:"🧹 Популярные услуги уборки",ar:"🧹 خدمات التنظيف الشائعة",fa:"🧹 خدمات نظافت محبوب"};
+function svcName(s){return s[lang]||s.en||s.tr}
+function renderCleaningCards(){
+  const grid=document.getElementById('catGrid');if(!grid)return;
+  const tt=document.getElementById('anaCatTitle');if(tt)tt.textContent=CLEAN_TITLE[lang]||CLEAN_TITLE.tr;
+  const cs=document.getElementById('anaCatSub');if(cs)cs.textContent="";
+  grid.className="listings"; // görsel kart ızgarası
+  grid.innerHTML=CLEANING_SERVICES.map(s=>`
+    <div class="lcard" onclick="openPost()">
+      <div class="ph" style="font-size:52px">${s.icon}</div>
+      <div class="bd">
+        <h4>${svcName(s)}</h4>
+        <div class="meta"><span>👤 ${s.pros} ${an('pros')}</span><span class="stars">★ ${s.rating}</span></div>
+        <div class="foot"><span class="pill badge-offers">${pr('req')}</span><span style="color:var(--muted);font-size:13px">→</span></div>
+      </div>
+    </div>`).join("");
+}
+
 /* Güven bandı + maliyet tahmini sözlüğü (yurt dışı liderlerden ilham) */
 const TRUST={
   tr:{escrow:"Ödeme güvencesi",escrowD:"Paran iş bitene kadar emanette",verified:"Doğrulanmış ustalar",verifiedD:"Kimlik & belge kontrolü",free:"Ücretsiz teklif",freeD:"Teklif almak bedava",estTitle:"Ne kadar tutar?",estDesc:"Ortalama fiyat aralığını gör (tahmini):",estPick:"Kategori seç",estRange:"Tahmini fiyat aralığı"},
@@ -517,8 +552,10 @@ function prosOf(c){return Math.max(1,Math.round(c.c*cityFactor))}
 function setCityFactor(){const v=document.getElementById('anaCity').value;cityFactor=CITY_FACTORS[v]??1;renderCats();renderAnalytics()}
 function renderAnalytics(){
   const el=document.getElementById('anaProv');if(!el)return;
-  const ct=document.getElementById('anaCatTitle');if(ct)ct.textContent=an('catTitle');
-  const cs=document.getElementById('anaCatSub');if(cs)cs.textContent=an('catSub');
+  if(groupFilter!=='cleaning'){
+    const ct=document.getElementById('anaCatTitle');if(ct)ct.textContent=an('catTitle');
+    const cs=document.getElementById('anaCatSub');if(cs)cs.textContent=an('catSub');
+  }
   document.getElementById('anaProTitle').textContent=an('proTitle');
   document.getElementById('anaProSub').textContent=an('proSub');
   // Şehir seçici doldur
@@ -661,6 +698,9 @@ document.addEventListener("click",()=>document.getElementById("langMenu").classL
 /* ============ Render ============ */
 function catName(c){return c[lang]||c.tr}
 function renderCats(){
+  const grid0=document.getElementById("catGrid");
+  if(groupFilter==='cleaning'){renderCleaningCards();return;}
+  if(grid0)grid0.className="cats";
   const keys=groupCatKeys();
   const list=keys?CATS.filter(c=>keys.includes(c.key)):CATS;
   const maxJ=Math.max(1,...list.map(jobsOf));const maxP=Math.max(1,...list.map(prosOf));
