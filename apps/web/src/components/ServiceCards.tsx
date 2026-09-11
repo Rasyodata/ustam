@@ -22,6 +22,16 @@ export function ServiceCards({ group, groupLabel }: { group: string; groupLabel?
   if (!list?.length) return null;
 
   const name = (s: ServiceItem) => (s as any)[locale] ?? s.en ?? s.tr;
+  const GRADS = [
+    "linear-gradient(135deg,#ffe4cf,#ffcfa1)",
+    "linear-gradient(135deg,#d7f0ff,#a9deff)",
+    "linear-gradient(135deg,#e3ffe0,#b8f5bd)",
+    "linear-gradient(135deg,#ffe0ec,#ffc2da)",
+    "linear-gradient(135deg,#ece2ff,#d0c2ff)",
+    "linear-gradient(135deg,#fff3c4,#ffe08a)",
+    "linear-gradient(135deg,#d9fff4,#a9f0e0)",
+    "linear-gradient(135deg,#ffe0e0,#ffc2c2)",
+  ];
   const filtered = q
     ? list.filter((s) => name(s).toLocaleLowerCase("tr").includes(q.toLocaleLowerCase("tr")))
     : list;
@@ -47,7 +57,7 @@ export function ServiceCards({ group, groupLabel }: { group: string; groupLabel?
             href="/post"
             className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand hover:-translate-y-1 transition flex flex-col"
           >
-            <div className="h-24 bg-gradient-to-br from-orange-50 to-slate-100 grid place-items-center text-5xl">
+            <div className="h-28 grid place-items-center text-6xl" style={{ background: GRADS[i % GRADS.length] }}>
               {s.icon}
             </div>
             <div className="p-3 flex flex-col gap-1 flex-1">

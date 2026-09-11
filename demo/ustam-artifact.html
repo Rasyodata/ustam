@@ -191,32 +191,6 @@
     </div>
   </div>
 
-  <!-- TRUST BAND -->
-  <section style="padding-top:6px">
-    <div class="container">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
-        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
-          <span style="font-size:28px">🛡️</span><div><div class="nm" id="tEscrow"></div><div class="ct" id="tEscrowD"></div></div>
-        </div>
-        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
-          <span style="font-size:28px">✅</span><div><div class="nm" id="tVerified"></div><div class="ct" id="tVerifiedD"></div></div>
-        </div>
-        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
-          <span style="font-size:28px">💬</span><div><div class="nm" id="tFree"></div><div class="ct" id="tFreeD"></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- USTAM GÜVENCESİ -->
-  <section id="guarantee" style="padding-top:10px">
-    <div class="container">
-      <h2 class="sec-title" id="guarTitle" style="margin-bottom:4px"></h2>
-      <p style="color:var(--muted);margin:0 0 16px;font-size:14px" id="guarSub"></p>
-      <div class="cats" id="guarGrid"></div>
-    </div>
-  </section>
-
   <!-- CATEGORIES -->
   <section id="cats">
     <div class="container">
@@ -251,6 +225,32 @@
         <button class="btn btn-primary" onclick="openPost()">＋ <span data-i18n="listing.create">İlan ver</span></button>
       </div>
       <div class="listings" id="listGrid" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <!-- USTAM GÜVENCESİ (sayfa altı) -->
+  <section id="guarantee" style="padding-top:10px">
+    <div class="container">
+      <h2 class="sec-title" id="guarTitle" style="margin-bottom:4px"></h2>
+      <p style="color:var(--muted);margin:0 0 16px;font-size:14px" id="guarSub"></p>
+      <div class="cats" id="guarGrid"></div>
+    </div>
+  </section>
+
+  <!-- TRUST BAND (sayfa altı) -->
+  <section style="padding-top:6px">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
+          <span style="font-size:28px">🛡️</span><div><div class="nm" id="tEscrow"></div><div class="ct" id="tEscrowD"></div></div>
+        </div>
+        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
+          <span style="font-size:28px">✅</span><div><div class="nm" id="tVerified"></div><div class="ct" id="tVerifiedD"></div></div>
+        </div>
+        <div class="cat" style="cursor:default;flex-direction:row;align-items:center;gap:12px">
+          <span style="font-size:28px">💬</span><div><div class="nm" id="tFree"></div><div class="ct" id="tFreeD"></div></div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -551,9 +551,10 @@ function renderServiceCards(group){
   }
   renderServiceGrid();
 }
-function svcCard(s){
+const GRADS=["linear-gradient(135deg,#ffe4cf,#ffcfa1)","linear-gradient(135deg,#d7f0ff,#a9deff)","linear-gradient(135deg,#e3ffe0,#b8f5bd)","linear-gradient(135deg,#ffe0ec,#ffc2da)","linear-gradient(135deg,#ece2ff,#d0c2ff)","linear-gradient(135deg,#fff3c4,#ffe08a)","linear-gradient(135deg,#d9fff4,#a9f0e0)","linear-gradient(135deg,#ffe0e0,#ffc2c2)"];
+function svcCard(s,i){
   return `<div class="lcard" onclick="openPost()">
-      <div class="ph" style="font-size:52px">${s.icon}</div>
+      <div class="ph" style="font-size:58px;background:${GRADS[i%GRADS.length]}">${s.icon}</div>
       <div class="bd">
         <h4>${svcName(s)}</h4>
         <div class="meta"><span>👤 ${s.pros} ${an('pros')}</span><span class="stars">★ ${s.rating}</span></div>
@@ -565,7 +566,7 @@ function renderServiceGrid(){
   const grid=document.getElementById('catGrid');if(!grid||!svcGroup)return;
   const q=(svcQuery||"").toLocaleLowerCase('tr');
   const list=(SERVICES[svcGroup]||[]).filter(s=>!q||svcName(s).toLocaleLowerCase('tr').includes(q));
-  grid.innerHTML=list.length?list.map(svcCard).join(""):`<p style="color:var(--muted);grid-column:1/-1">—</p>`;
+  grid.innerHTML=list.length?list.map((s,i)=>svcCard(s,i)).join(""):`<p style="color:var(--muted);grid-column:1/-1">—</p>`;
 }
 function filterServices(v){svcQuery=v;renderServiceGrid()}
 
