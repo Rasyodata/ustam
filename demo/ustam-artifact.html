@@ -822,7 +822,7 @@ const SVC_SEARCH={tr:"hizmeti ara…",en:"search service…",de:"Dienst suchen�
 let svcGroup=null, svcQuery="";
 function renderServiceCards(group){
   svcGroup=group; svcQuery="";
-  const tt=document.getElementById('anaCatTitle');if(tt)tt.textContent=`${gLabel(group)} · ${POP[lang]||POP.en}`;
+  const tt=document.getElementById('anaCatTitle');if(tt)tt.textContent=`📊 ${gLabel(group)} — ${ANLZ[lang]||ANLZ.en}`;
   const cs=document.getElementById('anaCatSub');if(cs)cs.textContent="";
   const grid=document.getElementById('catGrid');if(grid){grid.className="cats";grid.style.gridTemplateColumns="repeat(auto-fill,minmax(108px,1fr))";}
   const wrap=document.getElementById('svcSearchWrap');
@@ -835,13 +835,14 @@ function renderServiceCards(group){
   }
   renderServiceGrid();
 }
-const GRADS=["linear-gradient(135deg,#ffe4cf,#ffcfa1)","linear-gradient(135deg,#d7f0ff,#a9deff)","linear-gradient(135deg,#e3ffe0,#b8f5bd)","linear-gradient(135deg,#ffe0ec,#ffc2da)","linear-gradient(135deg,#ece2ff,#d0c2ff)","linear-gradient(135deg,#fff3c4,#ffe08a)","linear-gradient(135deg,#d9fff4,#a9f0e0)","linear-gradient(135deg,#ffe0e0,#ffc2c2)"];
+const ANLZ={tr:"İlan & Usta Analizi",en:"Listings & Pros Analysis",de:"Auftrag & Profi-Analyse",fr:"Analyse demandes & pros",es:"Análisis de solicitudes y pros",ru:"Анализ заявок и мастеров",ar:"تحليل الإعلانات والمحترفين",fa:"تحلیل آگهی و استادان"};
 function svcCard(s,i){
   const col=GROUP_COLOR[svcGroup]||'#ea6a0e';
+  const ilan=Math.round(s.pros*1.2+8);
   return `<div class="cat" onclick="openPost()" style="align-items:center;text-align:center;gap:5px;padding:14px 8px;border-color:${col}33;background:${col}0d">
       <div style="width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:${col}1f;color:${col}">${s.icon}</div>
       <div class="nm" style="text-align:center;font-size:13px;line-height:1.25;color:${col}">${svcName(s)}</div>
-      <div class="ct" style="text-align:center;font-size:11px">★ ${s.rating} · ${s.pros}</div>
+      <div class="ct" style="text-align:center;font-size:11px"><b style="color:${col}">${ilan}</b> ${an('jobs')} · <b style="color:#14b8a6">${s.pros}</b> ${an('pros')}</div>
     </div>`;
 }
 function renderServiceGrid(){
