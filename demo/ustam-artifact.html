@@ -256,12 +256,21 @@
       </div>
     </div>
   </section>
+
+  <!-- MÜŞTERİ YORUMLARI -->
+  <section style="padding-top:8px"><div class="container">
+    <h2 class="sec-title" id="testiTitle"></h2>
+    <div class="cats" id="testiGrid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))"></div>
+  </div></section>
 </main>
 
-<footer>
-  <div class="container">
-    <div class="logo" style="font-size:18px;margin-bottom:8px"><span class="mark" style="width:26px;height:26px;font-size:15px">🛠️</span> Ustam</div>
-    <span data-i18n="common.tagline">İşini ustasına bırak.</span> · © 2026 Ustam · Demo
+<footer style="background:#0f1420;color:#cbd5ef;margin-top:40px">
+  <div class="container" style="padding:36px 20px 20px">
+    <div id="footerInner" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px"></div>
+    <div style="border-top:1px solid rgba(255,255,255,.1);margin-top:26px;padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:#8b97b0;font-size:13px">
+      <span id="footRights">© 2026 Ustam</span>
+      <span>🇹🇷 TR · 🇬🇧 EN · 🇩🇪 DE · 🇫🇷 FR · 🇪🇸 ES · 🇷🇺 RU · 🇸🇦 AR · 🇮🇷 FA</span>
+    </div>
   </div>
 </footer>
 
@@ -1037,7 +1046,42 @@ function applyI18n(){
   document.getElementById("langFlag").textContent=FLAGS[lang];
   document.getElementById("langCode").textContent=lang.toUpperCase();
   renderNav();renderCats();renderListings();fillCities();renderTrust();renderPros();renderJobBoard();renderAnalytics();renderGuarantee();
+  renderTesti();renderFooter();
   const pp=document.getElementById('prosPage');if(pp&&pp.style.display!=='none')renderProsPage();
+}
+/* footer responsive: dar ekranda tek sütun */
+(function(){const st=document.createElement('style');st.textContent='@media(max-width:720px){#footerInner{grid-template-columns:1fr 1fr!important}}@media(max-width:460px){#footerInner{grid-template-columns:1fr!important}}';document.head.appendChild(st);})();
+const TESTI={
+  tr:{title:"💬 Müşteri Yorumları",items:[{n:"Ayşe K.",s:"Ev Temizliği",r:5,t:"Aynı gün geldiler, ev tertemiz oldu. Kesinlikle tavsiye ederim."},{n:"Mehmet D.",s:"Kombi Tamiri",r:5,t:"Usta çok bilgiliydi, sorunu 1 saatte çözdü. Fiyat da uygundu."},{n:"Zeynep A.",s:"Nakliyat",r:4,t:"Eşyalar sağlam taşındı, ekip güler yüzlü ve dakikti."}]},
+  en:{title:"💬 Customer Reviews",items:[{n:"Ayşe K.",s:"Home Cleaning",r:5,t:"Came same day, spotless. Highly recommend."},{n:"Mehmet D.",s:"Boiler Repair",r:5,t:"Very knowledgeable, fixed it in an hour. Fair price too."},{n:"Zeynep A.",s:"Moving",r:4,t:"Everything moved safely, friendly and punctual team."}]}
+};
+function renderTesti(){
+  const d=TESTI[lang]||TESTI.en;const el=document.getElementById('testiTitle');if(!el)return;
+  el.textContent=d.title;
+  document.getElementById('testiGrid').innerHTML=d.items.map(x=>`<div class="lcard" style="padding:16px;cursor:default;display:block">
+    <div style="color:#ffc14d;margin-bottom:6px">${'★'.repeat(x.r)}${'☆'.repeat(5-x.r)}</div>
+    <p style="margin:0 0 12px;font-size:14px;color:var(--text)">${x.t}</p>
+    <div style="display:flex;align-items:center;gap:8px"><span style="width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#1a1205;font-weight:800;font-size:13px">${x.n[0]}</span><div style="font-size:13px"><b>${x.n}</b><div style="color:var(--muted);font-size:12px">${x.s}</div></div></div>
+  </div>`).join("");
+}
+const FOOT={tr:{corp:"Kurumsal",about:"Hakkımızda",how:"Nasıl Çalışır",career:"Kariyer",blog:"Blog",services:"Hizmetler",legal:"Yasal & Destek",be:"Usta Ol",pro:"Ustam Pro",terms:"Kullanım Koşulları",privacy:"Gizlilik & KVKK",contact:"İletişim",tag:"İşini ustasına bırak.",rights:"Tüm hakları saklıdır."},en:{corp:"Company",about:"About",how:"How it works",career:"Careers",blog:"Blog",services:"Services",legal:"Legal & Support",be:"Become a Pro",pro:"Ustam Pro",terms:"Terms of Use",privacy:"Privacy & Data",contact:"Contact",tag:"Leave the job to the pros.",rights:"All rights reserved."}};
+function fo(k){return (FOOT[lang]||FOOT.en)[k]}
+function renderFooter(){
+  const el=document.getElementById('footerInner');if(!el)return;
+  const link=x=>`<a href="#" onclick="event.preventDefault()" style="color:#8b97b0;text-decoration:none;font-size:13px;display:block;padding:3px 0">${x}</a>`;
+  el.innerHTML=`
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;font-weight:900;font-size:20px;color:#fff;margin-bottom:8px"><span style="width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#1a1205">🛠️</span> Ustam</div>
+      <div style="color:#8b97b0;font-size:13px;margin-bottom:14px;max-width:260px">${fo('tag')}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#1b2335;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;font-size:12px;color:#fff"> App Store</span>
+        <span style="background:#1b2335;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;font-size:12px;color:#fff">▶ Google Play</span>
+      </div>
+    </div>
+    <div><div style="color:#fff;font-weight:700;margin-bottom:8px;font-size:14px">${fo('corp')}</div>${link(fo('about'))}${link(fo('how'))}${link(fo('career'))}${link(fo('blog'))}</div>
+    <div><div style="color:#fff;font-weight:700;margin-bottom:8px;font-size:14px">${fo('services')}</div>${link(gLabel('repair'))}${link(gLabel('cleaning'))}${link(gLabel('moving'))}${link(gLabel('tutoring'))}</div>
+    <div><div style="color:#fff;font-weight:700;margin-bottom:8px;font-size:14px">${fo('legal')}</div>${link(fo('be'))}${link(fo('pro'))}${link(fo('terms'))}${link(fo('privacy'))}${link(fo('contact'))}</div>`;
+  const r=document.getElementById('footRights');if(r)r.textContent=`© 2026 Ustam · ${fo('rights')}`;
 }
 function renderNav(){
   const el=document.getElementById('navGroups');if(!el)return;
