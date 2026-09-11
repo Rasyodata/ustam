@@ -784,6 +784,8 @@ function urgBadge(u){
 let catFilter=null,cityFilter="";
 let favs={};
 function toggleFav(id,e){e.stopPropagation();favs[id]=!favs[id];renderListings()}
+/* tutarların sağına 0 ekle (güncel tutar): sayıları ×10 yap */
+function scale10(str){return String(str).replace(/[\d.]+/g,m=>{const n=parseInt(m.replace(/\./g,''),10);return isNaN(n)?m:(n*10).toLocaleString('tr-TR')})}
 function renderListings(){
   const gk=groupCatKeys();
   let data=LISTINGS.filter(l=>(!catFilter||l.cat===catFilter)&&(!cityFilter||l.city===cityFilter)&&(!gk||gk.includes(l.cat)));
@@ -804,12 +806,12 @@ function renderListings(){
             <h4 style="margin:0">${l.title[lang]||l.title.tr}</h4>
             <div class="meta" style="margin-top:5px"><span>📍 ${l.city}</span>${cName?`<span>${catObj.icon||''} ${cName}</span>`:''}</div>
           </div>
-          <div style="width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#fff1e6,#f3f5fa);flex-shrink:0">${l.icon}</div>
+          <div style="width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,#fff1e6,#f3f5fa);flex-shrink:0">${l.icon}</div>
         </div>
         <p style="color:var(--muted);font-size:13px;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px">${desc}</p>
         <div class="foot" style="border-top:1px solid var(--line);padding-top:12px;margin-top:2px">
           <span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <b style="color:var(--brand2);font-size:14px">💰 ${l.budget}</b>
+            <b style="color:var(--brand2);font-size:14px">💰 ${scale10(l.budget)}</b>
             <span class="pill badge-offers">🗨 ${l.offers}/5</span>
           </span>
           <span class="btn btn-primary btn-sm" style="flex-shrink:0">${t('offer.make')} →</span>
@@ -836,17 +838,17 @@ function openDetail(id){
   const l=LISTINGS.find(x=>x.id===id);
   const offers=l.offersList.length?l.offersList.map(o=>`
     <div class="offer">
-      <div class="top"><span class="who">${o.who} <span class="stars">★ ${o.rating}</span>${tierBadge(o.rating)}</span><span class="price">${o.price}</span></div>
+      <div class="top"><span class="who">${o.who} <span class="stars">★ ${o.rating}</span>${tierBadge(o.rating)}</span><span class="price">${scale10(o.price)}</span></div>
       <div class="msg">${o.msg[lang]||o.msg.tr}</div>
       <div style="margin-top:10px;display:flex;gap:8px">
         <button class="btn btn-ghost btn-sm" onclick='openChat(${JSON.stringify(o.who)})'>💬 ${ch('title')}</button>
-        <button class="btn btn-primary btn-sm" onclick='acceptOffer(${JSON.stringify(o.price)},${JSON.stringify(o.who)})'>${t('offer.accept')}</button>
+        <button class="btn btn-primary btn-sm" onclick='acceptOffer(${JSON.stringify(scale10(o.price))},${JSON.stringify(o.who)})'>${t('offer.accept')}</button>
       </div>
     </div>`).join(""):`<p style="color:var(--muted)">${t('offer.statusPending')}…</p>`;
   openModal(`
     <div class="mh"><h3>${l.title[lang]||l.title.tr}</h3><button class="x" onclick="closeModal()">×</button></div>
     <div class="mb">
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">${urgBadge(l.urg)}<span class="pill badge-flex">📍 ${l.city}</span><span class="pill badge-offers">💰 ${l.budget}</span><span class="pill badge-flex">👤 ${l.owner||'Üye'}</span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">${urgBadge(l.urg)}<span class="pill badge-flex">📍 ${l.city}</span><span class="pill badge-offers">💰 ${scale10(l.budget)}</span><span class="pill badge-flex">👤 ${l.owner||'Üye'}</span></div>
       <p style="color:var(--muted)">${l.desc[lang]||l.desc.tr}</p>
       <h4 style="margin:18px 0 10px">${l.offers} ${t('listing.offers')}</h4>
       ${offers}
