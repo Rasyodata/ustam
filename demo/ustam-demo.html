@@ -488,13 +488,67 @@ const CLEANING_SERVICES=[
   {icon:"✨",tr:"Cam Silme",en:"Window Wiping",pros:90,rating:4.6}
 ];
 const CLEAN_TITLE={tr:"🧹 Popüler Temizlik Hizmetleri",en:"🧹 Popular Cleaning Services",de:"🧹 Beliebte Reinigungsdienste",fr:"🧹 Services de nettoyage populaires",es:"🧹 Servicios de limpieza populares",ru:"🧹 Популярные услуги уборки",ar:"🧹 خدمات التنظيف الشائعة",fa:"🧹 خدمات نظافت محبوب"};
+
+const REPAIR_SERVICES=[
+  {icon:"🧰",tr:"Beyaz Eşya Tamiri",en:"Appliance Repair",pros:280,rating:4.8},
+  {icon:"♨️",tr:"Kombi Tamiri",en:"Boiler Repair",pros:190,rating:4.7},
+  {icon:"❄️",tr:"Klima Tamiri & Montaj",en:"AC Repair & Install",pros:210,rating:4.8},
+  {icon:"🚰",tr:"Musluk & Tesisat",en:"Faucet & Plumbing",pros:320,rating:4.9},
+  {icon:"💡",tr:"Elektrik Arıza",en:"Electrical Fault",pros:240,rating:4.7},
+  {icon:"🎨",tr:"Boya & Badana",en:"Painting",pros:160,rating:4.6},
+  {icon:"🧱",tr:"Fayans & Seramik",en:"Tiling",pros:120,rating:4.7},
+  {icon:"🪛",tr:"Mobilya Montaj",en:"Furniture Assembly",pros:150,rating:4.8},
+  {icon:"🚪",tr:"Kapı Tamiri",en:"Door Repair",pros:90,rating:4.6},
+  {icon:"💧",tr:"Su Kaçağı Tespiti",en:"Leak Detection",pros:110,rating:4.8},
+  {icon:"🔑",tr:"Çilingir",en:"Locksmith",pros:130,rating:4.7},
+  {icon:"🪟",tr:"PVC & Pencere",en:"PVC & Windows",pros:70,rating:4.6},
+  {icon:"🪚",tr:"Marangoz",en:"Carpentry",pros:85,rating:4.7},
+  {icon:"🔩",tr:"Demir & Kaynak",en:"Ironwork & Welding",pros:60,rating:4.6}
+];
+const MOVING_SERVICES=[
+  {icon:"🚚",tr:"Evden Eve Nakliyat",en:"Home Moving",pros:210,rating:4.8},
+  {icon:"💼",tr:"Ofis Taşıma",en:"Office Moving",pros:90,rating:4.7},
+  {icon:"🛣️",tr:"Şehirler Arası Nakliyat",en:"Intercity Moving",pros:120,rating:4.7},
+  {icon:"📦",tr:"Parça Eşya Taşıma",en:"Small Item Moving",pros:140,rating:4.6},
+  {icon:"🏗️",tr:"Asansörlü Taşıma",en:"Lift Moving",pros:80,rating:4.8},
+  {icon:"🎁",tr:"Paketleme Hizmeti",en:"Packing Service",pros:70,rating:4.7},
+  {icon:"🏬",tr:"Eşya Depolama",en:"Storage",pros:55,rating:4.6},
+  {icon:"🎹",tr:"Piyano Taşıma",en:"Piano Moving",pros:30,rating:4.9}
+];
+const TUTORING_SERVICES=[
+  {icon:"🧮",tr:"Matematik Dersi",en:"Math Tutoring",pros:180,rating:4.9},
+  {icon:"🔤",tr:"İngilizce Dersi",en:"English Tutoring",pros:220,rating:4.8},
+  {icon:"⚛️",tr:"Fizik Dersi",en:"Physics",pros:70,rating:4.7},
+  {icon:"🧪",tr:"Kimya Dersi",en:"Chemistry",pros:60,rating:4.7},
+  {icon:"🎸",tr:"Gitar Dersi",en:"Guitar",pros:90,rating:4.8},
+  {icon:"🎹",tr:"Piyano Dersi",en:"Piano",pros:65,rating:4.9},
+  {icon:"🎨",tr:"Resim Dersi",en:"Drawing",pros:50,rating:4.7},
+  {icon:"🏊",tr:"Yüzme Dersi",en:"Swimming",pros:40,rating:4.8},
+  {icon:"💻",tr:"Kodlama Dersi",en:"Coding",pros:75,rating:4.8},
+  {icon:"📚",tr:"LGS / YKS Hazırlık",en:"Exam Prep",pros:110,rating:4.9},
+  {icon:"🇩🇪",tr:"Almanca Dersi",en:"German",pros:45,rating:4.7},
+  {icon:"🎻",tr:"Keman Dersi",en:"Violin",pros:25,rating:4.8}
+];
+const OTHER_SERVICES=[
+  {icon:"📸",tr:"Fotoğrafçı",en:"Photographer",pros:120,rating:4.8},
+  {icon:"🎉",tr:"Organizasyon",en:"Events",pros:80,rating:4.7},
+  {icon:"🌐",tr:"Web Tasarım",en:"Web Design",pros:95,rating:4.8},
+  {icon:"🖌️",tr:"Grafik Tasarım",en:"Graphic Design",pros:70,rating:4.7},
+  {icon:"📈",tr:"Dijital Pazarlama",en:"Digital Marketing",pros:60,rating:4.6},
+  {icon:"🎥",tr:"Video Çekim",en:"Videography",pros:55,rating:4.8},
+  {icon:"🌿",tr:"Bahçıvanlık",en:"Gardening",pros:65,rating:4.7},
+  {icon:"💄",tr:"Kuaför & Güzellik",en:"Hair & Beauty",pros:140,rating:4.8}
+];
+const SERVICES={cleaning:CLEANING_SERVICES,repair:REPAIR_SERVICES,moving:MOVING_SERVICES,tutoring:TUTORING_SERVICES,other:OTHER_SERVICES};
+const POP={tr:"Popüler Hizmetler",en:"Popular Services",de:"Beliebte Dienste",fr:"Services populaires",es:"Servicios populares",ru:"Популярные услуги",ar:"الخدمات الشائعة",fa:"خدمات محبوب"};
 function svcName(s){return s[lang]||s.en||s.tr}
-function renderCleaningCards(){
+function renderServiceCards(group){
   const grid=document.getElementById('catGrid');if(!grid)return;
-  const tt=document.getElementById('anaCatTitle');if(tt)tt.textContent=CLEAN_TITLE[lang]||CLEAN_TITLE.tr;
+  const list=SERVICES[group]||[];
+  const tt=document.getElementById('anaCatTitle');if(tt)tt.textContent=`${gLabel(group)} · ${POP[lang]||POP.en}`;
   const cs=document.getElementById('anaCatSub');if(cs)cs.textContent="";
   grid.className="listings"; // görsel kart ızgarası
-  grid.innerHTML=CLEANING_SERVICES.map(s=>`
+  grid.innerHTML=list.map(s=>`
     <div class="lcard" onclick="openPost()">
       <div class="ph" style="font-size:52px">${s.icon}</div>
       <div class="bd">
@@ -552,7 +606,7 @@ function prosOf(c){return Math.max(1,Math.round(c.c*cityFactor))}
 function setCityFactor(){const v=document.getElementById('anaCity').value;cityFactor=CITY_FACTORS[v]??1;renderCats();renderAnalytics()}
 function renderAnalytics(){
   const el=document.getElementById('anaProv');if(!el)return;
-  if(groupFilter!=='cleaning'){
+  if(!(groupFilter&&SERVICES[groupFilter])){
     const ct=document.getElementById('anaCatTitle');if(ct)ct.textContent=an('catTitle');
     const cs=document.getElementById('anaCatSub');if(cs)cs.textContent=an('catSub');
   }
@@ -699,7 +753,7 @@ document.addEventListener("click",()=>document.getElementById("langMenu").classL
 function catName(c){return c[lang]||c.tr}
 function renderCats(){
   const grid0=document.getElementById("catGrid");
-  if(groupFilter==='cleaning'){renderCleaningCards();return;}
+  if(groupFilter&&SERVICES[groupFilter]){renderServiceCards(groupFilter);return;}
   if(grid0)grid0.className="cats";
   const keys=groupCatKeys();
   const list=keys?CATS.filter(c=>keys.includes(c.key)):CATS;
