@@ -1,22 +1,47 @@
 "use client";
 
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { SERVICES, POP_LABEL, type ServiceItem } from "@/lib/services";
 
-/** armut.com tarzı resimli hizmet kartları (grup bazlı). */
-export function ServiceCards({ group }: { group: string }) {
+const SEARCH_PH: Record<string, string> = {
+  tr: "hizmeti ara…",
+  en: "search service…",
+  de: "Dienst suchen…",
+  fr: "rechercher un service…",
+  es: "buscar servicio…",
+};
+
+/** armut.com tarzı: arama çubuğu + altında resimli popüler hizmet kartları. */
+export function ServiceCards({ group, groupLabel }: { group: string; groupLabel?: string }) {
   const t = useTranslations();
   const locale = useLocale();
+  const [q, setQ] = useState("");
   const list = SERVICES[group];
   if (!list?.length) return null;
+
   const name = (s: ServiceItem) => (s as any)[locale] ?? s.en ?? s.tr;
+  const filtered = q
+    ? list.filter((s) => name(s).toLocaleLowerCase("tr").includes(q.toLocaleLowerCase("tr")))
+    : list;
 
   return (
     <div className="mb-10">
+      {/* Arama çubuğu */}
+      <div className="flex gap-2 bg-white border border-slate-200 p-2 rounded-2xl max-w-2xl mb-5">
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder={`${groupLabel ?? ""} ${SEARCH_PH[locale] ?? SEARCH_PH.en}`.trim()}
+          className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 outline-none text-sm"
+        />
+        <span className="grid place-items-center px-3 text-slate-400">🔎</span>
+      </div>
+
       <h2 className="text-xl font-bold mb-4">{POP_LABEL[locale] ?? POP_LABEL.en}</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {list.map((s, i) => (
+        {filtered.map((s, i) => (
           <Link
             key={i}
             href="/post"
@@ -37,6 +62,7 @@ export function ServiceCards({ group }: { group: string }) {
             </div>
           </Link>
         ))}
+        {filtered.length === 0 && <p className="text-slate-400 col-span-full">—</p>}
       </div>
     </div>
   );

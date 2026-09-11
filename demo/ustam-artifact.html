@@ -226,6 +226,7 @@
         <span style="font-size:14px;color:var(--muted);font-weight:600" id="anaCityLbl"></span>
         <select id="anaCity" onchange="setCityFactor()" class="lang-btn" style="min-width:160px"></select>
       </div>
+      <div id="svcSearchWrap"></div>
       <div class="cats" id="catGrid"></div>
     </div>
   </section>
@@ -533,22 +534,40 @@ const OTHER_SERVICES=[
 const SERVICES={cleaning:CLEANING_SERVICES,repair:REPAIR_SERVICES,moving:MOVING_SERVICES,tutoring:TUTORING_SERVICES,other:OTHER_SERVICES};
 const POP={tr:"Popüler Hizmetler",en:"Popular Services",de:"Beliebte Dienste",fr:"Services populaires",es:"Servicios populares",ru:"Популярные услуги",ar:"الخدمات الشائعة",fa:"خدمات محبوب"};
 function svcName(s){return s[lang]||s.en||s.tr}
+const SVC_SEARCH={tr:"hizmeti ara…",en:"search service…",de:"Dienst suchen…",fr:"rechercher un service…",es:"buscar servicio…",ru:"поиск услуги…",ar:"ابحث عن خدمة…",fa:"جستجوی خدمت…"};
+let svcGroup=null, svcQuery="";
 function renderServiceCards(group){
-  const grid=document.getElementById('catGrid');if(!grid)return;
-  const list=SERVICES[group]||[];
+  svcGroup=group; svcQuery="";
   const tt=document.getElementById('anaCatTitle');if(tt)tt.textContent=`${gLabel(group)} · ${POP[lang]||POP.en}`;
   const cs=document.getElementById('anaCatSub');if(cs)cs.textContent="";
-  grid.className="listings"; // görsel kart ızgarası
-  grid.innerHTML=list.map(s=>`
-    <div class="lcard" onclick="openPost()">
+  const grid=document.getElementById('catGrid');if(grid)grid.className="listings";
+  const wrap=document.getElementById('svcSearchWrap');
+  if(wrap){
+    const ph=`${gLabel(group)} ${SVC_SEARCH[lang]||SVC_SEARCH.en}`;
+    wrap.innerHTML=`<div class="searchbar" style="margin-bottom:16px;max-width:100%">
+      <input id="svcSearch" placeholder="${ph}" oninput="filterServices(this.value)" autocomplete="off">
+      <button class="btn btn-primary" onclick="filterServices(document.getElementById('svcSearch').value)">${t('common.search')} 🔎</button>
+    </div>`;
+  }
+  renderServiceGrid();
+}
+function svcCard(s){
+  return `<div class="lcard" onclick="openPost()">
       <div class="ph" style="font-size:52px">${s.icon}</div>
       <div class="bd">
         <h4>${svcName(s)}</h4>
         <div class="meta"><span>👤 ${s.pros} ${an('pros')}</span><span class="stars">★ ${s.rating}</span></div>
         <div class="foot"><span class="pill badge-offers">${pr('req')}</span><span style="color:var(--muted);font-size:13px">→</span></div>
       </div>
-    </div>`).join("");
+    </div>`;
 }
+function renderServiceGrid(){
+  const grid=document.getElementById('catGrid');if(!grid||!svcGroup)return;
+  const q=(svcQuery||"").toLocaleLowerCase('tr');
+  const list=(SERVICES[svcGroup]||[]).filter(s=>!q||svcName(s).toLocaleLowerCase('tr').includes(q));
+  grid.innerHTML=list.length?list.map(svcCard).join(""):`<p style="color:var(--muted);grid-column:1/-1">—</p>`;
+}
+function filterServices(v){svcQuery=v;renderServiceGrid()}
 
 /* Güven bandı + maliyet tahmini sözlüğü (yurt dışı liderlerden ilham) */
 const TRUST={
@@ -746,6 +765,7 @@ function renderCats(){
   const grid0=document.getElementById("catGrid");
   if(groupFilter&&SERVICES[groupFilter]){renderServiceCards(groupFilter);return;}
   if(grid0)grid0.className="cats";
+  const _w=document.getElementById('svcSearchWrap');if(_w)_w.innerHTML="";
   const keys=groupCatKeys();
   const list=keys?CATS.filter(c=>keys.includes(c.key)):CATS;
   const maxJ=Math.max(1,...list.map(jobsOf));const maxP=Math.max(1,...list.map(prosOf));
