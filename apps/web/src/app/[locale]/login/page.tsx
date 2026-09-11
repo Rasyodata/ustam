@@ -53,7 +53,7 @@ export default function LoginPage() {
             key={m}
             onClick={() => setMode(m)}
             className={`flex-1 py-2.5 rounded-xl font-bold text-sm ${
-              mode === m ? "bg-gradient-to-br from-brand to-brand-light text-black" : "bg-ink-card border border-white/10"
+              mode === m ? "bg-gradient-to-br from-brand to-brand-light text-black" : "bg-white border border-slate-200"
             }`}
           >
             {t(m === "login" ? "common.login" : "common.register")}
@@ -80,11 +80,11 @@ export default function LoginPage() {
         </button>
         {error && <p className="text-red-400 text-sm">⚠️ {error}</p>}
         {mode === "register" && (
-          <p className="text-white/50 text-xs text-center">🔒 {t("auth.otpSent")}</p>
+          <p className="text-slate-400 text-xs text-center">🔒 {t("auth.otpSent")}</p>
         )}
       </form>
 
-      <style>{`.input{width:100%;background:#1b2335;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;color:#eaf0ff;outline:none}`}</style>
+      <style>{`.input{width:100%;background:#ffffff;border:1px solid #e6e9f1;border-radius:12px;padding:12px;color:#141a26;outline:none}`}</style>
     </div>
   );
 }

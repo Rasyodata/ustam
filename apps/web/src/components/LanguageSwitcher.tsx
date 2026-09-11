@@ -20,7 +20,7 @@ export function LanguageSwitcher() {
       onChange={(e) =>
         startTransition(() => router.replace(pathname, { locale: e.target.value as Locale }))
       }
-      className="bg-ink-card border border-white/10 rounded-lg px-3 py-2 text-sm font-bold cursor-pointer"
+      className="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-bold cursor-pointer"
       aria-label="Language"
     >
       {LOCALES.map((l) => (

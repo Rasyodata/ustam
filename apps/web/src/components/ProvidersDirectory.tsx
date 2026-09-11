@@ -40,7 +40,7 @@ export function ProvidersDirectory({ categories }: { categories: { id: string; s
       <div className="flex gap-2 flex-wrap mb-6">
         <button
           onClick={() => setCategoryId("")}
-          className={`px-3 py-1.5 rounded-full text-sm font-semibold ${categoryId === "" ? "bg-brand text-black" : "bg-ink-card border border-white/10"}`}
+          className={`px-3 py-1.5 rounded-full text-sm font-semibold ${categoryId === "" ? "bg-brand text-black" : "bg-white border border-slate-200"}`}
         >
           {t("pros.all")}
         </button>
@@ -48,7 +48,7 @@ export function ProvidersDirectory({ categories }: { categories: { id: string; s
           <button
             key={c.id}
             onClick={() => setCategoryId(c.id)}
-            className={`px-3 py-1.5 rounded-full text-sm font-semibold ${categoryId === c.id ? "bg-brand text-black" : "bg-ink-card border border-white/10"}`}
+            className={`px-3 py-1.5 rounded-full text-sm font-semibold ${categoryId === c.id ? "bg-brand text-black" : "bg-white border border-slate-200"}`}
           >
             {c.name}
           </button>
@@ -63,8 +63,8 @@ export function ProvidersDirectory({ categories }: { categories: { id: string; s
 
       <div className="space-y-3">
         {items.map((p, i) => (
-          <div key={p.userId} className="bg-ink-card border border-white/10 rounded-xl p-4 flex items-center gap-4">
-            <div className="text-2xl w-8 text-center font-black text-white/50">
+          <div key={p.userId} className="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4">
+            <div className="text-2xl w-8 text-center font-black text-slate-400">
               {medals[i] ?? `#${p.rank}`}
             </div>
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand to-brand-light grid place-items-center text-black font-black text-lg">
@@ -75,7 +75,7 @@ export function ProvidersDirectory({ categories }: { categories: { id: string; s
                 {p.businessName || p.displayName}
                 <TierBadge avgRating={p.avgRating} reviewCount={p.reviewCount} completedJobs={p.completedJobs} verified={p.verified} />
               </Link>
-              <div className="text-white/50 text-sm">
+              <div className="text-slate-400 text-sm">
                 <span className="text-amber-400 font-bold">★ {Number(p.avgRating).toFixed(1)}</span> · {p.reviewCount} {t("review.reviews")} · {p.completedJobs} {t("pros.jobs")}
               </div>
             </div>
@@ -88,7 +88,7 @@ export function ProvidersDirectory({ categories }: { categories: { id: string; s
             </button>
           </div>
         ))}
-        {!offline && items.length === 0 && <p className="text-white/50">—</p>}
+        {!offline && items.length === 0 && <p className="text-slate-400">—</p>}
       </div>
     </div>
   );

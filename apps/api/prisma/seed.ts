@@ -66,6 +66,22 @@ const CATEGORIES: CatSeed[] = [
       { slug: "furniture-make", names: { tr: "Mobilya İmalatı", en: "Furniture Making", de: "Möbelherstellung", fr: "Fabrication de meubles", es: "Fabricación de muebles" } },
     ],
   },
+  { slug: "cleaning", icon: "🧹", names: { tr: "Temizlik", en: "Cleaning", de: "Reinigung", fr: "Nettoyage", es: "Limpieza" } },
+  { slug: "moving", icon: "🚚", names: { tr: "Nakliyat", en: "Moving", de: "Umzug", fr: "Déménagement", es: "Mudanzas" } },
+  { slug: "furniture", icon: "🪚", names: { tr: "Mobilya & Marangoz", en: "Furniture & Carpentry", de: "Möbel & Tischlerei", fr: "Meubles & Menuiserie", es: "Muebles y Carpintería" } },
+  { slug: "hvac", icon: "❄️", names: { tr: "Isıtma & Soğutma", en: "Heating & Cooling", de: "Heizung & Kühlung", fr: "Chauffage & Climatisation", es: "Calefacción y Refrigeración" } },
+  {
+    slug: "tutoring",
+    icon: "📚",
+    names: { tr: "Özel Ders", en: "Tutoring", de: "Nachhilfe", fr: "Cours particuliers", es: "Clases particulares" },
+    children: [
+      { slug: "math", names: { tr: "Matematik Dersi", en: "Math Tutoring", de: "Mathe-Nachhilfe", fr: "Cours de maths", es: "Clases de matemáticas" } },
+      { slug: "language", names: { tr: "Yabancı Dil Dersi", en: "Language Tutoring", de: "Sprachkurs", fr: "Cours de langue", es: "Clases de idiomas" } },
+      { slug: "music", names: { tr: "Müzik Dersi", en: "Music Lessons", de: "Musikunterricht", fr: "Cours de musique", es: "Clases de música" } },
+    ],
+  },
+  { slug: "events", icon: "🎉", names: { tr: "Organizasyon", en: "Events", de: "Events", fr: "Événements", es: "Eventos" } },
+  { slug: "photo", icon: "📸", names: { tr: "Fotoğraf & Video", en: "Photo & Video", de: "Foto & Video", fr: "Photo & Vidéo", es: "Foto y Vídeo" } },
 ];
 
 const CITIES: { name: string; code: string; districts: string[] }[] = [
@@ -271,6 +287,20 @@ async function main() {
     ["electrical", "Spot aydınlatma montajı (5 adet)", "Salona 5 adet spot montajı.", "Ankara", "FLEXIBLE", 500, 1100],
     ["painting", "Kapı/pervaz vernik", "İç kapılara vernik/rötuş.", "İzmir", "FLEXIBLE", 500, 1200],
     ["construction", "Silikon/derz yenileme (banyo)", "Banyo küvet çevresi silikon yenileme.", "İstanbul", "FLEXIBLE", 300, 700],
+    ["cleaning", "Genel ev temizliği", "3+1 daire genel temizlik.", "İstanbul", "WITHIN_WEEK", 600, 1200],
+    ["cleaning", "Koltuk yıkama (3+3+1)", "Koltuk takımı yerinde yıkama.", "Ankara", "FLEXIBLE", 500, 1000],
+    ["cleaning", "Cam & pencere temizliği", "Daire tüm camların temizliği.", "İzmir", "FLEXIBLE", 300, 700],
+    ["moving", "2+1 ev taşıma", "Kadıköy'den Üsküdar'a ev taşıma.", "İstanbul", "WITHIN_WEEK", 2500, 5000],
+    ["moving", "Tek eşya (buzdolabı) taşıma", "Buzdolabının kısa mesafe taşınması.", "Ankara", "URGENT", 400, 900],
+    ["furniture", "Gardırop montajı", "Yeni gardırobun montajı.", "İstanbul", "URGENT", 400, 900],
+    ["furniture", "Perde/kornis montajı", "3 odaya kornis ve perde montajı.", "Gaziantep", "FLEXIBLE", 200, 500],
+    ["hvac", "Klima montajı (1 adet)", "1 split klima montajı.", "İzmir", "WITHIN_WEEK", 900, 1800],
+    ["hvac", "Kombi bakımı", "Yıllık kombi bakımı.", "İstanbul", "FLEXIBLE", 500, 1000],
+    ["math", "İlkokul matematik dersi", "4. sınıf haftada 2 gün matematik.", "İstanbul", "FLEXIBLE", 300, 700],
+    ["language", "İngilizce konuşma dersi", "Yetişkin için konuşma pratiği.", "Ankara", "FLEXIBLE", 350, 900],
+    ["music", "Gitar dersi (başlangıç)", "Haftada 1 gün başlangıç gitar.", "İzmir", "FLEXIBLE", 300, 800],
+    ["events", "Doğum günü organizasyonu", "Ev partisi için süsleme + ikram.", "İstanbul", "WITHIN_WEEK", 1500, 6000],
+    ["photo", "Doğum günü fotoğrafçısı", "2 saatlik çekim + dijital teslim.", "Bursa", "FLEXIBLE", 800, 2500],
   ];
 
   const catCache: Record<string, string | undefined> = {};
@@ -331,6 +361,16 @@ async function main() {
     ["u.beyaz2@ustam.app", "Beyaz Eşya Doktoru", "appliance", ["Adana"], "INDIVIDUAL", 4.5, 33, 55, true],
     ["u.imalat@ustam.app", "Metal İmalat A.Ş.", "manufacturing", ["İzmir", "Gaziantep"], "MANUFACTURER", 5.0, 64, 210, true],
     ["u.imalat2@ustam.app", "Ahşap Atölye", "manufacturing", ["Gaziantep"], "INDIVIDUAL", 4.6, 22, 34, false],
+    ["u.temizlik@ustam.app", "Pırıl Temizlik", "cleaning", ["İstanbul", "Ankara"], "TECHNICAL_SERVICE", 4.8, 55, 140, true],
+    ["u.temizlik2@ustam.app", "Berrak Temizlik", "cleaning", ["İzmir"], "INDIVIDUAL", 4.5, 24, 38, false],
+    ["u.nakliyat@ustam.app", "Güven Nakliyat", "moving", ["İstanbul", "Bursa"], "TECHNICAL_SERVICE", 4.7, 38, 85, true],
+    ["u.mobilya@ustam.app", "Marangoz Ali", "furniture", ["İzmir", "İstanbul"], "INDIVIDUAL", 4.9, 44, 110, true],
+    ["u.klima@ustam.app", "Klima Servis Pro", "hvac", ["Ankara"], "TECHNICAL_SERVICE", 4.6, 30, 60, true],
+    ["u.matematik@ustam.app", "Matematik Öğretmeni Ayça", "math", ["İstanbul"], "INDIVIDUAL", 4.9, 50, 120, true],
+    ["u.ingilizce@ustam.app", "İngilizce Eğitmeni Deniz", "language", ["Ankara", "İzmir"], "INDIVIDUAL", 4.8, 33, 70, true],
+    ["u.muzik@ustam.app", "Gitar Eğitmeni Kaan", "music", ["İzmir"], "INDIVIDUAL", 4.7, 19, 28, false],
+    ["u.organizasyon@ustam.app", "Parti Organizasyon", "events", ["İstanbul"], "TECHNICAL_SERVICE", 4.7, 25, 40, true],
+    ["u.foto@ustam.app", "Foto Stüdyo Işık", "photo", ["Bursa", "İstanbul"], "TECHNICAL_SERVICE", 4.8, 40, 90, true],
   ];
 
   let provCreated = 0;

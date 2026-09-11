@@ -50,7 +50,7 @@ export default async function ProviderProfilePage({
             )}
           </h1>
           {pp && (
-            <div className="text-white/60 text-sm mt-1">
+            <div className="text-slate-500 text-sm mt-1">
               <span className="text-amber-400 font-bold">★ {Number(pp.avgRating).toFixed(1)}</span> ·{" "}
               {pp.reviewCount} {t("review.reviews")} · {pp.completedJobs} {t("review.completedJobs")}
             </div>
@@ -64,20 +64,20 @@ export default async function ProviderProfilePage({
         </div>
       )}
 
-      {pp?.bio && <p className="text-white/70 mb-8">{pp.bio}</p>}
+      {pp?.bio && <p className="text-slate-600 mb-8">{pp.bio}</p>}
 
       <h2 className="text-xl font-bold mb-4">{t("review.reviews")}</h2>
       <div className="space-y-3">
         {reviews.map((r: any) => (
-          <div key={r.id} className="bg-ink-card border border-white/10 rounded-xl p-4">
+          <div key={r.id} className="bg-white border border-slate-200 rounded-xl p-4">
             <div className="flex justify-between items-center mb-1">
               <span className="font-semibold">{r.author?.displayName ?? "—"}</span>
               <span className="text-amber-400">{"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}</span>
             </div>
-            {r.comment && <p className="text-white/60 text-sm">{r.comment}</p>}
+            {r.comment && <p className="text-slate-500 text-sm">{r.comment}</p>}
           </div>
         ))}
-        {reviews.length === 0 && <p className="text-white/50">—</p>}
+        {reviews.length === 0 && <p className="text-slate-400">—</p>}
       </div>
     </div>
   );

@@ -59,15 +59,15 @@ export default async function PriceGuidePage({
       <div className="text-5xl mb-4">{range.icon}</div>
       <h1 className="text-3xl font-black mb-6">{t("priceGuide.heading", { category })}</h1>
 
-      <div className="bg-ink-card border border-white/10 rounded-2xl p-6 mb-8">
-        <div className="text-white/60 text-sm mb-1">{t("priceGuide.avgLabel")}</div>
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-8">
+        <div className="text-slate-500 text-sm mb-1">{t("priceGuide.avgLabel")}</div>
         <div className="text-3xl font-black text-brand-light">
           {formatTRY(range.min)} – {formatTRY(range.max)} ₺
         </div>
       </div>
 
       <h2 className="text-xl font-bold mb-3">{t("priceGuide.factorsTitle")}</h2>
-      <ul className="space-y-2 mb-8 text-white/70">
+      <ul className="space-y-2 mb-8 text-slate-600">
         {["factor1", "factor2", "factor3"].map((f) => (
           <li key={f} className="flex gap-2">
             <span className="text-brand">•</span>
@@ -77,9 +77,9 @@ export default async function PriceGuidePage({
       </ul>
 
       <h2 className="text-xl font-bold mb-3">{t("priceGuide.faqTitle")}</h2>
-      <div className="bg-ink-card border border-white/10 rounded-xl p-5 mb-8">
+      <div className="bg-white border border-slate-200 rounded-xl p-5 mb-8">
         <div className="font-semibold mb-2">{t("priceGuide.faqQ", { category })}</div>
-        <p className="text-white/60 text-sm">{t("priceGuide.faqA", { category })}</p>
+        <p className="text-slate-500 text-sm">{t("priceGuide.faqA", { category })}</p>
       </div>
 
       <div className="bg-gradient-to-br from-brand/20 to-brand-light/10 border border-brand/40 rounded-2xl p-6 text-center">
@@ -92,7 +92,7 @@ export default async function PriceGuidePage({
         </Link>
       </div>
 
-      <p className="text-white/40 text-xs mt-6">{t("priceGuide.disclaimer")}</p>
+      <p className="text-slate-400 text-xs mt-6">{t("priceGuide.disclaimer")}</p>
 
       <div className="mt-8">
         <Link href="/prices" className="text-brand-light text-sm">

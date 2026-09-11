@@ -61,7 +61,7 @@ export default function PostPage() {
         {status === "err" && <p className="text-red-400 text-sm">⚠️ {t("errors.generic")}</p>}
       </form>
 
-      <style>{`.input{width:100%;background:#1b2335;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;color:#eaf0ff;outline:none}`}</style>
+      <style>{`.input{width:100%;background:#ffffff;border:1px solid #e6e9f1;border-radius:12px;padding:12px;color:#141a26;outline:none}`}</style>
     </div>
   );
 }
@@ -69,7 +69,7 @@ export default function PostPage() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-sm text-white/60 mb-1.5 font-semibold">{label}</span>
+      <span className="block text-sm text-slate-500 mb-1.5 font-semibold">{label}</span>
       {children}
     </label>
   );

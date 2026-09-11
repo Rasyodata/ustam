@@ -1,15 +1,15 @@
 <style>
   :root{
-    --bg:#0f1420; --bg2:#151c2c; --card:#1b2335; --card2:#222c42;
-    --line:#2b3650; --text:#eaf0ff; --muted:#97a3be; --brand:#ff7a1a;
-    --brand2:#ffb347; --accent:#2dd4bf; --danger:#f43f5e; --ok:#34d399;
-    --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    --bg:#f6f7fb; --bg2:#eef1f7; --card:#ffffff; --card2:#f3f5fa;
+    --line:#e6e9f1; --text:#141a26; --muted:#6b7688; --brand:#ff7a1a;
+    --brand2:#f97316; --accent:#14b8a6; --danger:#e11d48; --ok:#16a34a;
+    --radius:16px; --shadow:0 8px 24px rgba(20,26,38,.07);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
     font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:radial-gradient(1200px 600px at 80% -10%,#1c2740 0,var(--bg) 55%);
+    background:var(--bg);
     color:var(--text); line-height:1.5; min-height:100vh;
   }
   a{color:inherit;text-decoration:none}
@@ -29,7 +29,7 @@
 
   /* Header */
   header{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);
-    background:rgba(15,20,32,.82);border-bottom:1px solid var(--line)}
+    background:rgba(255,255,255,.9);border-bottom:1px solid var(--line)}
   .nav{display:flex;align-items:center;gap:18px;height:66px}
   .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;letter-spacing:.3px}
   .logo .mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
@@ -37,6 +37,11 @@
   .nav-links{display:flex;gap:18px;margin-inline-start:auto;align-items:center}
   .nav-links a{color:var(--muted);font-weight:600;font-size:14px}
   .nav-links a:hover{color:var(--text)}
+  .nav-groups{display:flex;gap:6px;flex-wrap:wrap}
+  .gnav{color:var(--muted);font-weight:600;font-size:14px;cursor:pointer;padding:6px 10px;border-radius:9px}
+  .gnav:hover{color:var(--text);background:var(--card2)}
+  .gnav.active{color:var(--brand);background:rgba(255,122,26,.1)}
+  @media(max-width:860px){.nav-groups{display:none}}
   .lang{position:relative}
   .lang-btn{background:var(--card2);border:1px solid var(--line);border-radius:10px;
     padding:8px 12px;cursor:pointer;color:var(--text);font-weight:700;font-size:13px}
@@ -89,7 +94,7 @@
   .lcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
     cursor:pointer;transition:.15s;display:flex;flex-direction:column}
   .lcard:hover{border-color:var(--brand);transform:translateY(-3px)}
-  .lcard .ph{height:140px;background:linear-gradient(135deg,#26324c,#1a2133);
+  .lcard .ph{height:140px;background:linear-gradient(135deg,#fff1e6,#f3f5fa);
     display:grid;place-items:center;font-size:46px}
   .lcard .bd{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
   .lcard h4{margin:0;font-size:16px}
@@ -146,10 +151,7 @@
   <div class="container nav">
     <div class="logo"><span class="mark">🛠️</span><span>Ustam</span></div>
     <nav class="nav-links">
-      <a class="hide-sm" data-i18n="nav.home" onclick="window.scrollTo({top:0,behavior:'smooth'})">Ana Sayfa</a>
-      <a class="hide-sm" style="color:#5eead4" onclick="scrollToId('guarantee')">🛡️ Güvence</a>
-      <a class="hide-sm" data-i18n="nav.howItWorks" onclick="scrollToId('how')">Nasıl Çalışır?</a>
-      <a class="hide-sm" data-i18n="nav.becomeProvider">Usta Ol</a>
+      <div class="nav-groups" id="navGroups"></div>
       <button class="btn btn-ghost btn-sm" data-i18n="common.login" onclick="openAuth('login')">Giriş</button>
       <button class="btn btn-primary btn-sm" data-i18n="common.register" onclick="openAuth('register')">Kayıt ol</button>
       <div class="lang">
@@ -203,20 +205,6 @@
     </div>
   </section>
 
-  <!-- COST ESTIMATOR -->
-  <section style="padding-top:10px">
-    <div class="container">
-      <div class="lcard" style="cursor:default;padding:20px">
-        <h2 class="sec-title" style="margin:0 0 6px" id="estTitle"></h2>
-        <p style="color:var(--muted);margin:0 0 14px;font-size:14px" id="estDesc"></p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <select id="estCat" class="searchbar" style="padding:12px 14px;border-radius:11px;background:var(--bg2);border:1px solid var(--line);color:var(--text);min-width:220px" onchange="renderEstimate()"></select>
-          <div id="estOut" style="font-weight:900;font-size:20px;color:var(--brand2)"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- USTAM GÜVENCESİ -->
   <section id="guarantee" style="padding-top:10px">
     <div class="container">
@@ -248,24 +236,6 @@
         <div class="step"><div class="num">2</div><h3 data-i18n="home.step2Title">Teklifleri topla</h3><p data-i18n="home.step2Desc">İlgili ustalar sana teklif gönderir.</p></div>
         <div class="step"><div class="num">3</div><h3 data-i18n="home.step3Title">Ustanı seç</h3><p data-i18n="home.step3Desc">Puanları, yorumları karşılaştır ve işe başla.</p></div>
       </div>
-    </div>
-  </section>
-
-  <!-- USTA ANALİZİ -->
-  <section style="padding-top:6px">
-    <div class="container">
-      <h2 class="sec-title" id="anaProTitle" style="margin-bottom:4px"></h2>
-      <p style="color:var(--muted);margin:0 0 16px;font-size:14px" id="anaProSub"></p>
-      <div class="lcard" style="cursor:default;padding:20px;display:flex;flex-direction:column;gap:12px" id="anaProv"></div>
-    </div>
-  </section>
-
-  <!-- PROVIDERS (puana göre sıralı) -->
-  <section>
-    <div class="container">
-      <h2 class="sec-title" id="prosTitle" style="margin-bottom:4px"></h2>
-      <p style="color:var(--muted);margin:0 0 16px;font-size:14px" id="prosSub"></p>
-      <div id="prosGrid"></div>
     </div>
   </section>
 
@@ -435,8 +405,33 @@ const CATS=[
   {icon:"🏠",key:"roofing",tr:"Çatı & İzolasyon",en:"Roofing & Insulation",de:"Dach & Dämmung",fr:"Toiture & Isolation",es:"Tejados y Aislamiento",c:330,pmin:20000,pmax:150000},
   {icon:"🧹",key:"cleaning",tr:"Temizlik",en:"Cleaning",de:"Reinigung",fr:"Nettoyage",es:"Limpieza",c:1120,pmin:400,pmax:3000},
   {icon:"🚚",key:"moving",tr:"Nakliyat",en:"Moving",de:"Umzug",fr:"Déménagement",es:"Mudanzas",c:690,pmin:2000,pmax:20000},
-  {icon:"🏭",key:"manufacturing",tr:"İmalat & Üretim",en:"Manufacturing",de:"Fertigung",fr:"Fabrication",es:"Fabricación",c:280,pmin:5000,pmax:200000}
+  {icon:"🏭",key:"manufacturing",tr:"İmalat & Üretim",en:"Manufacturing",de:"Fertigung",fr:"Fabrication",es:"Fabricación",c:280,pmin:5000,pmax:200000},
+  {icon:"📚",key:"tutoring",tr:"Özel Ders",en:"Tutoring",de:"Nachhilfe",fr:"Cours particuliers",es:"Clases particulares",c:540,pmin:200,pmax:1500},
+  {icon:"🧮",key:"math",tr:"Matematik Dersi",en:"Math Tutoring",de:"Mathe-Nachhilfe",fr:"Cours de maths",es:"Clases de matemáticas",c:320,pmin:200,pmax:900},
+  {icon:"🗣️",key:"language",tr:"Yabancı Dil Dersi",en:"Language Tutoring",de:"Sprachkurs",fr:"Cours de langue",es:"Clases de idiomas",c:410,pmin:250,pmax:1200},
+  {icon:"🎵",key:"music",tr:"Müzik Dersi",en:"Music Lessons",de:"Musikunterricht",fr:"Cours de musique",es:"Clases de música",c:190,pmin:300,pmax:1500},
+  {icon:"🎉",key:"events",tr:"Organizasyon",en:"Events",de:"Events",fr:"Événements",es:"Eventos",c:220,pmin:1000,pmax:20000},
+  {icon:"📸",key:"photo",tr:"Fotoğraf & Video",en:"Photo & Video",de:"Foto & Video",fr:"Photo & Vidéo",es:"Foto y Vídeo",c:260,pmin:800,pmax:8000}
 ];
+
+/* Armut tarzı üst menü sayfaları (makro kategoriler) */
+const GROUPS={
+  home:{tr:"Ana Sayfa",en:"Home",de:"Startseite",fr:"Accueil",es:"Inicio",cats:null},
+  repair:{tr:"Tamirat",en:"Repair",de:"Reparatur",fr:"Réparation",es:"Reparación",cats:["plumbing","electrical","construction","painting","furniture","hvac","appliance","ironwork","roofing"]},
+  cleaning:{tr:"Temizlik",en:"Cleaning",de:"Reinigung",fr:"Nettoyage",es:"Limpieza",cats:["cleaning"]},
+  moving:{tr:"Nakliyat",en:"Moving",de:"Umzug",fr:"Déménagement",es:"Mudanzas",cats:["moving"]},
+  tutoring:{tr:"Özel Ders",en:"Tutoring",de:"Nachhilfe",fr:"Cours particuliers",es:"Clases",cats:["tutoring","math","language","music"]},
+  other:{tr:"Diğer",en:"Other",de:"Andere",fr:"Autre",es:"Otros",cats:["manufacturing","events","photo"]}
+};
+let groupFilter=null; // null = tümü (ana sayfa)
+function gLabel(g){return (GROUPS[g][lang]||GROUPS[g].tr)}
+function selectGroup(g){
+  groupFilter=(g==="home")?null:g;
+  document.querySelectorAll('.gnav').forEach(a=>a.classList.toggle('active',a.dataset.g===g));
+  renderCats();renderListings();
+  if(g==="home")window.scrollTo({top:0,behavior:'smooth'});else scrollToId('cats');
+}
+function groupCatKeys(){return groupFilter?GROUPS[groupFilter].cats:null}
 
 /* Güven bandı + maliyet tahmini sözlüğü (yurt dışı liderlerden ilham) */
 const TRUST={
@@ -501,7 +496,7 @@ function renderAnalytics(){
   el.innerHTML=sorted.map(c=>`
     <div style="display:flex;align-items:center;gap:12px">
       <span style="width:150px;flex-shrink:0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.icon} ${catName(c)}</span>
-      <div style="flex:1;height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden">
+      <div style="flex:1;height:10px;border-radius:999px;background:rgba(20,26,38,.06);overflow:hidden">
         <div style="height:100%;width:${Math.round(prosOf(c)/max*100)}%;background:linear-gradient(90deg,#2dd4bf,#34d399)"></div>
       </div>
       <span style="width:56px;text-align:right;font-weight:800;color:#5eead4;font-size:13px">${prosOf(c).toLocaleString()}</span>
@@ -596,7 +591,12 @@ function applyI18n(){
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>{el.setAttribute("placeholder",t(el.getAttribute("data-i18n-ph")))});
   document.getElementById("langFlag").textContent=FLAGS[lang];
   document.getElementById("langCode").textContent=lang.toUpperCase();
-  renderCats();renderListings();fillCities();renderTrust();renderPros();renderJobBoard();renderAnalytics();renderGuarantee();
+  renderNav();renderCats();renderListings();fillCities();renderTrust();renderPros();renderJobBoard();renderAnalytics();renderGuarantee();
+}
+function renderNav(){
+  const el=document.getElementById('navGroups');if(!el)return;
+  const keys=["home","repair","cleaning","moving","tutoring","other"];
+  el.innerHTML=keys.map(g=>`<span class="gnav ${((g==='home'&&!groupFilter)||groupFilter===g)?'active':''}" data-g="${g}" onclick="selectGroup('${g}')">${gLabel(g)}</span>`).join("");
 }
 function renderTrust(){
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
@@ -623,9 +623,11 @@ document.addEventListener("click",()=>document.getElementById("langMenu").classL
 /* ============ Render ============ */
 function catName(c){return c[lang]||c.tr}
 function renderCats(){
-  const maxJ=Math.max(...CATS.map(jobsOf));const maxP=Math.max(...CATS.map(prosOf));
-  const bar=(w,col)=>`<div style="height:6px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden"><div style="height:100%;width:${w}%;background:${col}"></div></div>`;
-  document.getElementById("catGrid").innerHTML=CATS.map(c=>`
+  const keys=groupCatKeys();
+  const list=keys?CATS.filter(c=>keys.includes(c.key)):CATS;
+  const maxJ=Math.max(1,...list.map(jobsOf));const maxP=Math.max(1,...list.map(prosOf));
+  const bar=(w,col)=>`<div style="height:6px;border-radius:999px;background:rgba(20,26,38,.06);overflow:hidden"><div style="height:100%;width:${w}%;background:${col}"></div></div>`;
+  document.getElementById("catGrid").innerHTML=list.map(c=>`
     <div class="cat" onclick="filterCat('${c.key}')">
       <div style="display:flex;align-items:center;gap:8px"><span class="ic">${c.icon}</span><span class="nm">${catName(c)}</span></div>
       <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px"><span>📋 ${an('jobs')}</span><b style="color:var(--brand2)">${jobsOf(c).toLocaleString()}</b></div>
@@ -640,7 +642,8 @@ function urgBadge(u){
 }
 let catFilter=null,cityFilter="";
 function renderListings(){
-  let data=LISTINGS.filter(l=>(!catFilter||l.cat===catFilter)&&(!cityFilter||l.city===cityFilter));
+  const gk=groupCatKeys();
+  let data=LISTINGS.filter(l=>(!catFilter||l.cat===catFilter)&&(!cityFilter||l.city===cityFilter)&&(!gk||gk.includes(l.cat)));
   const grid=document.getElementById("listGrid");
   if(!data.length){grid.innerHTML=`<p style="color:var(--muted)">—</p>`;return}
   grid.innerHTML=data.map(l=>`
@@ -824,7 +827,7 @@ function wizGo(d){wizSave();wiz.step=Math.min(4,Math.max(1,wiz.step+d));renderWi
 function wizPickCat(i){wiz.catIdx=i;wiz.step=2;renderWiz()}
 function wizPickUrg(u){wiz.urg=u;renderWiz()}
 function renderWiz(){
-  const prog=[1,2,3,4].map(n=>`<div style="flex:1;height:4px;border-radius:999px;background:${n<=wiz.step?'var(--brand)':'rgba(255,255,255,.1)'}"></div>`).join("");
+  const prog=[1,2,3,4].map(n=>`<div style="flex:1;height:4px;border-radius:999px;background:${n<=wiz.step?'var(--brand)':'rgba(20,26,38,.1)'}"></div>`).join("");
   let body="";
   if(wiz.step===1){
     body=`<h4 style="margin:0 0 4px">${wz('s1')}</h4><p style="color:var(--muted);font-size:13px;margin:0 0 14px">${wz('s1d')}</p>

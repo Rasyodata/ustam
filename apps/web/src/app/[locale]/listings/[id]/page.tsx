@@ -30,14 +30,14 @@ export default async function ListingDetailPage({
         <Badge>{listing.offerCount} {t("listing.offers")}</Badge>
       </div>
       <h1 className="text-3xl font-black mb-3">{listing.title}</h1>
-      <p className="text-white/70 whitespace-pre-line mb-8">{listing.description}</p>
+      <p className="text-slate-600 whitespace-pre-line mb-8">{listing.description}</p>
 
       <h2 className="text-xl font-bold mb-4">
         {listing.offerCount} {t("listing.offers")}
       </h2>
       <div className="space-y-3">
         {(listing.offers ?? []).map((o: any) => (
-          <div key={o.id} className="bg-ink-card border border-white/10 rounded-xl p-4">
+          <div key={o.id} className="bg-white border border-slate-200 rounded-xl p-4">
             <div className="flex justify-between items-center mb-1.5">
               <div className="flex items-center gap-2">
                 <Link href={`/providers/${o.provider?.id}`} className="font-bold hover:text-brand-light">
@@ -47,7 +47,7 @@ export default async function ListingDetailPage({
                   <>
                     <span className="text-xs text-amber-400">
                       ★ {Number(o.provider.providerProfile.avgRating).toFixed(1)}
-                      <span className="text-white/40"> ({o.provider.providerProfile.reviewCount})</span>
+                      <span className="text-slate-400"> ({o.provider.providerProfile.reviewCount})</span>
                     </span>
                     <TierBadge
                       avgRating={Number(o.provider.providerProfile.avgRating)}
@@ -62,12 +62,12 @@ export default async function ListingDetailPage({
                 {Number(o.price).toLocaleString()} {o.currency}
               </span>
             </div>
-            <p className="text-white/60 text-sm">{o.message}</p>
+            <p className="text-slate-500 text-sm">{o.message}</p>
             <PaymentFlow offerId={o.id} listingId={listing.id} price={Number(o.price)} currency={o.currency} />
           </div>
         ))}
         {(!listing.offers || listing.offers.length === 0) && (
-          <p className="text-white/50">{t("listing.noOffers")}</p>
+          <p className="text-slate-400">{t("listing.noOffers")}</p>
         )}
       </div>
     </div>
@@ -76,6 +76,6 @@ export default async function ListingDetailPage({
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="text-xs font-bold bg-white/10 px-2.5 py-1 rounded-full">{children}</span>
+    <span className="text-xs font-bold bg-slate-200 px-2.5 py-1 rounded-full">{children}</span>
   );
 }

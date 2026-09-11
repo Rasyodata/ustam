@@ -43,7 +43,7 @@ export function PaymentFlow({
   }
 
   return (
-    <div className="mt-3 border-t border-white/10 pt-3">
+    <div className="mt-3 border-t border-slate-200 pt-3">
       {step === "idle" && (
         <button
           disabled={busy}
@@ -56,7 +56,7 @@ export function PaymentFlow({
 
       {step === "accepted" && (
         <div className="space-y-2">
-          <div className="text-sm space-y-1 bg-black/20 rounded-lg p-3">
+          <div className="text-sm space-y-1 bg-slate-100 rounded-lg p-3">
             <Row label={t("offer.price")} value={`${price.toLocaleString()} ${currency}`} />
             <Row label="Komisyon (%10)" value={`− ${commission.toLocaleString()} ${currency}`} muted />
             <Row label="Ustaya" value={`${net.toLocaleString()} ${currency}`} bold />
@@ -89,14 +89,14 @@ export function PaymentFlow({
       {step === "released" && (
         <div className="space-y-2">
           <p className="text-green-400 text-sm font-bold">🎉 Ödeme ustaya aktarıldı!</p>
-          <div className="bg-black/20 rounded-lg p-3 space-y-2">
+          <div className="bg-slate-100 rounded-lg p-3 space-y-2">
             <p className="text-sm font-semibold">⭐ {t("review.leaveReview")}</p>
             <StarRating value={rating} onChange={setRating} />
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder={t("review.comment")}
-              className="w-full bg-ink-card border border-white/10 rounded-lg p-2 text-sm"
+              className="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm"
               rows={2}
             />
             <button

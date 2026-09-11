@@ -41,12 +41,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* HERO + arama */}
       <section className="max-w-5xl mx-auto px-5 pt-12 pb-6">
         <h1 className="text-3xl sm:text-4xl font-black leading-tight mb-3">{t("home.heroTitle")}</h1>
-        <p className="text-white/60 mb-6 max-w-xl">{t("home.heroSubtitle")}</p>
-        <form action={`/${locale}/listings`} className="flex gap-2 bg-ink-card border border-white/10 p-2.5 rounded-2xl max-w-2xl">
+        <p className="text-slate-500 mb-6 max-w-xl">{t("home.heroSubtitle")}</p>
+        <form action={`/${locale}/listings`} className="flex gap-2 bg-white border border-slate-200 p-2.5 rounded-2xl max-w-2xl">
           <input
             name="q"
             placeholder={t("common.searchPlaceholder")}
-            className="flex-1 bg-ink-soft border border-white/10 rounded-xl px-4 py-3 outline-none"
+            className="flex-1 bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 outline-none"
           />
           <button className="font-bold px-5 rounded-xl bg-gradient-to-br from-brand to-brand-light text-black">
             {t("common.search")} 🔎
@@ -64,7 +64,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="bg-gradient-to-br from-brand/20 to-brand-light/10 border border-brand/40 rounded-2xl p-6 flex flex-wrap items-center justify-between gap-4">
           <div className="font-bold text-lg">{t("home.ctaPost")}</div>
           <div className="flex gap-2">
-            <Link href="/listings" className="font-bold px-5 py-2.5 rounded-xl bg-ink-card border border-white/10">
+            <Link href="/listings" className="font-bold px-5 py-2.5 rounded-xl bg-white border border-slate-200">
               {t("analytics.viewJobs")}
             </Link>
             <Link href="/post" className="font-bold px-5 py-2.5 rounded-xl bg-gradient-to-br from-brand to-brand-light text-black">

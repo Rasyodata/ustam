@@ -35,6 +35,21 @@ export default async function JobBoardPage({
     offline = true;
   }
 
+  // Armut tarzı makro grup filtresi (?g=repair|cleaning|moving|tutoring|other)
+  const GROUP_SLUGS: Record<string, string[]> = {
+    repair: ["plumbing", "electrical", "construction", "painting", "furniture", "hvac", "appliance", "ironwork", "roofing"],
+    cleaning: ["cleaning"],
+    moving: ["moving"],
+    tutoring: ["tutoring", "math", "language", "music"],
+    other: ["manufacturing", "events", "photo"],
+  };
+  const g = sp.g;
+  if (g && GROUP_SLUGS[g]) {
+    const slugs = GROUP_SLUGS[g];
+    items = items.filter((l) => slugs.includes(l.category?.slug));
+    categories = categories.filter((c) => slugs.includes(c.slug));
+  }
+
   const buildHref = (patch: Record<string, string | undefined>) => {
     const merged = { ...sp, ...patch };
     const qs = new URLSearchParams(
@@ -45,7 +60,7 @@ export default async function JobBoardPage({
 
   const chip = (active: boolean) =>
     `px-3 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap ${
-      active ? "bg-brand text-black" : "bg-ink-card border border-white/10 hover:border-brand"
+      active ? "bg-brand text-black" : "bg-white border border-slate-200 hover:border-brand"
     }`;
 
   return (
@@ -59,7 +74,7 @@ export default async function JobBoardPage({
           + {t("jobBoard.postCta")}
         </Link>
       </div>
-      <p className="text-white/60 mb-6">{t("jobBoard.subtitle")}</p>
+      <p className="text-slate-500 mb-6">{t("jobBoard.subtitle")}</p>
 
       {/* Kategori filtresi */}
       <div className="flex gap-2 flex-wrap mb-3 overflow-x-auto">
@@ -93,7 +108,7 @@ export default async function JobBoardPage({
 
       {!offline && items.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-white/50 mb-4">{t("jobBoard.empty")}</p>
+          <p className="text-slate-400 mb-4">{t("jobBoard.empty")}</p>
           <Link href="/post" className="font-bold px-5 py-3 rounded-xl bg-gradient-to-br from-brand to-brand-light text-black">
             + {t("jobBoard.postCta")}
           </Link>
@@ -105,14 +120,14 @@ export default async function JobBoardPage({
           <Link
             key={l.id}
             href={`/listings/${l.id}`}
-            className="bg-ink-card border border-white/10 rounded-2xl overflow-hidden hover:border-brand hover:-translate-y-1 transition flex flex-col"
+            className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-brand hover:-translate-y-1 transition flex flex-col"
           >
-            <div className="h-32 bg-gradient-to-br from-[#26324c] to-[#1a2133] grid place-items-center text-4xl">
+            <div className="h-32 bg-gradient-to-br from-orange-50 to-slate-100 grid place-items-center text-4xl">
               {l.category?.icon ?? "🔧"}
             </div>
             <div className="p-4 flex flex-col gap-2 flex-1">
               <h3 className="font-semibold">{l.title}</h3>
-              <div className="text-white/50 text-sm flex gap-3 flex-wrap">
+              <div className="text-slate-400 text-sm flex gap-3 flex-wrap">
                 <span>📍 {l.location?.cityName}</span>
                 {l.category?.name && <span>{l.category.name}</span>}
               </div>

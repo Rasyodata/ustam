@@ -29,7 +29,7 @@ export default async function ProvidersIndex({ params }: { params: Promise<{ loc
   return (
     <div className="max-w-3xl mx-auto px-5 py-10">
       <h1 className="text-3xl font-black mb-2">🏆 {t("pros.title")}</h1>
-      <p className="text-white/60 mb-8">{t("pros.subtitle")}</p>
+      <p className="text-slate-500 mb-8">{t("pros.subtitle")}</p>
       <ProvidersDirectory categories={categories} />
     </div>
   );

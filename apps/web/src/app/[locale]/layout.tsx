@@ -33,7 +33,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>{children}</main>
-          <footer className="border-t border-white/10 mt-10 py-6 text-white/50 text-sm">
+          <footer className="border-t border-slate-200 mt-10 py-6 text-slate-400 text-sm">
             <div className="max-w-5xl mx-auto px-5">© 2026 Ustam · İşini ustasına bırak.</div>
           </footer>
         </NextIntlClientProvider>

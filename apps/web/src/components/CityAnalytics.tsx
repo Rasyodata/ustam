@@ -41,11 +41,11 @@ export function CityAnalytics({ initial }: { initial: StatsOverview }) {
     <div>
       {/* Şehir seçici */}
       <div className="flex items-center gap-3 mb-6 flex-wrap">
-        <label className="text-sm text-white/60 font-semibold">🏙️ {t("analytics.cityFilter")}:</label>
+        <label className="text-sm text-slate-500 font-semibold">🏙️ {t("analytics.cityFilter")}:</label>
         <select
           value={cityId}
           onChange={(e) => setCityId(e.target.value)}
-          className="bg-ink-card border border-white/10 rounded-lg px-3 py-2 text-sm font-semibold outline-none"
+          className="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-semibold outline-none"
         >
           <option value="">{t("analytics.allCities")}</option>
           {cities.map((c) => (
@@ -67,13 +67,13 @@ export function CityAnalytics({ initial }: { initial: StatsOverview }) {
 
       {/* Kategori analizi: her kategoride iş + usta */}
       <h2 className="text-2xl font-bold mb-1">📊 {t("analytics.categoryTitle")}</h2>
-      <p className="text-white/50 text-sm mb-5">{t("analytics.categorySubtitle")}</p>
+      <p className="text-slate-400 text-sm mb-5">{t("analytics.categorySubtitle")}</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12">
         {topLevel.map((c) => (
           <Link
             key={c.id}
             href={`/listings?categoryId=${c.id}${cityId ? `&cityId=${cityId}` : ""}`}
-            className="bg-ink-card border border-white/10 rounded-xl p-4 hover:border-brand transition"
+            className="bg-white border border-slate-200 rounded-xl p-4 hover:border-brand transition"
           >
             <div className="font-semibold flex items-center gap-2 mb-3">
               <span className="text-2xl">{c.icon ?? "🔧"}</span> {c.name}
@@ -94,15 +94,15 @@ export function CityAnalytics({ initial }: { initial: StatsOverview }) {
           {t("analytics.viewPros")} →
         </Link>
       </div>
-      <p className="text-white/50 text-sm mb-5">{t("analytics.providerSubtitle")}</p>
-      <div className="bg-ink-card border border-white/10 rounded-2xl p-5 space-y-3">
+      <p className="text-slate-400 text-sm mb-5">{t("analytics.providerSubtitle")}</p>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3">
         {byPros.slice(0, 8).map((c) => (
           <div key={c.id} className="flex items-center gap-3">
             <span className="w-40 shrink-0 text-sm flex items-center gap-2">
               <span>{c.icon ?? "🔧"}</span>
               <span className="truncate">{c.name}</span>
             </span>
-            <div className="flex-1 h-2.5 rounded-full bg-white/5 overflow-hidden">
+            <div className="flex-1 h-2.5 rounded-full bg-slate-100 overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-teal-400 to-emerald-400"
                 style={{ width: `${Math.round((c.providerCount / maxPros) * 100)}%` }}
@@ -120,24 +120,24 @@ export function CityAnalytics({ initial }: { initial: StatsOverview }) {
 
 function Tile({ n, l, icon }: { n: string; l: string; icon: string }) {
   return (
-    <div className="bg-ink-card border border-white/10 rounded-xl p-4">
+    <div className="bg-white border border-slate-200 rounded-xl p-4">
       <div className="text-xl mb-1">{icon}</div>
       <div className="text-2xl font-black tabular-nums">{n}</div>
-      <div className="text-white/50 text-xs">{l}</div>
+      <div className="text-slate-400 text-xs">{l}</div>
     </div>
   );
 }
 function Row({ label, value, color }: { label: string; value: string; color: string }) {
   return (
     <div className="flex items-center justify-between text-xs mb-1">
-      <span className="text-white/50">{label}</span>
+      <span className="text-slate-400">{label}</span>
       <span className={`font-bold tabular-nums ${color}`}>{value}</span>
     </div>
   );
 }
 function Bar({ pct, from, to }: { pct: number; from: string; to: string }) {
   return (
-    <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+    <div className="h-1.5 rounded-full bg-slate-100 overflow-hidden">
       <div className={`h-full bg-gradient-to-r ${from} ${to}`} style={{ width: `${pct}%` }} />
     </div>
   );
