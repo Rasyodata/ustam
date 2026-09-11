@@ -1179,33 +1179,49 @@ function wizPublish(){
 }
 
 let authTab="login";
+const REG={
+  tr:{customer:"Usta Arıyorum",customerDesc:"İş veren olarak kayıt ol; ilan aç, teklif al.",provider:"Usta Olmak İstiyorum",providerDesc:"Hizmet ver; ilanlara teklif gönder, iş al.",back:"← Geri"},
+  en:{customer:"I'm Looking for a Pro",customerDesc:"Register as a client; post jobs, get offers.",provider:"I Want to Become a Pro",providerDesc:"Offer services; send offers, get jobs.",back:"← Back"}
+};
+function reg(k){return (REG[lang]||REG.en||REG.tr)[k]}
 function openAuth(tab){
   authTab=tab;
-  openModal(`
-    <div class="mh"><h3 id="authTitle">${t(tab==='login'?'auth.loginTitle':'auth.registerTitle')}</h3><button class="x" onclick="closeModal()">×</button></div>
-    <div class="mb">
-      <div class="tabs">
+  const tabs=`<div class="tabs">
         <div class="tab ${tab==='login'?'active':''}" onclick="openAuth('login')">${t('common.login')}</div>
-        <div class="tab ${tab==='register'?'active':''}" onclick="openAuth('register')">${t('common.register')}</div>
-      </div>
-      ${tab==='register'?`
-        <div class="field"><label>${t('auth.displayName')}</label><input></div>
-        <div class="field"><label>${t('auth.accountType')||''}</label>
-          <div class="seg">
-            <div class="opt active">${t('auth.customer')}</div>
-            <div class="opt">${t('auth.provider')}</div>
-            <div class="opt">${t('auth.company')}</div>
-          </div>
+        <div class="tab ${tab!=='login'?'active':''}" onclick="openAuth('register')">${t('common.register')}</div>
+      </div>`;
+  if(tab==='register'){
+    openModal(`
+    <div class="mh"><h3>${t('auth.registerTitle')}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      ${tabs}
+      <div style="display:grid;gap:12px">
+        <div class="cat" style="flex-direction:row;align-items:center;gap:14px;cursor:pointer;padding:16px" onclick="openAuth('register_customer')">
+          <span style="font-size:30px">🔎</span><div><div class="nm">${reg('customer')}</div><div class="ct">${reg('customerDesc')}</div></div>
         </div>
+        <div class="cat" style="flex-direction:row;align-items:center;gap:14px;cursor:pointer;padding:16px" onclick="openProSignup()">
+          <span style="font-size:30px">🛠️</span><div><div class="nm">${reg('provider')}</div><div class="ct">${reg('providerDesc')}</div></div>
+        </div>
+      </div>
+    </div>`);
+    return;
+  }
+  const isCust=tab==='register_customer';
+  openModal(`
+    <div class="mh"><h3>${t(isCust?'auth.registerTitle':'auth.loginTitle')}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      ${tabs}
+      ${isCust?`<div style="margin-bottom:6px"><span class="gnav" style="cursor:pointer" onclick="openAuth('register')">${reg('back')}</span></div>
+        <div class="field"><label>${t('auth.displayName')}</label><input></div>
         <div class="field"><label>${t('auth.phone')}</label><input placeholder="+90"></div>`:''}
       <div class="field"><label>${t('auth.email')}</label><input type="email"></div>
       <div class="field"><label>${t('auth.password')}</label><input type="password"></div>
-      <button class="btn btn-primary" style="width:100%" onclick="submitAuth()">${t(tab==='login'?'common.login':'common.register')}</button>
-      ${tab==='register'?`<p style="color:var(--muted);font-size:12px;margin-top:12px;text-align:center">🔒 ${t('auth.otpSent')}</p>`:''}
+      <button class="btn btn-primary" style="width:100%" onclick="submitAuth()">${t(isCust?'common.register':'common.login')}</button>
+      ${isCust?`<p style="color:var(--muted);font-size:12px;margin-top:12px;text-align:center">🔒 ${t('auth.otpSent')}</p>`:''}
     </div>`);
 }
 function submitAuth(){
-  if(authTab==='register'){closeModal();toast("📩 "+t('auth.otpSent'))}
+  if(authTab&&authTab.indexOf('register')===0){closeModal();toast("📩 "+t('auth.otpSent'))}
   else{closeModal();toast("👋 "+t('msg.loggedin'))}
 }
 
