@@ -399,13 +399,30 @@ const PROS_I18N={
 };
 function pr(k){return (PROS_I18N[lang]||PROS_I18N.en||PROS_I18N.tr)[k]}
 const PROVIDERS=[
-  {name:"Metal İmalat A.Ş.",cat:"manufacturing",rating:5.0,reviews:64,jobs:210},
   {name:"Mehmet Usta Tesisat",cat:"plumbing",rating:4.9,reviews:37,jobs:152},
-  {name:"Çatı Ustası Hasan",cat:"roofing",rating:4.8,reviews:41,jobs:98},
   {name:"Su Tesisat Ltd.",cat:"plumbing",rating:4.7,reviews:52,jobs:88},
-  {name:"Yıldız Elektrik",cat:"electrical",rating:4.6,reviews:29,jobs:61},
-  {name:"Demir Kaynak Atölyesi",cat:"ironwork",rating:4.4,reviews:18,jobs:34}
+  {name:"Yıldız Elektrik",cat:"electrical",rating:4.8,reviews:29,jobs:61},
+  {name:"Kale İnşaat Tadilat",cat:"construction",rating:4.7,reviews:40,jobs:90},
+  {name:"Renk Boya Badana",cat:"painting",rating:4.9,reviews:70,jobs:160},
+  {name:"Marangoz Ali",cat:"furniture",rating:4.9,reviews:44,jobs:110},
+  {name:"Klima Servis Pro",cat:"hvac",rating:4.6,reviews:30,jobs:60},
+  {name:"Teknik Servis Plus",cat:"appliance",rating:4.7,reviews:60,jobs:140},
+  {name:"Demir Kaynak Atölyesi",cat:"ironwork",rating:4.6,reviews:18,jobs:34},
+  {name:"Çatı Ustası Hasan",cat:"roofing",rating:4.8,reviews:41,jobs:98},
+  {name:"Pırıl Temizlik",cat:"cleaning",rating:4.8,reviews:55,jobs:140},
+  {name:"Güven Nakliyat",cat:"moving",rating:4.7,reviews:38,jobs:85},
+  {name:"Matematik Öğretmeni Ayça",cat:"tutoring",rating:4.9,reviews:50,jobs:120},
+  {name:"İngilizce Eğitmeni Deniz",cat:"tutoring",rating:4.8,reviews:33,jobs:70},
+  {name:"Metal İmalat A.Ş.",cat:"manufacturing",rating:5.0,reviews:64,jobs:210},
+  {name:"Foto Stüdyo Işık",cat:"other",rating:4.8,reviews:40,jobs:90}
 ];
+const ADMIN_REQUESTS=[]; // teklif talepleri + usta başvuruları (admine düşer)
+const PROS2={
+  tr:{page:"Ustalar",be:"Usta Ol",searchPh:"Usta ara…",all:"Tüm kategoriler",analysis:"Usta Analizi (kayıtlı usta / kategori)",quoteTitle:"Teklif Al",signupTitle:"Usta Ol — Üyelik Başvurusu",name:"Ad Soyad / İşletme adı",phone:"Telefon",email:"E-posta",cat:"Kategori",city:"Şehir",desc:"İhtiyacınızı kısaca yazın",exp:"Deneyim / hizmet açıklaması",send:"Talebi gönder",apply:"Başvuruyu gönder",sentAdmin:"✅ Talebiniz Ustam yönetimine (admin) iletildi.",applied:"✅ Başvurunuz alındı, admin onayına düştü.",adminNote:"Talepler yönetim paneline düşer"},
+  en:{page:"Pros",be:"Become a Pro",searchPh:"Search pro…",all:"All categories",analysis:"Pro Analytics (registered pros / category)",quoteTitle:"Request a Quote",signupTitle:"Become a Pro — Application",name:"Full name / Business",phone:"Phone",email:"Email",cat:"Category",city:"City",desc:"Describe your need briefly",exp:"Experience / service description",send:"Send request",apply:"Submit application",sentAdmin:"✅ Your request was sent to Ustam admin.",applied:"✅ Application received, pending admin approval.",adminNote:"Requests go to the admin panel"}
+};
+function p2(k){return (PROS2[lang]||PROS2.en||PROS2.tr)[k]}
+let prosQuery="",prosCat="";
 let prosReq={};
 function renderPros(){
   const grid=document.getElementById('prosGrid');if(!grid)return;
@@ -425,6 +442,104 @@ function renderPros(){
     </div>`).join("");
 }
 function reqQuote(name){prosReq[name]=true;renderPros();toast("📨 "+pr('reqd'))}
+
+/* ---- USTALAR SAYFASI (analiz + arama + filtre + teklif al + usta ol) ---- */
+function proCatLabel(cat){const co=CATS.find(c=>c.key===cat);return co?catName(co):gLabel('other')}
+function openProsPage(){
+  prosQuery="";prosCat="";
+  // kategori bazında usta sayısı (analiz)
+  const counts={};PROVIDERS.forEach(p=>counts[p.cat]=(counts[p.cat]||0)+1);
+  const cats=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+  const max=Math.max(...Object.values(counts));
+  const bars=cats.map(c=>`<div style="display:flex;align-items:center;gap:10px">
+      <span style="width:140px;flex-shrink:0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${proCatLabel(c)}</span>
+      <div style="flex:1;height:9px;border-radius:999px;background:rgba(20,26,38,.06);overflow:hidden"><div style="height:100%;width:${Math.round(counts[c]/max*100)}%;background:linear-gradient(90deg,#2dd4bf,#34d399)"></div></div>
+      <span style="width:28px;text-align:right;font-weight:800;color:#14b8a6;font-size:13px">${counts[c]}</span>
+    </div>`).join("");
+  const chips=`<span class="gnav ${prosCat===''?'active':''}" onclick="setProsCat('')">${p2('all')}</span>`+
+    cats.map(c=>`<span class="gnav ${prosCat===c?'active':''}" onclick="setProsCat('${c}')">${proCatLabel(c)}</span>`).join("");
+  openModal(`
+    <div class="mh"><h3>🏆 ${p2('page')}</h3>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-primary btn-sm" onclick="openProSignup()">🛠️ ${p2('be')}</button>
+        <button class="x" onclick="closeModal()">×</button>
+      </div>
+    </div>
+    <div class="mb">
+      <h4 style="margin:0 0 10px">📊 ${p2('analysis')}</h4>
+      <div class="offer" style="display:flex;flex-direction:column;gap:10px">${bars}</div>
+      <div class="searchbar" style="margin:16px 0 12px;max-width:100%">
+        <input id="prosSearch" value="${prosQuery.replace(/"/g,'&quot;')}" placeholder="${p2('searchPh')}" oninput="filterPros(this.value)">
+        <button class="btn btn-primary">${t('common.search')} 🔎</button>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">${chips}</div>
+      <div id="prosList" style="display:flex;flex-direction:column;gap:10px"></div>
+    </div>`,true);
+  renderProsList();
+}
+function setProsCat(c){prosCat=c;openProsPage2Restore(c)}
+function openProsPage2Restore(c){ // kategori değişince yeniden çiz, arama kutusunu koru
+  const q=prosQuery;openProsPage();prosCat=c;prosQuery=q;
+  const s=document.getElementById('prosSearch');if(s)s.value=q;
+  // chip aktifliğini güncelle
+  document.querySelectorAll('#modal .gnav').forEach(el=>el.classList.remove('active'));
+  renderProsList();
+}
+function filterPros(v){prosQuery=v;renderProsList()}
+function renderProsList(){
+  const box=document.getElementById('prosList');if(!box)return;
+  const q=(prosQuery||"").toLocaleLowerCase('tr');
+  const list=PROVIDERS.filter(p=>(!prosCat||p.cat===prosCat)&&(!q||p.name.toLocaleLowerCase('tr').includes(q)))
+    .sort((a,b)=>b.rating-a.rating);
+  box.innerHTML=list.length?list.map(p=>`
+    <div class="offer" style="display:flex;align-items:center;gap:12px">
+      <div style="width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#1a1205;background:linear-gradient(135deg,var(--brand),var(--brand2));flex-shrink:0">${p.name.trim()[0]}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700">${p.name} ${tierBadge(p.rating)}</div>
+        <div style="color:var(--muted);font-size:13px"><span class="stars">★ ${p.rating.toFixed(1)}</span> · ${p.reviews} ${pr('reviews')} · ${p.jobs} ${pr('jobs')} · ${proCatLabel(p.cat)}</div>
+      </div>
+      <button class="btn btn-primary btn-sm" style="flex-shrink:0" onclick='openProQuote(${JSON.stringify(p.name)},${JSON.stringify(p.cat)})'>📨 ${pr('req')}</button>
+    </div>`).join(""):`<p style="color:var(--muted)">—</p>`;
+}
+function openProQuote(name,cat){
+  openModal(`
+    <div class="mh"><h3>📨 ${p2('quoteTitle')} — ${name}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <div class="field"><label>${p2('name')}</label><input id="qName"></div>
+      <div class="field"><label>${p2('phone')}</label><input id="qPhone" placeholder="+90"></div>
+      <div class="field"><label>${p2('desc')}</label><textarea id="qDesc"></textarea></div>
+      <button class="btn btn-primary" style="width:100%" onclick="submitProQuote(${JSON.stringify(name)},${JSON.stringify(cat)})">${p2('send')} →</button>
+      <p style="color:var(--muted);font-size:12px;margin-top:10px">🔒 ${p2('adminNote')}</p>
+    </div>`);
+}
+function submitProQuote(name,cat){
+  ADMIN_REQUESTS.push({type:"quote",provider:name,cat,name:(document.getElementById('qName')||{}).value||"",phone:(document.getElementById('qPhone')||{}).value||"",desc:(document.getElementById('qDesc')||{}).value||"",ts:Date.now()});
+  closeModal();toast(p2('sentAdmin'));
+}
+function openProSignup(){
+  const cats=CATS.filter(c=>!c.parentId||true).map(c=>`<option value="${c.key}">${c.icon} ${catName(c)}</option>`).join("");
+  openModal(`
+    <div class="mh"><h3>🛠️ ${p2('signupTitle')}</h3><button class="x" onclick="closeModal()">×</button></div>
+    <div class="mb">
+      <div class="field"><label>${p2('name')}</label><input id="sName"></div>
+      <div class="row" style="gap:12px">
+        <div class="field" style="flex:1"><label>${p2('cat')}</label><select id="sCat">${cats}</select></div>
+        <div class="field" style="flex:1"><label>${p2('city')}</label><select id="sCity">${CITIES.map(c=>`<option>${c}</option>`).join("")}</select></div>
+      </div>
+      <div class="row" style="gap:12px">
+        <div class="field" style="flex:1"><label>${p2('phone')}</label><input id="sPhone" placeholder="+90"></div>
+        <div class="field" style="flex:1"><label>${p2('email')}</label><input id="sEmail" type="email"></div>
+      </div>
+      <div class="field"><label>${p2('exp')}</label><textarea id="sExp"></textarea></div>
+      <button class="btn btn-primary" style="width:100%" onclick="submitProSignup()">${p2('apply')} →</button>
+      <p style="color:var(--muted);font-size:12px;margin-top:10px">🔒 ${p2('adminNote')}</p>
+    </div>`,true);
+}
+function submitProSignup(){
+  const g=id=>(document.getElementById(id)||{}).value||"";
+  ADMIN_REQUESTS.push({type:"provider_application",name:g('sName'),cat:g('sCat'),city:g('sCity'),phone:g('sPhone'),email:g('sEmail'),exp:g('sExp'),status:"pending_admin",ts:Date.now()});
+  closeModal();toast(p2('applied'));
+}
 
 /* Tamirat İlanları başlığı */
 const JB_SUF={tr:"İlanları",en:"Listings",de:"Aufträge",fr:"Demandes",es:"Solicitudes",ru:"Заявки",ar:"إعلانات",fa:"آگهی‌ها"};
@@ -756,7 +871,9 @@ function applyI18n(){
 function renderNav(){
   const el=document.getElementById('navGroups');if(!el)return;
   const keys=["home","repair","cleaning","moving","tutoring","other"];
-  el.innerHTML=keys.map(g=>`<span class="gnav ${((g==='home'&&!groupFilter)||groupFilter===g)?'active':''}" data-g="${g}" onclick="selectGroup('${g}')">${gLabel(g)}</span>`).join("");
+  el.innerHTML=keys.map(g=>`<span class="gnav ${((g==='home'&&!groupFilter)||groupFilter===g)?'active':''}" data-g="${g}" onclick="selectGroup('${g}')">${gLabel(g)}</span>`).join("")
+    +`<span class="gnav" style="color:#14b8a6" onclick="openProsPage()">🏆 ${p2('page')}</span>`
+    +`<span class="gnav" style="color:var(--brand)" onclick="openProSignup()">🛠️ ${p2('be')}</span>`;
 }
 function renderTrust(){
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
