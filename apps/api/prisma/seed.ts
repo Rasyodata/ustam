@@ -312,6 +312,64 @@ async function main() {
   }
   console.log(`  ✓ ${members.length} üye + ${created} küçük tamir ilanı (üyeler tarafından) oluşturuldu`);
 
+  // --- Ustalar (kategorilere yayılmış, puanlı, seviye çeşitliliği) ---
+  // [email, işletme adı, kategori slug, hizmet şehirleri, kind, puan, yorum, tamamlanan iş, doğrulanmış]
+  const PROVIDERS: [string, string, string, string[], any, number, number, number, boolean][] = [
+    ["u.tesisat@ustam.app", "Usta Su Tesisat", "plumbing", ["İstanbul", "Ankara"], "TECHNICAL_SERVICE", 4.9, 64, 210, true],
+    ["u.tesisat2@ustam.app", "Hızlı Tesisat", "plumbing", ["İzmir"], "INDIVIDUAL", 4.6, 28, 40, true],
+    ["u.elektrik@ustam.app", "Yıldız Elektrik", "electrical", ["İstanbul", "Bursa"], "TECHNICAL_SERVICE", 4.8, 52, 130, true],
+    ["u.elektrik2@ustam.app", "Voltaj Elektrik", "electrical", ["Ankara"], "INDIVIDUAL", 4.4, 15, 22, false],
+    ["u.insaat@ustam.app", "Kale İnşaat Tadilat", "construction", ["İstanbul"], "CONTRACTOR", 4.7, 40, 90, true],
+    ["u.insaat2@ustam.app", "Sağlam Tadilat", "construction", ["Konya", "Adana"], "INDIVIDUAL", 4.3, 12, 15, false],
+    ["u.boya@ustam.app", "Renk Boya Badana", "painting", ["İzmir", "İstanbul"], "TECHNICAL_SERVICE", 4.9, 70, 160, true],
+    ["u.boya2@ustam.app", "Badanacı Ercan", "painting", ["Bursa"], "INDIVIDUAL", 4.5, 20, 30, false],
+    ["u.demir@ustam.app", "Demir Ustası Kaynak", "ironwork", ["Ankara", "İstanbul"], "MANUFACTURER", 5.0, 48, 120, true],
+    ["u.demir2@ustam.app", "Ferforje Sanat", "ironwork", ["İzmir"], "INDIVIDUAL", 4.6, 18, 26, true],
+    ["u.cati@ustam.app", "Çatı Ustası Hasan", "roofing", ["Bursa", "İstanbul"], "INDIVIDUAL", 4.8, 41, 98, true],
+    ["u.cati2@ustam.app", "İzolasyon Pro", "roofing", ["Antalya"], "TECHNICAL_SERVICE", 4.4, 10, 12, false],
+    ["u.beyaz@ustam.app", "Teknik Servis Plus", "appliance", ["İstanbul", "Ankara", "İzmir"], "TECHNICAL_SERVICE", 4.7, 60, 140, true],
+    ["u.beyaz2@ustam.app", "Beyaz Eşya Doktoru", "appliance", ["Adana"], "INDIVIDUAL", 4.5, 33, 55, true],
+    ["u.imalat@ustam.app", "Metal İmalat A.Ş.", "manufacturing", ["İzmir", "Gaziantep"], "MANUFACTURER", 5.0, 64, 210, true],
+    ["u.imalat2@ustam.app", "Ahşap Atölye", "manufacturing", ["Gaziantep"], "INDIVIDUAL", 4.6, 22, 34, false],
+  ];
+
+  let provCreated = 0;
+  for (let i = 0; i < PROVIDERS.length; i++) {
+    const [email, name, slug, cities, kind, rating, reviews, jobs, verified] = PROVIDERS[i];
+    const cid = await catId(slug);
+    if (!cid) continue;
+    const cityIds = (await Promise.all(cities.map((c) => cityId(c)))).filter(Boolean) as string[];
+    await prisma.user.upsert({
+      where: { email },
+      update: {},
+      create: {
+        email,
+        phone: `+9053200${String(10000 + i)}`,
+        passwordHash: pass,
+        displayName: name,
+        status: "ACTIVE",
+        emailVerifiedAt: new Date(),
+        phoneVerifiedAt: new Date(),
+        roles: { create: [{ role: "PROVIDER" }] },
+        providerProfile: {
+          create: {
+            kind,
+            businessName: name,
+            verified,
+            verifiedAt: verified ? new Date() : null,
+            avgRating: rating,
+            reviewCount: reviews,
+            completedJobs: jobs,
+            categories: { create: [{ categoryId: cid }] },
+            serviceAreas: { create: cityIds.map((id) => ({ cityId: id })) },
+          },
+        },
+      },
+    });
+    provCreated++;
+  }
+  console.log(`  ✓ ${provCreated} usta (kategorilere yayılmış, puanlı) oluşturuldu`);
+
   console.log("🌱 Seed tamam.");
 }
 
