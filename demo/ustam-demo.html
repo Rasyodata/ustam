@@ -361,7 +361,10 @@ const PAY={
   en:{secure:"Secure Payment",escrowInfo:"Your payment is held safely in Ustam escrow until the job is done.",amount:"Offer amount",commission:"Platform fee (10%)",net:"To be paid to pro",payBtn:"Hold in escrow & Pay",held:"💰 Payment held in escrow",heldDesc:"Confirm when the job is done; the amount is released to the pro minus the fee.",release:"Complete & Release to pro",released:"🎉 Payment released to the pro!",refund:"Refund"},
   de:{secure:"Sichere Zahlung",escrowInfo:"Deine Zahlung wird bis zur Fertigstellung sicher im Ustam-Treuhandkonto gehalten.",amount:"Angebotsbetrag",commission:"Plattformgebühr (10%)",net:"An Profi auszuzahlen",payBtn:"Treuhänderisch zahlen",held:"💰 Zahlung im Treuhandkonto",heldDesc:"Bestätige nach Fertigstellung; der Betrag wird abzüglich Gebühr ausgezahlt.",release:"Abschließen & auszahlen",released:"🎉 Zahlung an Profi ausgezahlt!",refund:"Erstatten"},
   fr:{secure:"Paiement sécurisé",escrowInfo:"Votre paiement est conservé en séquestre Ustam jusqu'à la fin du travail.",amount:"Montant de l'offre",commission:"Frais de plateforme (10%)",net:"À verser au pro",payBtn:"Séquestrer & Payer",held:"💰 Paiement en séquestre",heldDesc:"Confirmez à la fin ; le montant est versé au pro moins les frais.",release:"Terminer & Verser au pro",released:"🎉 Paiement versé au pro !",refund:"Rembourser"},
-  es:{secure:"Pago seguro",escrowInfo:"Tu pago se mantiene en depósito de Ustam hasta terminar el trabajo.",amount:"Importe de la oferta",commission:"Comisión de plataforma (10%)",net:"A pagar al profesional",payBtn:"Depositar y Pagar",held:"💰 Pago en depósito",heldDesc:"Confirma al terminar; el importe se paga al profesional menos la comisión.",release:"Completar y Pagar al profesional",released:"🎉 ¡Pago liberado al profesional!",refund:"Reembolsar"}
+  es:{secure:"Pago seguro",escrowInfo:"Tu pago se mantiene en depósito de Ustam hasta terminar el trabajo.",amount:"Importe de la oferta",commission:"Comisión de plataforma (10%)",net:"A pagar al profesional",payBtn:"Depositar y Pagar",held:"💰 Pago en depósito",heldDesc:"Confirma al terminar; el importe se paga al profesional menos la comisión.",release:"Completar y Pagar al profesional",released:"🎉 ¡Pago liberado al profesional!",refund:"Reembolsar"},
+  ru:{secure:"Безопасная оплата",escrowInfo:"Ваш платёж надёжно хранится на эскроу-счёте Ustam до завершения работы.",amount:"Сумма предложения",commission:"Комиссия платформы (10%)",net:"К выплате мастеру",payBtn:"На эскроу и оплатить",held:"💰 Платёж на эскроу",heldDesc:"Подтвердите после завершения; сумма выплачивается мастеру за вычетом комиссии.",release:"Завершить и выплатить мастеру",released:"🎉 Платёж выплачен мастеру!",refund:"Возврат"},
+  ar:{secure:"دفع آمن",escrowInfo:"يتم الاحتفاظ بدفعتك بأمان في ضمان Ustam حتى اكتمال العمل.",amount:"قيمة العرض",commission:"عمولة المنصة (10%)",net:"المبلغ المستحق للحرفي",payBtn:"احتجاز في الضمان والدفع",held:"💰 الدفعة محتجزة في الضمان",heldDesc:"أكّد عند اكتمال العمل؛ يُحوَّل المبلغ للحرفي بعد خصم العمولة.",release:"إكمال وتحويل للحرفي",released:"🎉 تم تحويل الدفعة للحرفي!",refund:"استرداد"},
+  fa:{secure:"پرداخت امن",escrowInfo:"پرداخت شما تا پایان کار به‌صورت امانی نزد Ustam نگهداری می‌شود.",amount:"مبلغ پیشنهاد",commission:"کارمزد پلتفرم (۱۰٪)",net:"مبلغ قابل پرداخت به استادکار",payBtn:"نگهداری امانی و پرداخت",held:"💰 پرداخت در حساب امانی",heldDesc:"پس از پایان کار تأیید کنید؛ مبلغ پس از کسر کارمزد به استادکار پرداخت می‌شود.",release:"تکمیل و پرداخت به استادکار",released:"🎉 پرداخت به استادکار انجام شد!",refund:"بازگشت وجه"}
 };
 function p(k){return (PAY[lang]||PAY.en||PAY.tr)[k]}
 
@@ -371,7 +374,10 @@ const RATE={
   en:{title:"Rate the pro",desc:"How was the job? Your rating helps others.",comment:"Your comment (optional)",send:"Submit review",thanks:"Thanks! Your review was saved.",selectStars:"Please select a rating"},
   de:{title:"Profi bewerten",desc:"Wie war die Arbeit? Deine Bewertung hilft anderen.",comment:"Dein Kommentar (optional)",send:"Bewertung senden",thanks:"Danke! Deine Bewertung wurde gespeichert.",selectStars:"Bitte eine Bewertung wählen"},
   fr:{title:"Évaluer le pro",desc:"Comment s'est passé le travail ? Votre note aide les autres.",comment:"Votre commentaire (facultatif)",send:"Envoyer l'avis",thanks:"Merci ! Votre avis a été enregistré.",selectStars:"Veuillez choisir une note"},
-  es:{title:"Califica al profesional",desc:"¿Cómo fue el trabajo? Tu calificación ayuda a otros.",comment:"Tu comentario (opcional)",send:"Enviar reseña",thanks:"¡Gracias! Tu reseña se guardó.",selectStars:"Selecciona una calificación"}
+  es:{title:"Califica al profesional",desc:"¿Cómo fue el trabajo? Tu calificación ayuda a otros.",comment:"Tu comentario (opcional)",send:"Enviar reseña",thanks:"¡Gracias! Tu reseña se guardó.",selectStars:"Selecciona una calificación"},
+  ru:{title:"Оцените мастера",desc:"Как прошла работа? Ваша оценка поможет другим.",comment:"Ваш комментарий (необязательно)",send:"Отправить отзыв",thanks:"Спасибо! Ваш отзыв сохранён.",selectStars:"Пожалуйста, выберите оценку"},
+  ar:{title:"قيّم الحرفي",desc:"كيف كان العمل؟ تقييمك يساعد الآخرين.",comment:"تعليقك (اختياري)",send:"إرسال التقييم",thanks:"شكرًا! تم حفظ تقييمك.",selectStars:"يرجى اختيار تقييم"},
+  fa:{title:"به استادکار امتیاز دهید",desc:"کار چطور بود؟ امتیاز شما به دیگران کمک می‌کند.",comment:"نظر شما (اختیاری)",send:"ارسال نظر",thanks:"ممنون! نظر شما ثبت شد.",selectStars:"لطفاً امتیاز را انتخاب کنید"}
 };
 function r(k){return (RATE[lang]||RATE.en||RATE.tr)[k]}
 let ratingValue=0;
@@ -382,7 +388,10 @@ const BADGE={
   en:{elite:"Elite Pro",topRated:"Top Rated",pro:"Pro",rising:"Rising Pro"},
   de:{elite:"Elite-Profi",topRated:"Top-Bewertet",pro:"Pro",rising:"Aufsteiger"},
   fr:{elite:"Pro Élite",topRated:"Mieux noté",pro:"Pro",rising:"Pro montant"},
-  es:{elite:"Profesional Élite",topRated:"Mejor valorado",pro:"Pro",rising:"En ascenso"}
+  es:{elite:"Profesional Élite",topRated:"Mejor valorado",pro:"Pro",rising:"En ascenso"},
+  ru:{elite:"Элитный мастер",topRated:"Топ мастер",pro:"Про",rising:"Восходящий"},
+  ar:{elite:"حرفي نخبة",topRated:"الأعلى تقييمًا",pro:"محترف",rising:"صاعد"},
+  fa:{elite:"استادکار برتر",topRated:"عالی‌ترین امتیاز",pro:"حرفه‌ای",rising:"در حال رشد"}
 };
 function tierFor(rating){
   if(rating>=4.9)return{e:"👑",k:"elite",c:"#f0abfc"};
@@ -401,7 +410,10 @@ const PROS_I18N={
   en:{title:"Pros",subtitle:"The best in their field — ranked by customer ratings.",req:"Request a quote",reqd:"Quote requested ✓",jobs:"jobs",reviews:"reviews"},
   de:{title:"Profis",subtitle:"Die Besten ihres Fachs — nach Kundenbewertungen.",req:"Angebot anfordern",reqd:"Angefordert ✓",jobs:"Aufträge",reviews:"Bewertungen"},
   fr:{title:"Pros",subtitle:"Les meilleurs — classés selon les avis clients.",req:"Demander un devis",reqd:"Demandé ✓",jobs:"travaux",reviews:"avis"},
-  es:{title:"Profesionales",subtitle:"Los mejores — ordenados por valoraciones.",req:"Solicitar presupuesto",reqd:"Solicitado ✓",jobs:"trabajos",reviews:"reseñas"}
+  es:{title:"Profesionales",subtitle:"Los mejores — ordenados por valoraciones.",req:"Solicitar presupuesto",reqd:"Solicitado ✓",jobs:"trabajos",reviews:"reseñas"},
+  ru:{title:"Мастера",subtitle:"Лучшие в своём деле — по оценкам клиентов.",req:"Запросить предложение",reqd:"Запрошено ✓",jobs:"работ",reviews:"отзывов"},
+  ar:{title:"الحرفيون",subtitle:"الأفضل في مجالهم — مرتبون حسب تقييمات العملاء.",req:"اطلب عرض سعر",reqd:"تم الطلب ✓",jobs:"عمل",reviews:"تقييم"},
+  fa:{title:"استادکاران",subtitle:"بهترین‌های حرفه — بر اساس امتیاز مشتریان.",req:"درخواست پیشنهاد",reqd:"درخواست شد ✓",jobs:"کار",reviews:"نظر"}
 };
 function pr(k){return (PROS_I18N[lang]||PROS_I18N.en||PROS_I18N.tr)[k]}
 const PROVIDERS=[
@@ -432,19 +444,40 @@ PROVIDERS.forEach((p,i)=>{
 });
 /* Ustam Pro — üyelik paketleri (gelir modeli) */
 const PLANS=[
-  {key:"free",price:0,color:"#6b7688",name:{tr:"Ücretsiz",en:"Free"},feats:{tr:["Profil oluştur","Ayda 5 teklif hakkı","Temel görünürlük"],en:["Create profile","5 offers/month","Basic visibility"]}},
-  {key:"pro",price:990,color:"#ea6a0e",popular:true,name:{tr:"Pro",en:"Pro"},feats:{tr:["Sınırsız teklif","⭐ Öne çıkan rozet","2x daha fazla görünürlük","Öncelikli destek"],en:["Unlimited offers","⭐ Featured badge","2x more visibility","Priority support"]}},
-  {key:"premium",price:1950,color:"#7c3aed",name:{tr:"Premium",en:"Premium"},feats:{tr:["Pro'daki her şey","Aramada üst sıralarda","Ana sayfada öne çıkma","Doğrulanmış rozet","Aylık reklam kredisi"],en:["Everything in Pro","Top of search results","Homepage spotlight","Verified badge","Monthly ad credit"]}}
+  {key:"free",price:0,color:"#6b7688",name:{tr:"Ücretsiz",en:"Free",de:"Kostenlos",fr:"Gratuit",es:"Gratis",ru:"Бесплатно",ar:"مجاني",fa:"رایگان"},feats:{tr:["Profil oluştur","Ayda 5 teklif hakkı","Temel görünürlük"],en:["Create profile","5 offers/month","Basic visibility"],de:["Profil erstellen","5 Angebote/Monat","Basis-Sichtbarkeit"],fr:["Créer un profil","5 offres/mois","Visibilité de base"],es:["Crear perfil","5 ofertas/mes","Visibilidad básica"],ru:["Создать профиль","5 предложений/мес","Базовая видимость"],ar:["إنشاء ملف","5 عروض/شهر","ظهور أساسي"],fa:["ساخت پروفایل","۵ پیشنهاد در ماه","دیده‌شدن پایه"]}},
+  {key:"pro",price:990,color:"#ea6a0e",popular:true,name:{tr:"Pro",en:"Pro",de:"Pro",fr:"Pro",es:"Pro",ru:"Про",ar:"محترف",fa:"حرفه‌ای"},feats:{tr:["Sınırsız teklif","⭐ Öne çıkan rozet","2x daha fazla görünürlük","Öncelikli destek"],en:["Unlimited offers","⭐ Featured badge","2x more visibility","Priority support"],de:["Unbegrenzte Angebote","⭐ Hervorgehoben-Abzeichen","2x mehr Sichtbarkeit","Priorisierter Support"],fr:["Offres illimitées","⭐ Badge en vedette","2x plus de visibilité","Support prioritaire"],es:["Ofertas ilimitadas","⭐ Insignia destacada","2x más visibilidad","Soporte prioritario"],ru:["Безлимитные предложения","⭐ Значок «Рекомендуемый»","В 2 раза больше видимости","Приоритетная поддержка"],ar:["عروض غير محدودة","⭐ شارة مميّزة","ظهور أكثر بمرتين","دعم ذو أولوية"],fa:["پیشنهاد نامحدود","⭐ نشان ویژه","۲ برابر دیده‌شدن بیشتر","پشتیبانی اولویت‌دار"]}},
+  {key:"premium",price:1950,color:"#7c3aed",name:{tr:"Premium",en:"Premium",de:"Premium",fr:"Premium",es:"Premium",ru:"Премиум",ar:"بريميوم",fa:"پریمیوم"},feats:{tr:["Pro'daki her şey","Aramada üst sıralarda","Ana sayfada öne çıkma","Doğrulanmış rozet","Aylık reklam kredisi"],en:["Everything in Pro","Top of search results","Homepage spotlight","Verified badge","Monthly ad credit"],de:["Alles aus Pro","Oben in der Suche","Startseiten-Spotlight","Verifiziert-Abzeichen","Monatliches Werbeguthaben"],fr:["Tout du Pro","En tête des recherches","Mise en avant sur l'accueil","Badge vérifié","Crédit pub mensuel"],es:["Todo lo de Pro","Primeros en búsquedas","Destacado en portada","Insignia verificada","Crédito de anuncios mensual"],ru:["Всё из Pro","Вверху результатов поиска","Витрина на главной","Значок «Проверено»","Ежемесячный рекламный кредит"],ar:["كل ما في Pro","أعلى نتائج البحث","إبراز في الصفحة الرئيسية","شارة موثّقة","رصيد إعلاني شهري"],fa:["همه امکانات Pro","بالای نتایج جستجو","نمایش ویژه در صفحه اصلی","نشان تأییدشده","اعتبار تبلیغاتی ماهانه"]}}
 ];
-const PLAN_TXT={tr:{title:"💎 Ustam Pro — Üyelik Paketleri",sub:"Daha çok iş al, öne çık. İstediğin zaman iptal et.",month:"/ay",popular:"EN POPÜLER",choose:"Paketi Seç",chosen:"✅ Paket talebin alındı (admin onayına düştü)",featured:"⭐ Öne Çıkan"},en:{title:"💎 Ustam Pro — Membership Plans",sub:"Get more jobs, stand out. Cancel anytime.",month:"/mo",popular:"MOST POPULAR",choose:"Choose plan",chosen:"✅ Plan request received (sent to admin)",featured:"⭐ Featured"}};
+const PLAN_TXT={
+  tr:{title:"💎 Ustam Pro — Üyelik Paketleri",sub:"Daha çok iş al, öne çık. İstediğin zaman iptal et.",month:"/ay",popular:"EN POPÜLER",choose:"Paketi Seç",chosen:"✅ Paket talebin alındı (admin onayına düştü)",featured:"⭐ Öne Çıkan"},
+  en:{title:"💎 Ustam Pro — Membership Plans",sub:"Get more jobs, stand out. Cancel anytime.",month:"/mo",popular:"MOST POPULAR",choose:"Choose plan",chosen:"✅ Plan request received (sent to admin)",featured:"⭐ Featured"},
+  de:{title:"💎 Ustam Pro — Mitgliedschaftspakete",sub:"Mehr Aufträge, mehr Sichtbarkeit. Jederzeit kündbar.",month:"/Mon.",popular:"AM BELIEBTESTEN",choose:"Paket wählen",chosen:"✅ Paketanfrage erhalten (an Admin gesendet)",featured:"⭐ Hervorgehoben"},
+  fr:{title:"💎 Ustam Pro — Forfaits d'abonnement",sub:"Plus de travaux, plus de visibilité. Annulez à tout moment.",month:"/mois",popular:"LE PLUS POPULAIRE",choose:"Choisir le forfait",chosen:"✅ Demande reçue (envoyée à l'admin)",featured:"⭐ En vedette"},
+  es:{title:"💎 Ustam Pro — Planes de membresía",sub:"Más trabajos, más visibilidad. Cancela cuando quieras.",month:"/mes",popular:"MÁS POPULAR",choose:"Elegir plan",chosen:"✅ Solicitud recibida (enviada al admin)",featured:"⭐ Destacado"},
+  ru:{title:"💎 Ustam Pro — Пакеты подписки",sub:"Больше заказов, больше видимости. Отмена в любое время.",month:"/мес",popular:"САМЫЙ ПОПУЛЯРНЫЙ",choose:"Выбрать пакет",chosen:"✅ Запрос получен (отправлен админу)",featured:"⭐ Рекомендуемый"},
+  ar:{title:"💎 Ustam Pro — باقات العضوية",sub:"أعمال أكثر وظهور أكبر. ألغِ في أي وقت.",month:"/شهر",popular:"الأكثر شيوعًا",choose:"اختر الباقة",chosen:"✅ تم استلام الطلب (أُرسل للمشرف)",featured:"⭐ مميّز"},
+  fa:{title:"💎 Ustam Pro — بسته‌های عضویت",sub:"کار بیشتر، دیده‌شدن بیشتر. هر زمان لغو کنید.",month:"/ماه",popular:"محبوب‌ترین",choose:"انتخاب بسته",chosen:"✅ درخواست دریافت شد (به مدیر ارسال شد)",featured:"⭐ ویژه"}
+};
 function pl(k){return (PLAN_TXT[lang]||PLAN_TXT.en)[k]}
 const PROS2={
   tr:{page:"Ustalar",be:"Usta Ol",searchPh:"Usta ara…",all:"Tüm kategoriler",analysis:"Usta Analizi (kayıtlı usta / kategori)",quoteTitle:"Teklif Al",signupTitle:"Usta Ol — Üyelik Başvurusu",name:"Ad Soyad / İşletme adı",phone:"Telefon",email:"E-posta",cat:"Kategori",city:"Şehir",desc:"İhtiyacınızı kısaca yazın",exp:"Deneyim / hizmet açıklaması",send:"Talebi gönder",apply:"Başvuruyu gönder",sentAdmin:"✅ Talebiniz Ustam yönetimine (admin) iletildi.",applied:"✅ Başvurunuz alındı, admin onayına düştü.",adminNote:"Talepler yönetim paneline düşer",heroTitle:"İşin ehli ustalar Ustam'da",heroSub:"Binlerce doğrulanmış usta; ara, karşılaştır, güvenle teklif al. Ustaysan hemen kaydol, iş almaya başla.",formTitle:"Hizmet Ver — Hemen Kaydol",byCat:"Kategoriye göre usta sayısı",total:"Toplam kayıtlı usta",pick3:"En fazla 3 meslek seçebilirsiniz",picked:"seçildi"},
-  en:{page:"Pros",be:"Become a Pro",searchPh:"Search pro…",all:"All categories",analysis:"Pro Analytics (registered pros / category)",quoteTitle:"Request a Quote",signupTitle:"Become a Pro — Application",name:"Full name / Business",phone:"Phone",email:"Email",cat:"Category",city:"City",desc:"Describe your need briefly",exp:"Experience / service description",send:"Send request",apply:"Submit application",sentAdmin:"✅ Your request was sent to Ustam admin.",applied:"✅ Application received, pending admin approval.",adminNote:"Requests go to the admin panel",heroTitle:"Skilled pros are on Ustam",heroSub:"Thousands of verified pros; search, compare, get quotes with confidence. If you're a pro, sign up and start getting jobs.",formTitle:"Provide a Service — Sign Up Now",byCat:"Number of pros by category",total:"Total registered pros",pick3:"You can pick up to 3 professions",picked:"selected"}
+  en:{page:"Pros",be:"Become a Pro",searchPh:"Search pro…",all:"All categories",analysis:"Pro Analytics (registered pros / category)",quoteTitle:"Request a Quote",signupTitle:"Become a Pro — Application",name:"Full name / Business",phone:"Phone",email:"Email",cat:"Category",city:"City",desc:"Describe your need briefly",exp:"Experience / service description",send:"Send request",apply:"Submit application",sentAdmin:"✅ Your request was sent to Ustam admin.",applied:"✅ Application received, pending admin approval.",adminNote:"Requests go to the admin panel",heroTitle:"Skilled pros are on Ustam",heroSub:"Thousands of verified pros; search, compare, get quotes with confidence. If you're a pro, sign up and start getting jobs.",formTitle:"Provide a Service — Sign Up Now",byCat:"Number of pros by category",total:"Total registered pros",pick3:"You can pick up to 3 professions",picked:"selected"},
+  de:{page:"Profis",be:"Profi werden",searchPh:"Profi suchen…",all:"Alle Kategorien",analysis:"Profi-Analyse (registrierte Profis / Kategorie)",quoteTitle:"Angebot anfordern",signupTitle:"Profi werden — Mitgliedsantrag",name:"Name / Firmenname",phone:"Telefon",email:"E-Mail",cat:"Kategorie",city:"Stadt",desc:"Beschreibe deinen Bedarf kurz",exp:"Erfahrung / Leistungsbeschreibung",send:"Anfrage senden",apply:"Antrag absenden",sentAdmin:"✅ Deine Anfrage wurde an das Ustam-Team (Admin) gesendet.",applied:"✅ Antrag erhalten, wartet auf Admin-Freigabe.",adminNote:"Anfragen gehen ans Admin-Panel",heroTitle:"Erfahrene Profis sind auf Ustam",heroSub:"Tausende verifizierte Profis; suchen, vergleichen, sicher Angebote erhalten. Als Profi jetzt registrieren und Aufträge bekommen.",formTitle:"Leistung anbieten — Jetzt registrieren",byCat:"Anzahl Profis nach Kategorie",total:"Registrierte Profis gesamt",pick3:"Du kannst bis zu 3 Berufe wählen",picked:"ausgewählt"},
+  fr:{page:"Pros",be:"Devenir pro",searchPh:"Rechercher un pro…",all:"Toutes les catégories",analysis:"Analyse des pros (pros inscrits / catégorie)",quoteTitle:"Demander un devis",signupTitle:"Devenir pro — Inscription",name:"Nom / Nom de l'entreprise",phone:"Téléphone",email:"E-mail",cat:"Catégorie",city:"Ville",desc:"Décrivez brièvement votre besoin",exp:"Expérience / description du service",send:"Envoyer la demande",apply:"Envoyer la candidature",sentAdmin:"✅ Votre demande a été envoyée à l'admin Ustam.",applied:"✅ Candidature reçue, en attente d'approbation admin.",adminNote:"Les demandes vont au panneau admin",heroTitle:"Les pros qualifiés sont sur Ustam",heroSub:"Des milliers de pros vérifiés ; recherchez, comparez, recevez des devis en confiance. Pro ? Inscrivez-vous et recevez des travaux.",formTitle:"Proposer un service — Inscrivez-vous",byCat:"Nombre de pros par catégorie",total:"Total des pros inscrits",pick3:"Vous pouvez choisir jusqu'à 3 métiers",picked:"sélectionné"},
+  es:{page:"Profesionales",be:"Ser profesional",searchPh:"Buscar profesional…",all:"Todas las categorías",analysis:"Análisis de profesionales (registrados / categoría)",quoteTitle:"Solicitar presupuesto",signupTitle:"Ser profesional — Solicitud",name:"Nombre / Empresa",phone:"Teléfono",email:"Correo",cat:"Categoría",city:"Ciudad",desc:"Describe tu necesidad brevemente",exp:"Experiencia / descripción del servicio",send:"Enviar solicitud",apply:"Enviar candidatura",sentAdmin:"✅ Tu solicitud se envió al admin de Ustam.",applied:"✅ Candidatura recibida, pendiente de aprobación.",adminNote:"Las solicitudes van al panel admin",heroTitle:"Los profesionales cualificados están en Ustam",heroSub:"Miles de profesionales verificados; busca, compara y recibe presupuestos con confianza. Si eres profesional, regístrate y consigue trabajos.",formTitle:"Ofrecer un servicio — Regístrate ya",byCat:"Número de profesionales por categoría",total:"Total de profesionales registrados",pick3:"Puedes elegir hasta 3 profesiones",picked:"seleccionado"},
+  ru:{page:"Мастера",be:"Стать мастером",searchPh:"Поиск мастера…",all:"Все категории",analysis:"Аналитика мастеров (зарегистрированные / категория)",quoteTitle:"Запросить предложение",signupTitle:"Стать мастером — Заявка",name:"Имя / Название компании",phone:"Телефон",email:"Эл. почта",cat:"Категория",city:"Город",desc:"Кратко опишите вашу потребность",exp:"Опыт / описание услуги",send:"Отправить запрос",apply:"Отправить заявку",sentAdmin:"✅ Ваш запрос отправлен администрации Ustam.",applied:"✅ Заявка получена, ожидает одобрения администратора.",adminNote:"Запросы поступают в админ-панель",heroTitle:"Опытные мастера — на Ustam",heroSub:"Тысячи проверенных мастеров; ищите, сравнивайте, получайте предложения с уверенностью. Вы мастер? Зарегистрируйтесь и начните получать заказы.",formTitle:"Предложить услугу — Зарегистрируйтесь",byCat:"Количество мастеров по категориям",total:"Всего зарегистрированных мастеров",pick3:"Можно выбрать до 3 профессий",picked:"выбрано"},
+  ar:{page:"الحرفيون",be:"كن محترفًا",searchPh:"ابحث عن حرفي…",all:"كل الفئات",analysis:"تحليل الحرفيين (المسجلون / الفئة)",quoteTitle:"اطلب عرض سعر",signupTitle:"كن محترفًا — طلب العضوية",name:"الاسم / اسم الشركة",phone:"الهاتف",email:"البريد الإلكتروني",cat:"الفئة",city:"المدينة",desc:"صف حاجتك باختصار",exp:"الخبرة / وصف الخدمة",send:"إرسال الطلب",apply:"إرسال الطلب",sentAdmin:"✅ تم إرسال طلبك إلى إدارة Ustam.",applied:"✅ تم استلام طلبك، بانتظار موافقة المشرف.",adminNote:"الطلبات تذهب إلى لوحة المشرف",heroTitle:"الحرفيون المهرة على Ustam",heroSub:"آلاف الحرفيين الموثّقين؛ ابحث وقارن واحصل على عروض بثقة. إن كنت حرفيًا، سجّل الآن وابدأ العمل.",formTitle:"قدّم خدمة — سجّل الآن",byCat:"عدد الحرفيين حسب الفئة",total:"إجمالي الحرفيين المسجلين",pick3:"يمكنك اختيار حتى 3 مهن",picked:"محدد"},
+  fa:{page:"استادکاران",be:"استاد شوید",searchPh:"جستجوی استادکار…",all:"همه دسته‌ها",analysis:"تحلیل استادکاران (ثبت‌شده / دسته)",quoteTitle:"درخواست پیشنهاد",signupTitle:"استاد شوید — درخواست عضویت",name:"نام / نام کسب‌وکار",phone:"تلفن",email:"ایمیل",cat:"دسته",city:"شهر",desc:"نیاز خود را کوتاه بنویسید",exp:"تجربه / شرح خدمت",send:"ارسال درخواست",apply:"ارسال درخواست",sentAdmin:"✅ درخواست شما به مدیریت Ustam ارسال شد.",applied:"✅ درخواست شما دریافت شد، در انتظار تأیید مدیر.",adminNote:"درخواست‌ها به پنل مدیر می‌روند",heroTitle:"استادکاران ماهر در Ustam هستند",heroSub:"هزاران استادکار تأییدشده؛ جستجو کنید، مقایسه کنید و با اطمینان پیشنهاد بگیرید. اگر استادکارید، ثبت‌نام کنید و کار بگیرید.",formTitle:"ارائه خدمت — همین حالا ثبت‌نام کنید",byCat:"تعداد استادکاران بر اساس دسته",total:"مجموع استادکاران ثبت‌شده",pick3:"می‌توانید تا ۳ حرفه انتخاب کنید",picked:"انتخاب شد"}
 };
 const PROS3={
   tr:{certHave:"🎖️ Mesleki yeterlilik belgem var",upload:"Belge yükle (PDF/JPG)",tabReviews:"⭐ Puanlar",tabQA:"💬 Soru-Cevap",tabInfo:"ℹ️ Bilgi",rate:"Puan Ver",askQ:"Soru Sor",yourComment:"Yorumunuz",yourQuestion:"Sorunuz",pending:"⏳ Admin onayı bekliyor",adminRate:"🛡️ Admin puanı",reviewSent:"✅ Değerlendirmeniz admine iletildi, onaydan sonra yayınlanır.",qSent:"✅ Sorunuz admine iletildi, onaydan sonra yayınlanır.",noReviews:"Henüz değerlendirme yok.",noQA:"Henüz soru yok.",certBadge:"🎖️ Belgeli",send:"Gönder",adminVerified:"Admin (doğrulanmış)",customer:"Müşteri"},
-  en:{certHave:"🎖️ I have a professional certificate",upload:"Upload document (PDF/JPG)",tabReviews:"⭐ Reviews",tabQA:"💬 Q&A",tabInfo:"ℹ️ Info",rate:"Rate",askQ:"Ask",yourComment:"Your comment",yourQuestion:"Your question",pending:"⏳ Pending admin approval",adminRate:"🛡️ Admin rating",reviewSent:"✅ Your review was sent to admin; published after approval.",qSent:"✅ Your question was sent to admin; published after approval.",noReviews:"No reviews yet.",noQA:"No questions yet.",certBadge:"🎖️ Certified",send:"Send",adminVerified:"Admin (verified)",customer:"Customer"}
+  en:{certHave:"🎖️ I have a professional certificate",upload:"Upload document (PDF/JPG)",tabReviews:"⭐ Reviews",tabQA:"💬 Q&A",tabInfo:"ℹ️ Info",rate:"Rate",askQ:"Ask",yourComment:"Your comment",yourQuestion:"Your question",pending:"⏳ Pending admin approval",adminRate:"🛡️ Admin rating",reviewSent:"✅ Your review was sent to admin; published after approval.",qSent:"✅ Your question was sent to admin; published after approval.",noReviews:"No reviews yet.",noQA:"No questions yet.",certBadge:"🎖️ Certified",send:"Send",adminVerified:"Admin (verified)",customer:"Customer"},
+  de:{certHave:"🎖️ Ich habe einen Berufsqualifikationsnachweis",upload:"Dokument hochladen (PDF/JPG)",tabReviews:"⭐ Bewertungen",tabQA:"💬 Fragen & Antworten",tabInfo:"ℹ️ Info",rate:"Bewerten",askQ:"Fragen",yourComment:"Dein Kommentar",yourQuestion:"Deine Frage",pending:"⏳ Wartet auf Admin-Freigabe",adminRate:"🛡️ Admin-Bewertung",reviewSent:"✅ Deine Bewertung wurde an den Admin gesendet; nach Freigabe veröffentlicht.",qSent:"✅ Deine Frage wurde an den Admin gesendet; nach Freigabe veröffentlicht.",noReviews:"Noch keine Bewertungen.",noQA:"Noch keine Fragen.",certBadge:"🎖️ Zertifiziert",send:"Senden",adminVerified:"Admin (verifiziert)",customer:"Kunde"},
+  fr:{certHave:"🎖️ J'ai un certificat de qualification professionnelle",upload:"Téléverser un document (PDF/JPG)",tabReviews:"⭐ Avis",tabQA:"💬 Questions-Réponses",tabInfo:"ℹ️ Infos",rate:"Noter",askQ:"Poser",yourComment:"Votre commentaire",yourQuestion:"Votre question",pending:"⏳ En attente d'approbation admin",adminRate:"🛡️ Note admin",reviewSent:"✅ Votre avis a été envoyé à l'admin ; publié après approbation.",qSent:"✅ Votre question a été envoyée à l'admin ; publiée après approbation.",noReviews:"Pas encore d'avis.",noQA:"Pas encore de questions.",certBadge:"🎖️ Certifié",send:"Envoyer",adminVerified:"Admin (vérifié)",customer:"Client"},
+  es:{certHave:"🎖️ Tengo un certificado de cualificación profesional",upload:"Subir documento (PDF/JPG)",tabReviews:"⭐ Reseñas",tabQA:"💬 Preguntas y respuestas",tabInfo:"ℹ️ Info",rate:"Calificar",askQ:"Preguntar",yourComment:"Tu comentario",yourQuestion:"Tu pregunta",pending:"⏳ Pendiente de aprobación",adminRate:"🛡️ Calificación admin",reviewSent:"✅ Tu reseña se envió al admin; se publica tras aprobación.",qSent:"✅ Tu pregunta se envió al admin; se publica tras aprobación.",noReviews:"Aún no hay reseñas.",noQA:"Aún no hay preguntas.",certBadge:"🎖️ Certificado",send:"Enviar",adminVerified:"Admin (verificado)",customer:"Cliente"},
+  ru:{certHave:"🎖️ У меня есть сертификат профессиональной квалификации",upload:"Загрузить документ (PDF/JPG)",tabReviews:"⭐ Отзывы",tabQA:"💬 Вопросы и ответы",tabInfo:"ℹ️ Информация",rate:"Оценить",askQ:"Спросить",yourComment:"Ваш комментарий",yourQuestion:"Ваш вопрос",pending:"⏳ Ожидает одобрения администратора",adminRate:"🛡️ Оценка администратора",reviewSent:"✅ Ваш отзыв отправлен администратору; будет опубликован после одобрения.",qSent:"✅ Ваш вопрос отправлен администратору; будет опубликован после одобрения.",noReviews:"Пока нет отзывов.",noQA:"Пока нет вопросов.",certBadge:"🎖️ Сертифицирован",send:"Отправить",adminVerified:"Админ (проверено)",customer:"Клиент"},
+  ar:{certHave:"🎖️ لدي شهادة كفاءة مهنية",upload:"رفع مستند (PDF/JPG)",tabReviews:"⭐ التقييمات",tabQA:"💬 الأسئلة والأجوبة",tabInfo:"ℹ️ معلومات",rate:"قيّم",askQ:"اسأل",yourComment:"تعليقك",yourQuestion:"سؤالك",pending:"⏳ بانتظار موافقة المشرف",adminRate:"🛡️ تقييم المشرف",reviewSent:"✅ تم إرسال تقييمك للمشرف؛ يُنشر بعد الموافقة.",qSent:"✅ تم إرسال سؤالك للمشرف؛ يُنشر بعد الموافقة.",noReviews:"لا توجد تقييمات بعد.",noQA:"لا توجد أسئلة بعد.",certBadge:"🎖️ معتمد",send:"إرسال",adminVerified:"المشرف (موثّق)",customer:"عميل"},
+  fa:{certHave:"🎖️ گواهی صلاحیت حرفه‌ای دارم",upload:"بارگذاری مدرک (PDF/JPG)",tabReviews:"⭐ امتیازها",tabQA:"💬 پرسش و پاسخ",tabInfo:"ℹ️ اطلاعات",rate:"امتیاز",askQ:"پرسیدن",yourComment:"نظر شما",yourQuestion:"سؤال شما",pending:"⏳ در انتظار تأیید مدیر",adminRate:"🛡️ امتیاز مدیر",reviewSent:"✅ نظر شما به مدیر ارسال شد؛ پس از تأیید منتشر می‌شود.",qSent:"✅ سؤال شما به مدیر ارسال شد؛ پس از تأیید منتشر می‌شود.",noReviews:"هنوز نظری نیست.",noQA:"هنوز سؤالی نیست.",certBadge:"🎖️ دارای گواهی",send:"ارسال",adminVerified:"مدیر (تأییدشده)",customer:"مشتری"}
 };
 function p3(k){return (PROS3[lang]||PROS3.en||PROS3.tr)[k]}
 function p2(k){return (PROS2[lang]||PROS2.en||PROS2.tr)[k]}
@@ -452,7 +485,13 @@ const HRS_OPTS=["08:00–18:00","18:00–24:00","24:00–08:00"];
 const DAYNAMES={tr:["Pzt","Sal","Çar","Per","Cum","Cmt","Paz"],en:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],de:["Mo","Di","Mi","Do","Fr","Sa","So"],fr:["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"],es:["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"],ru:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"],ar:["إث","ثل","أر","خم","جم","سب","أح"],fa:["دو","سه","چه","پن","جم","شن","یک"]};
 const EXTRA={
   tr:{hours:"Çalışma saati",days:"Çalışma günleri",weekend:"Hafta sonu çalışırım",holiday:"Resmi tatillerde çalışırım",evening:"Akşam çalışanlar",h24:"24 saat / Gece çalışanlar"},
-  en:{hours:"Working hours",days:"Working days",weekend:"I work on weekends",holiday:"I work on public holidays",evening:"Evening workers",h24:"24h / Night workers"}
+  en:{hours:"Working hours",days:"Working days",weekend:"I work on weekends",holiday:"I work on public holidays",evening:"Evening workers",h24:"24h / Night workers"},
+  de:{hours:"Arbeitszeit",days:"Arbeitstage",weekend:"Ich arbeite am Wochenende",holiday:"Ich arbeite an Feiertagen",evening:"Abendarbeiter",h24:"24 Std / Nachtarbeiter"},
+  fr:{hours:"Heures de travail",days:"Jours de travail",weekend:"Je travaille le week-end",holiday:"Je travaille les jours fériés",evening:"Travailleurs du soir",h24:"24h / Travailleurs de nuit"},
+  es:{hours:"Horario de trabajo",days:"Días laborables",weekend:"Trabajo los fines de semana",holiday:"Trabajo en días festivos",evening:"Trabajadores de tarde",h24:"24h / Trabajadores nocturnos"},
+  ru:{hours:"Рабочее время",days:"Рабочие дни",weekend:"Работаю по выходным",holiday:"Работаю в праздники",evening:"Работающие вечером",h24:"24 часа / Ночные мастера"},
+  ar:{hours:"ساعات العمل",days:"أيام العمل",weekend:"أعمل في عطلة نهاية الأسبوع",holiday:"أعمل في العطلات الرسمية",evening:"العاملون مساءً",h24:"24 ساعة / العاملون ليلاً"},
+  fa:{hours:"ساعات کاری",days:"روزهای کاری",weekend:"آخر هفته‌ها کار می‌کنم",holiday:"در تعطیلات رسمی کار می‌کنم",evening:"کارکنان عصر",h24:"۲۴ ساعته / کارکنان شب"}
 };
 function ex(k){return (EXTRA[lang]||EXTRA.en||EXTRA.tr)[k]}
 let prosQuery="",prosCat="",prosGroup2="";
@@ -736,34 +775,34 @@ function renderJobBoard(){
 
 /* ============ Örnek veri ============ */
 const CATS=[
-  {icon:"🚰",key:"plumbing",tr:"Tesisat & Su",en:"Plumbing & Water",de:"Sanitär & Wasser",fr:"Plomberie & Eau",es:"Fontanería y Agua",c:1240,pmin:800,pmax:3500},
-  {icon:"💡",key:"electrical",tr:"Elektrik",en:"Electrical",de:"Elektrik",fr:"Électricité",es:"Electricidad",c:980,pmin:600,pmax:4000},
-  {icon:"🏗️",key:"construction",tr:"İnşaat & Tadilat",en:"Construction & Renovation",de:"Bau & Renovierung",fr:"Construction & Rénovation",es:"Construcción y Reforma",c:1530,pmin:15000,pmax:250000},
-  {icon:"🎨",key:"painting",tr:"Boya & Badana",en:"Painting",de:"Malerarbeiten",fr:"Peinture",es:"Pintura",c:760,pmin:3000,pmax:25000},
-  {icon:"🪚",key:"furniture",tr:"Mobilya & Marangoz",en:"Furniture & Carpentry",de:"Möbel & Tischlerei",fr:"Meubles & Menuiserie",es:"Muebles y Carpintería",c:640,pmin:1500,pmax:40000},
-  {icon:"❄️",key:"hvac",tr:"Isıtma & Soğutma",en:"Heating & Cooling",de:"Heizung & Kühlung",fr:"Chauffage & Climatisation",es:"Calefacción y Refrigeración",c:520,pmin:1000,pmax:20000},
-  {icon:"🧰",key:"appliance",tr:"Beyaz Eşya Servisi",en:"Appliance Repair",de:"Geräte-Reparatur",fr:"Réparation d'électroménager",es:"Reparación de electrodomésticos",c:870,pmin:500,pmax:5000},
-  {icon:"🔩",key:"ironwork",tr:"Demir & Kaynak",en:"Ironwork & Welding",de:"Eisen- & Schweißarbeiten",fr:"Ferronnerie & Soudure",es:"Herrería y Soldadura",c:410,pmin:2000,pmax:60000},
-  {icon:"🏠",key:"roofing",tr:"Çatı & İzolasyon",en:"Roofing & Insulation",de:"Dach & Dämmung",fr:"Toiture & Isolation",es:"Tejados y Aislamiento",c:330,pmin:20000,pmax:150000},
-  {icon:"🧹",key:"cleaning",tr:"Temizlik",en:"Cleaning",de:"Reinigung",fr:"Nettoyage",es:"Limpieza",c:1120,pmin:400,pmax:3000},
-  {icon:"🚚",key:"moving",tr:"Nakliyat",en:"Moving",de:"Umzug",fr:"Déménagement",es:"Mudanzas",c:690,pmin:2000,pmax:20000},
-  {icon:"🏭",key:"manufacturing",tr:"İmalat & Üretim",en:"Manufacturing",de:"Fertigung",fr:"Fabrication",es:"Fabricación",c:280,pmin:5000,pmax:200000},
-  {icon:"📚",key:"tutoring",tr:"Özel Ders",en:"Tutoring",de:"Nachhilfe",fr:"Cours particuliers",es:"Clases particulares",c:540,pmin:200,pmax:1500},
-  {icon:"🧮",key:"math",tr:"Matematik Dersi",en:"Math Tutoring",de:"Mathe-Nachhilfe",fr:"Cours de maths",es:"Clases de matemáticas",c:320,pmin:200,pmax:900},
-  {icon:"🗣️",key:"language",tr:"Yabancı Dil Dersi",en:"Language Tutoring",de:"Sprachkurs",fr:"Cours de langue",es:"Clases de idiomas",c:410,pmin:250,pmax:1200},
-  {icon:"🎵",key:"music",tr:"Müzik Dersi",en:"Music Lessons",de:"Musikunterricht",fr:"Cours de musique",es:"Clases de música",c:190,pmin:300,pmax:1500},
-  {icon:"🎉",key:"events",tr:"Organizasyon",en:"Events",de:"Events",fr:"Événements",es:"Eventos",c:220,pmin:1000,pmax:20000},
-  {icon:"📸",key:"photo",tr:"Fotoğraf & Video",en:"Photo & Video",de:"Foto & Video",fr:"Photo & Vidéo",es:"Foto y Vídeo",c:260,pmin:800,pmax:8000}
+  {icon:"🚰",key:"plumbing",tr:"Tesisat & Su",en:"Plumbing & Water",de:"Sanitär & Wasser",fr:"Plomberie & Eau",es:"Fontanería y Agua",ru:"Сантехника и вода",ar:"السباكة والمياه",fa:"لوله‌کشی و آب",c:1240,pmin:800,pmax:3500},
+  {icon:"💡",key:"electrical",tr:"Elektrik",en:"Electrical",de:"Elektrik",fr:"Électricité",es:"Electricidad",ru:"Электрика",ar:"الكهرباء",fa:"برق",c:980,pmin:600,pmax:4000},
+  {icon:"🏗️",key:"construction",tr:"İnşaat & Tadilat",en:"Construction & Renovation",de:"Bau & Renovierung",fr:"Construction & Rénovation",es:"Construcción y Reforma",ru:"Строительство и ремонт",ar:"البناء والتجديد",fa:"ساخت‌وساز و بازسازی",c:1530,pmin:15000,pmax:250000},
+  {icon:"🎨",key:"painting",tr:"Boya & Badana",en:"Painting",de:"Malerarbeiten",fr:"Peinture",es:"Pintura",ru:"Покраска",ar:"الدهان",fa:"نقاشی ساختمان",c:760,pmin:3000,pmax:25000},
+  {icon:"🪚",key:"furniture",tr:"Mobilya & Marangoz",en:"Furniture & Carpentry",de:"Möbel & Tischlerei",fr:"Meubles & Menuiserie",es:"Muebles y Carpintería",ru:"Мебель и столярка",ar:"الأثاث والنجارة",fa:"مبلمان و نجاری",c:640,pmin:1500,pmax:40000},
+  {icon:"❄️",key:"hvac",tr:"Isıtma & Soğutma",en:"Heating & Cooling",de:"Heizung & Kühlung",fr:"Chauffage & Climatisation",es:"Calefacción y Refrigeración",ru:"Отопление и охлаждение",ar:"التدفئة والتبريد",fa:"گرمایش و سرمایش",c:520,pmin:1000,pmax:20000},
+  {icon:"🧰",key:"appliance",tr:"Beyaz Eşya Servisi",en:"Appliance Repair",de:"Geräte-Reparatur",fr:"Réparation d'électroménager",es:"Reparación de electrodomésticos",ru:"Ремонт бытовой техники",ar:"إصلاح الأجهزة",fa:"تعمیر لوازم خانگی",c:870,pmin:500,pmax:5000},
+  {icon:"🔩",key:"ironwork",tr:"Demir & Kaynak",en:"Ironwork & Welding",de:"Eisen- & Schweißarbeiten",fr:"Ferronnerie & Soudure",es:"Herrería y Soldadura",ru:"Металл и сварка",ar:"الحدادة واللحام",fa:"آهنگری و جوشکاری",c:410,pmin:2000,pmax:60000},
+  {icon:"🏠",key:"roofing",tr:"Çatı & İzolasyon",en:"Roofing & Insulation",de:"Dach & Dämmung",fr:"Toiture & Isolation",es:"Tejados y Aislamiento",ru:"Кровля и изоляция",ar:"الأسقف والعزل",fa:"سقف و عایق‌کاری",c:330,pmin:20000,pmax:150000},
+  {icon:"🧹",key:"cleaning",tr:"Temizlik",en:"Cleaning",de:"Reinigung",fr:"Nettoyage",es:"Limpieza",ru:"Уборка",ar:"التنظيف",fa:"نظافت",c:1120,pmin:400,pmax:3000},
+  {icon:"🚚",key:"moving",tr:"Nakliyat",en:"Moving",de:"Umzug",fr:"Déménagement",es:"Mudanzas",ru:"Переезд",ar:"النقل",fa:"حمل و نقل",c:690,pmin:2000,pmax:20000},
+  {icon:"🏭",key:"manufacturing",tr:"İmalat & Üretim",en:"Manufacturing",de:"Fertigung",fr:"Fabrication",es:"Fabricación",ru:"Производство",ar:"التصنيع",fa:"تولید و ساخت",c:280,pmin:5000,pmax:200000},
+  {icon:"📚",key:"tutoring",tr:"Özel Ders",en:"Tutoring",de:"Nachhilfe",fr:"Cours particuliers",es:"Clases particulares",ru:"Частные уроки",ar:"دروس خصوصية",fa:"تدریس خصوصی",c:540,pmin:200,pmax:1500},
+  {icon:"🧮",key:"math",tr:"Matematik Dersi",en:"Math Tutoring",de:"Mathe-Nachhilfe",fr:"Cours de maths",es:"Clases de matemáticas",ru:"Уроки математики",ar:"دروس الرياضيات",fa:"تدریس ریاضی",c:320,pmin:200,pmax:900},
+  {icon:"🗣️",key:"language",tr:"Yabancı Dil Dersi",en:"Language Tutoring",de:"Sprachkurs",fr:"Cours de langue",es:"Clases de idiomas",ru:"Уроки языков",ar:"دروس اللغات",fa:"آموزش زبان",c:410,pmin:250,pmax:1200},
+  {icon:"🎵",key:"music",tr:"Müzik Dersi",en:"Music Lessons",de:"Musikunterricht",fr:"Cours de musique",es:"Clases de música",ru:"Уроки музыки",ar:"دروس الموسيقى",fa:"آموزش موسیقی",c:190,pmin:300,pmax:1500},
+  {icon:"🎉",key:"events",tr:"Organizasyon",en:"Events",de:"Events",fr:"Événements",es:"Eventos",ru:"Организация",ar:"تنظيم الفعاليات",fa:"برگزاری رویداد",c:220,pmin:1000,pmax:20000},
+  {icon:"📸",key:"photo",tr:"Fotoğraf & Video",en:"Photo & Video",de:"Foto & Video",fr:"Photo & Vidéo",es:"Foto y Vídeo",ru:"Фото и видео",ar:"تصوير وفيديو",fa:"عکس و ویدیو",c:260,pmin:800,pmax:8000}
 ];
 
 /* Armut tarzı üst menü sayfaları (makro kategoriler) */
 const GROUPS={
-  home:{tr:"Ana Sayfa",en:"Home",de:"Startseite",fr:"Accueil",es:"Inicio",cats:null},
-  repair:{tr:"Tamirat",en:"Repair",de:"Reparatur",fr:"Réparation",es:"Reparación",cats:["plumbing","electrical","construction","painting","furniture","hvac","appliance","ironwork","roofing"]},
-  cleaning:{tr:"Temizlik",en:"Cleaning",de:"Reinigung",fr:"Nettoyage",es:"Limpieza",cats:["cleaning"]},
-  moving:{tr:"Nakliyat",en:"Moving",de:"Umzug",fr:"Déménagement",es:"Mudanzas",cats:["moving"]},
-  tutoring:{tr:"Özel Ders",en:"Tutoring",de:"Nachhilfe",fr:"Cours particuliers",es:"Clases",cats:["tutoring","math","language","music"]},
-  other:{tr:"Diğer",en:"Other",de:"Andere",fr:"Autre",es:"Otros",cats:["manufacturing","events","photo"]}
+  home:{tr:"Ana Sayfa",en:"Home",de:"Startseite",fr:"Accueil",es:"Inicio",ru:"Главная",ar:"الرئيسية",fa:"خانه",cats:null},
+  repair:{tr:"Tamirat",en:"Repair",de:"Reparatur",fr:"Réparation",es:"Reparación",ru:"Ремонт",ar:"إصلاحات",fa:"تعمیرات",cats:["plumbing","electrical","construction","painting","furniture","hvac","appliance","ironwork","roofing"]},
+  cleaning:{tr:"Temizlik",en:"Cleaning",de:"Reinigung",fr:"Nettoyage",es:"Limpieza",ru:"Уборка",ar:"تنظيف",fa:"نظافت",cats:["cleaning"]},
+  moving:{tr:"Nakliyat",en:"Moving",de:"Umzug",fr:"Déménagement",es:"Mudanzas",ru:"Переезд",ar:"نقل",fa:"حمل و نقل",cats:["moving"]},
+  tutoring:{tr:"Özel Ders",en:"Tutoring",de:"Nachhilfe",fr:"Cours particuliers",es:"Clases",ru:"Репетитор",ar:"دروس خصوصية",fa:"تدریس خصوصی",cats:["tutoring","math","language","music"]},
+  other:{tr:"Diğer",en:"Other",de:"Andere",fr:"Autre",es:"Otros",ru:"Другое",ar:"أخرى",fa:"سایر",cats:["manufacturing","events","photo"]}
 };
 let groupFilter=null; // null = tümü (ana sayfa)
 function gLabel(g){return (GROUPS[g][lang]||GROUPS[g].en||GROUPS[g].tr)}
@@ -778,76 +817,76 @@ function groupCatKeys(){return groupFilter?GROUPS[groupFilter].cats:null}
 
 /* armut.com/g/temizlik-1 — popüler temizlik hizmetleri (resimli kartlar) */
 const CLEANING_SERVICES=[
-  {icon:"🏠",tr:"Ev Temizliği",en:"Home Cleaning",pros:320,rating:4.8},
-  {icon:"📦",tr:"Boş Ev Temizliği",en:"Empty Home Cleaning",pros:180,rating:4.7},
-  {icon:"🛋️",tr:"Koltuk Yıkama",en:"Sofa Washing",pros:240,rating:4.9},
-  {icon:"🧶",tr:"Halı Yıkama",en:"Carpet Washing",pros:210,rating:4.8},
-  {icon:"🏢",tr:"Apartman Temizliği",en:"Apartment Cleaning",pros:130,rating:4.6},
-  {icon:"🏗️",tr:"İnşaat Sonrası Temizlik",en:"Post-Construction Cleaning",pros:160,rating:4.7},
-  {icon:"🐛",tr:"Böcek İlaçlama",en:"Pest Control",pros:140,rating:4.8},
-  {icon:"🪟",tr:"Cam Temizliği",en:"Window Cleaning",pros:120,rating:4.7},
-  {icon:"♨️",tr:"Petek Temizliği",en:"Radiator Cleaning",pros:95,rating:4.6},
-  {icon:"💼",tr:"Ofis Temizliği",en:"Office Cleaning",pros:110,rating:4.7},
-  {icon:"👕",tr:"Evde Ütü Hizmeti",en:"In-Home Ironing",pros:70,rating:4.8},
-  {icon:"🪜",tr:"Merdiven Temizliği",en:"Staircase Cleaning",pros:60,rating:4.5},
-  {icon:"🧴",tr:"Dezenfeksiyon",en:"Disinfection",pros:80,rating:4.7},
-  {icon:"✨",tr:"Cam Silme",en:"Window Wiping",pros:90,rating:4.6}
+  {icon:"🏠",tr:"Ev Temizliği",en:"Home Cleaning",de:"Wohnungsreinigung",fr:"Nettoyage maison",es:"Limpieza del hogar",ru:"Уборка дома",ar:"تنظيف المنزل",fa:"نظافت منزل",pros:320,rating:4.8},
+  {icon:"📦",tr:"Boş Ev Temizliği",en:"Empty Home Cleaning",de:"Reinigung leerer Wohnung",fr:"Nettoyage logement vide",es:"Limpieza casa vacía",ru:"Уборка пустой квартиры",ar:"تنظيف منزل فارغ",fa:"نظافت خانه خالی",pros:180,rating:4.7},
+  {icon:"🛋️",tr:"Koltuk Yıkama",en:"Sofa Washing",de:"Sofareinigung",fr:"Nettoyage de canapé",es:"Lavado de sofá",ru:"Химчистка дивана",ar:"غسيل الأرائك",fa:"شست‌وشوی مبل",pros:240,rating:4.9},
+  {icon:"🧶",tr:"Halı Yıkama",en:"Carpet Washing",de:"Teppichreinigung",fr:"Nettoyage de tapis",es:"Lavado de alfombras",ru:"Химчистка ковров",ar:"غسيل السجاد",fa:"قالی‌شویی",pros:210,rating:4.8},
+  {icon:"🏢",tr:"Apartman Temizliği",en:"Apartment Cleaning",de:"Treppenhausreinigung",fr:"Nettoyage d'immeuble",es:"Limpieza de edificio",ru:"Уборка подъезда",ar:"تنظيف العمارة",fa:"نظافت آپارتمان",pros:130,rating:4.6},
+  {icon:"🏗️",tr:"İnşaat Sonrası Temizlik",en:"Post-Construction Cleaning",de:"Bauendreinigung",fr:"Nettoyage après travaux",es:"Limpieza post-obra",ru:"Уборка после ремонта",ar:"تنظيف ما بعد البناء",fa:"نظافت پس از ساخت",pros:160,rating:4.7},
+  {icon:"🐛",tr:"Böcek İlaçlama",en:"Pest Control",de:"Schädlingsbekämpfung",fr:"Traitement anti-nuisibles",es:"Control de plagas",ru:"Дезинсекция",ar:"مكافحة الحشرات",fa:"سمپاشی",pros:140,rating:4.8},
+  {icon:"🪟",tr:"Cam Temizliği",en:"Window Cleaning",de:"Fensterreinigung",fr:"Nettoyage de vitres",es:"Limpieza de ventanas",ru:"Мытьё окон",ar:"تنظيف النوافذ",fa:"نظافت شیشه",pros:120,rating:4.7},
+  {icon:"♨️",tr:"Petek Temizliği",en:"Radiator Cleaning",de:"Heizkörperreinigung",fr:"Nettoyage de radiateurs",es:"Limpieza de radiadores",ru:"Промывка радиаторов",ar:"تنظيف الرادياتير",fa:"شست‌وشوی رادیاتور",pros:95,rating:4.6},
+  {icon:"💼",tr:"Ofis Temizliği",en:"Office Cleaning",de:"Büroreinigung",fr:"Nettoyage de bureaux",es:"Limpieza de oficinas",ru:"Уборка офиса",ar:"تنظيف المكاتب",fa:"نظافت اداری",pros:110,rating:4.7},
+  {icon:"👕",tr:"Evde Ütü Hizmeti",en:"In-Home Ironing",de:"Bügelservice zu Hause",fr:"Repassage à domicile",es:"Planchado a domicilio",ru:"Глажка на дому",ar:"كي الملابس بالمنزل",fa:"اتوکشی در منزل",pros:70,rating:4.8},
+  {icon:"🪜",tr:"Merdiven Temizliği",en:"Staircase Cleaning",de:"Treppenreinigung",fr:"Nettoyage d'escaliers",es:"Limpieza de escaleras",ru:"Уборка лестниц",ar:"تنظيف السلالم",fa:"نظافت راه‌پله",pros:60,rating:4.5},
+  {icon:"🧴",tr:"Dezenfeksiyon",en:"Disinfection",de:"Desinfektion",fr:"Désinfection",es:"Desinfección",ru:"Дезинфекция",ar:"التعقيم",fa:"ضدعفونی",pros:80,rating:4.7},
+  {icon:"✨",tr:"Cam Silme",en:"Window Wiping",de:"Scheibenwischen",fr:"Lavage de vitres",es:"Limpieza de cristales",ru:"Протирка стёкол",ar:"مسح الزجاج",fa:"برق‌انداختن شیشه",pros:90,rating:4.6}
 ];
 const CLEAN_TITLE={tr:"🧹 Popüler Temizlik Hizmetleri",en:"🧹 Popular Cleaning Services",de:"🧹 Beliebte Reinigungsdienste",fr:"🧹 Services de nettoyage populaires",es:"🧹 Servicios de limpieza populares",ru:"🧹 Популярные услуги уборки",ar:"🧹 خدمات التنظيف الشائعة",fa:"🧹 خدمات نظافت محبوب"};
 
 const REPAIR_SERVICES=[
-  {icon:"🧰",tr:"Beyaz Eşya Tamiri",en:"Appliance Repair",pros:280,rating:4.8},
-  {icon:"♨️",tr:"Kombi Tamiri",en:"Boiler Repair",pros:190,rating:4.7},
-  {icon:"❄️",tr:"Klima Tamiri & Montaj",en:"AC Repair & Install",pros:210,rating:4.8},
-  {icon:"🚰",tr:"Musluk & Tesisat",en:"Faucet & Plumbing",pros:320,rating:4.9},
-  {icon:"💡",tr:"Elektrik Arıza",en:"Electrical Fault",pros:240,rating:4.7},
-  {icon:"🎨",tr:"Boya & Badana",en:"Painting",pros:160,rating:4.6},
-  {icon:"🧱",tr:"Fayans & Seramik",en:"Tiling",pros:120,rating:4.7},
-  {icon:"🪛",tr:"Mobilya Montaj",en:"Furniture Assembly",pros:150,rating:4.8},
-  {icon:"🚪",tr:"Kapı Tamiri",en:"Door Repair",pros:90,rating:4.6},
-  {icon:"💧",tr:"Su Kaçağı Tespiti",en:"Leak Detection",pros:110,rating:4.8},
-  {icon:"🔑",tr:"Çilingir",en:"Locksmith",pros:130,rating:4.7},
-  {icon:"🪟",tr:"PVC & Pencere",en:"PVC & Windows",pros:70,rating:4.6},
-  {icon:"🪚",tr:"Marangoz",en:"Carpentry",pros:85,rating:4.7},
-  {icon:"🔩",tr:"Demir & Kaynak",en:"Ironwork & Welding",pros:60,rating:4.6}
+  {icon:"🧰",tr:"Beyaz Eşya Tamiri",en:"Appliance Repair",de:"Geräte-Reparatur",fr:"Réparation d'électroménager",es:"Reparación de electrodomésticos",ru:"Ремонт бытовой техники",ar:"إصلاح الأجهزة",fa:"تعمیر لوازم خانگی",pros:280,rating:4.8},
+  {icon:"♨️",tr:"Kombi Tamiri",en:"Boiler Repair",de:"Boiler-Reparatur",fr:"Réparation de chaudière",es:"Reparación de caldera",ru:"Ремонт котла",ar:"إصلاح السخان",fa:"تعمیر پکیج",pros:190,rating:4.7},
+  {icon:"❄️",tr:"Klima Tamiri & Montaj",en:"AC Repair & Install",de:"Klima-Reparatur & Montage",fr:"Réparation & pose de clim",es:"Reparación e instalación de AC",ru:"Ремонт и монтаж кондиционера",ar:"إصلاح وتركيب المكيف",fa:"تعمیر و نصب کولر",pros:210,rating:4.8},
+  {icon:"🚰",tr:"Musluk & Tesisat",en:"Faucet & Plumbing",de:"Armatur & Sanitär",fr:"Robinet & plomberie",es:"Grifo y fontanería",ru:"Кран и сантехника",ar:"الصنبور والسباكة",fa:"شیر و لوله‌کشی",pros:320,rating:4.9},
+  {icon:"💡",tr:"Elektrik Arıza",en:"Electrical Fault",de:"Elektrik-Störung",fr:"Panne électrique",es:"Avería eléctrica",ru:"Электрическая неисправность",ar:"أعطال كهربائية",fa:"عیب برقی",pros:240,rating:4.7},
+  {icon:"🎨",tr:"Boya & Badana",en:"Painting",de:"Malerarbeiten",fr:"Peinture",es:"Pintura",ru:"Покраска",ar:"الدهان",fa:"نقاشی",pros:160,rating:4.6},
+  {icon:"🧱",tr:"Fayans & Seramik",en:"Tiling",de:"Fliesenlegen",fr:"Carrelage",es:"Alicatado",ru:"Укладка плитки",ar:"تركيب البلاط",fa:"کاشی‌کاری",pros:120,rating:4.7},
+  {icon:"🪛",tr:"Mobilya Montaj",en:"Furniture Assembly",de:"Möbelmontage",fr:"Montage de meubles",es:"Montaje de muebles",ru:"Сборка мебели",ar:"تركيب الأثاث",fa:"مونتاژ مبلمان",pros:150,rating:4.8},
+  {icon:"🚪",tr:"Kapı Tamiri",en:"Door Repair",de:"Türreparatur",fr:"Réparation de porte",es:"Reparación de puertas",ru:"Ремонт дверей",ar:"إصلاح الأبواب",fa:"تعمیر درب",pros:90,rating:4.6},
+  {icon:"💧",tr:"Su Kaçağı Tespiti",en:"Leak Detection",de:"Leckortung",fr:"Détection de fuite",es:"Detección de fugas",ru:"Поиск протечек",ar:"كشف تسربات المياه",fa:"تشخیص نشتی آب",pros:110,rating:4.8},
+  {icon:"🔑",tr:"Çilingir",en:"Locksmith",de:"Schlüsseldienst",fr:"Serrurier",es:"Cerrajero",ru:"Слесарь",ar:"فتح الأقفال",fa:"قفل‌ساز",pros:130,rating:4.7},
+  {icon:"🪟",tr:"PVC & Pencere",en:"PVC & Windows",de:"PVC & Fenster",fr:"PVC & fenêtres",es:"PVC y ventanas",ru:"ПВХ и окна",ar:"نوافذ PVC",fa:"UPVC و پنجره",pros:70,rating:4.6},
+  {icon:"🪚",tr:"Marangoz",en:"Carpentry",de:"Tischlerei",fr:"Menuiserie",es:"Carpintería",ru:"Столярные работы",ar:"نجارة",fa:"نجاری",pros:85,rating:4.7},
+  {icon:"🔩",tr:"Demir & Kaynak",en:"Ironwork & Welding",de:"Eisen & Schweißen",fr:"Ferronnerie & soudure",es:"Herrería y soldadura",ru:"Металл и сварка",ar:"الحدادة واللحام",fa:"آهنگری و جوشکاری",pros:60,rating:4.6}
 ];
 const MOVING_SERVICES=[
-  {icon:"🚚",tr:"Evden Eve Nakliyat",en:"Home Moving",pros:210,rating:4.8},
-  {icon:"💼",tr:"Ofis Taşıma",en:"Office Moving",pros:90,rating:4.7},
-  {icon:"🛣️",tr:"Şehirler Arası Nakliyat",en:"Intercity Moving",pros:120,rating:4.7},
-  {icon:"📦",tr:"Parça Eşya Taşıma",en:"Small Item Moving",pros:140,rating:4.6},
-  {icon:"🏗️",tr:"Asansörlü Taşıma",en:"Lift Moving",pros:80,rating:4.8},
-  {icon:"🎁",tr:"Paketleme Hizmeti",en:"Packing Service",pros:70,rating:4.7},
-  {icon:"🏬",tr:"Eşya Depolama",en:"Storage",pros:55,rating:4.6},
-  {icon:"🎹",tr:"Piyano Taşıma",en:"Piano Moving",pros:30,rating:4.9}
+  {icon:"🚚",tr:"Evden Eve Nakliyat",en:"Home Moving",de:"Wohnungsumzug",fr:"Déménagement",es:"Mudanza de hogar",ru:"Квартирный переезд",ar:"نقل المنازل",fa:"اسباب‌کشی منزل",pros:210,rating:4.8},
+  {icon:"💼",tr:"Ofis Taşıma",en:"Office Moving",de:"Büroumzug",fr:"Déménagement de bureau",es:"Mudanza de oficina",ru:"Офисный переезд",ar:"نقل المكاتب",fa:"جابه‌جایی اداری",pros:90,rating:4.7},
+  {icon:"🛣️",tr:"Şehirler Arası Nakliyat",en:"Intercity Moving",de:"Fernumzug",fr:"Déménagement longue distance",es:"Mudanza interurbana",ru:"Междугородний переезд",ar:"نقل بين المدن",fa:"حمل بین‌شهری",pros:120,rating:4.7},
+  {icon:"📦",tr:"Parça Eşya Taşıma",en:"Small Item Moving",de:"Einzelstück-Transport",fr:"Transport de petits objets",es:"Transporte de objetos pequeños",ru:"Перевозка отдельных вещей",ar:"نقل أغراض مفردة",fa:"حمل بار جزئی",pros:140,rating:4.6},
+  {icon:"🏗️",tr:"Asansörlü Taşıma",en:"Lift Moving",de:"Umzug mit Möbellift",fr:"Déménagement avec monte-meuble",es:"Mudanza con montamuebles",ru:"Переезд с подъёмником",ar:"نقل بمصعد",fa:"حمل با آسانسور",pros:80,rating:4.8},
+  {icon:"🎁",tr:"Paketleme Hizmeti",en:"Packing Service",de:"Verpackungsservice",fr:"Service d'emballage",es:"Servicio de embalaje",ru:"Услуга упаковки",ar:"خدمة التغليف",fa:"خدمات بسته‌بندی",pros:70,rating:4.7},
+  {icon:"🏬",tr:"Eşya Depolama",en:"Storage",de:"Einlagerung",fr:"Stockage",es:"Almacenamiento",ru:"Хранение вещей",ar:"تخزين الأغراض",fa:"انبارداری",pros:55,rating:4.6},
+  {icon:"🎹",tr:"Piyano Taşıma",en:"Piano Moving",de:"Klaviertransport",fr:"Transport de piano",es:"Transporte de piano",ru:"Перевозка пианино",ar:"نقل البيانو",fa:"حمل پیانو",pros:30,rating:4.9}
 ];
 const TUTORING_SERVICES=[
-  {icon:"🧮",tr:"Matematik Dersi",en:"Math Tutoring",pros:180,rating:4.9},
-  {icon:"🔤",tr:"İngilizce Dersi",en:"English Tutoring",pros:220,rating:4.8},
-  {icon:"⚛️",tr:"Fizik Dersi",en:"Physics",pros:70,rating:4.7},
-  {icon:"🧪",tr:"Kimya Dersi",en:"Chemistry",pros:60,rating:4.7},
-  {icon:"🎸",tr:"Gitar Dersi",en:"Guitar",pros:90,rating:4.8},
-  {icon:"🎹",tr:"Piyano Dersi",en:"Piano",pros:65,rating:4.9},
-  {icon:"🎨",tr:"Resim Dersi",en:"Drawing",pros:50,rating:4.7},
-  {icon:"🏊",tr:"Yüzme Dersi",en:"Swimming",pros:40,rating:4.8},
-  {icon:"💻",tr:"Kodlama Dersi",en:"Coding",pros:75,rating:4.8},
-  {icon:"📚",tr:"LGS / YKS Hazırlık",en:"Exam Prep",pros:110,rating:4.9},
-  {icon:"🇩🇪",tr:"Almanca Dersi",en:"German",pros:45,rating:4.7},
-  {icon:"🎻",tr:"Keman Dersi",en:"Violin",pros:25,rating:4.8},
-  {icon:"🇸🇦",tr:"Arapça Dersi",en:"Arabic Tutoring",pros:60,rating:4.8},
-  {icon:"🇮🇷",tr:"Farsça Dersi",en:"Persian Tutoring",pros:35,rating:4.7},
-  {icon:"🛒",tr:"E-ticaret Eğitimi",en:"E-commerce Training",pros:70,rating:4.8},
-  {icon:"🧾",tr:"Muhasebe Dersi",en:"Accounting Course",pros:55,rating:4.7}
+  {icon:"🧮",tr:"Matematik Dersi",en:"Math Tutoring",de:"Mathe-Nachhilfe",fr:"Cours de maths",es:"Clases de matemáticas",ru:"Уроки математики",ar:"دروس الرياضيات",fa:"تدریس ریاضی",pros:180,rating:4.9},
+  {icon:"🔤",tr:"İngilizce Dersi",en:"English Tutoring",de:"Englisch-Nachhilfe",fr:"Cours d'anglais",es:"Clases de inglés",ru:"Уроки английского",ar:"دروس الإنجليزية",fa:"تدریس انگلیسی",pros:220,rating:4.8},
+  {icon:"⚛️",tr:"Fizik Dersi",en:"Physics",de:"Physik",fr:"Physique",es:"Física",ru:"Физика",ar:"الفيزياء",fa:"فیزیک",pros:70,rating:4.7},
+  {icon:"🧪",tr:"Kimya Dersi",en:"Chemistry",de:"Chemie",fr:"Chimie",es:"Química",ru:"Химия",ar:"الكيمياء",fa:"شیمی",pros:60,rating:4.7},
+  {icon:"🎸",tr:"Gitar Dersi",en:"Guitar",de:"Gitarre",fr:"Guitare",es:"Guitarra",ru:"Гитара",ar:"الغيتار",fa:"گیتار",pros:90,rating:4.8},
+  {icon:"🎹",tr:"Piyano Dersi",en:"Piano",de:"Klavier",fr:"Piano",es:"Piano",ru:"Фортепиано",ar:"البيانو",fa:"پیانو",pros:65,rating:4.9},
+  {icon:"🎨",tr:"Resim Dersi",en:"Drawing",de:"Zeichnen",fr:"Dessin",es:"Dibujo",ru:"Рисование",ar:"الرسم",fa:"نقاشی",pros:50,rating:4.7},
+  {icon:"🏊",tr:"Yüzme Dersi",en:"Swimming",de:"Schwimmen",fr:"Natation",es:"Natación",ru:"Плавание",ar:"السباحة",fa:"شنا",pros:40,rating:4.8},
+  {icon:"💻",tr:"Kodlama Dersi",en:"Coding",de:"Programmieren",fr:"Programmation",es:"Programación",ru:"Программирование",ar:"البرمجة",fa:"برنامه‌نویسی",pros:75,rating:4.8},
+  {icon:"📚",tr:"LGS / YKS Hazırlık",en:"Exam Prep",de:"Prüfungsvorbereitung",fr:"Préparation aux examens",es:"Preparación de exámenes",ru:"Подготовка к экзаменам",ar:"التحضير للامتحانات",fa:"آمادگی آزمون",pros:110,rating:4.9},
+  {icon:"🇩🇪",tr:"Almanca Dersi",en:"German",de:"Deutsch",fr:"Allemand",es:"Alemán",ru:"Немецкий язык",ar:"اللغة الألمانية",fa:"آلمانی",pros:45,rating:4.7},
+  {icon:"🎻",tr:"Keman Dersi",en:"Violin",de:"Geige",fr:"Violon",es:"Violín",ru:"Скрипка",ar:"الكمان",fa:"ویولن",pros:25,rating:4.8},
+  {icon:"🇸🇦",tr:"Arapça Dersi",en:"Arabic Tutoring",de:"Arabisch",fr:"Arabe",es:"Árabe",ru:"Арабский язык",ar:"اللغة العربية",fa:"عربی",pros:60,rating:4.8},
+  {icon:"🇮🇷",tr:"Farsça Dersi",en:"Persian Tutoring",de:"Persisch",fr:"Persan",es:"Persa",ru:"Персидский язык",ar:"اللغة الفارسية",fa:"فارسی",pros:35,rating:4.7},
+  {icon:"🛒",tr:"E-ticaret Eğitimi",en:"E-commerce Training",de:"E-Commerce-Schulung",fr:"Formation e-commerce",es:"Formación en e-commerce",ru:"Обучение электронной коммерции",ar:"تدريب التجارة الإلكترونية",fa:"آموزش تجارت الکترونیک",pros:70,rating:4.8},
+  {icon:"🧾",tr:"Muhasebe Dersi",en:"Accounting Course",de:"Buchhaltungskurs",fr:"Cours de comptabilité",es:"Curso de contabilidad",ru:"Курс бухгалтерии",ar:"دورة المحاسبة",fa:"آموزش حسابداری",pros:55,rating:4.7}
 ];
 const OTHER_SERVICES=[
-  {icon:"📸",tr:"Fotoğrafçı",en:"Photographer",pros:120,rating:4.8},
-  {icon:"🎉",tr:"Organizasyon",en:"Events",pros:80,rating:4.7},
-  {icon:"🌐",tr:"Web Tasarım",en:"Web Design",pros:95,rating:4.8},
-  {icon:"🖌️",tr:"Grafik Tasarım",en:"Graphic Design",pros:70,rating:4.7},
-  {icon:"📈",tr:"Dijital Pazarlama",en:"Digital Marketing",pros:60,rating:4.6},
-  {icon:"🎥",tr:"Video Çekim",en:"Videography",pros:55,rating:4.8},
-  {icon:"🌿",tr:"Bahçıvanlık",en:"Gardening",pros:65,rating:4.7},
-  {icon:"💄",tr:"Kuaför & Güzellik",en:"Hair & Beauty",pros:140,rating:4.8}
+  {icon:"📸",tr:"Fotoğrafçı",en:"Photographer",de:"Fotograf",fr:"Photographe",es:"Fotógrafo",ru:"Фотограф",ar:"مصور",fa:"عکاس",pros:120,rating:4.8},
+  {icon:"🎉",tr:"Organizasyon",en:"Events",de:"Events",fr:"Événements",es:"Eventos",ru:"Организация мероприятий",ar:"تنظيم الفعاليات",fa:"برگزاری رویداد",pros:80,rating:4.7},
+  {icon:"🌐",tr:"Web Tasarım",en:"Web Design",de:"Webdesign",fr:"Conception web",es:"Diseño web",ru:"Веб-дизайн",ar:"تصميم مواقع",fa:"طراحی وب",pros:95,rating:4.8},
+  {icon:"🖌️",tr:"Grafik Tasarım",en:"Graphic Design",de:"Grafikdesign",fr:"Design graphique",es:"Diseño gráfico",ru:"Графический дизайн",ar:"تصميم جرافيك",fa:"طراحی گرافیک",pros:70,rating:4.7},
+  {icon:"📈",tr:"Dijital Pazarlama",en:"Digital Marketing",de:"Digitales Marketing",fr:"Marketing digital",es:"Marketing digital",ru:"Цифровой маркетинг",ar:"التسويق الرقمي",fa:"بازاریابی دیجیتال",pros:60,rating:4.6},
+  {icon:"🎥",tr:"Video Çekim",en:"Videography",de:"Videografie",fr:"Vidéographie",es:"Videografía",ru:"Видеосъёмка",ar:"تصوير فيديو",fa:"فیلم‌برداری",pros:55,rating:4.8},
+  {icon:"🌿",tr:"Bahçıvanlık",en:"Gardening",de:"Gartenarbeit",fr:"Jardinage",es:"Jardinería",ru:"Садоводство",ar:"البستنة",fa:"باغبانی",pros:65,rating:4.7},
+  {icon:"💄",tr:"Kuaför & Güzellik",en:"Hair & Beauty",de:"Friseur & Beauty",fr:"Coiffure & beauté",es:"Peluquería y belleza",ru:"Парикмахер и красота",ar:"الحلاقة والتجميل",fa:"آرایش و زیبایی",pros:140,rating:4.8}
 ];
 const SERVICES={cleaning:CLEANING_SERVICES,repair:REPAIR_SERVICES,moving:MOVING_SERVICES,tutoring:TUTORING_SERVICES,other:OTHER_SERVICES};
 const POP={tr:"Popüler Hizmetler",en:"Popular Services",de:"Beliebte Dienste",fr:"Services populaires",es:"Servicios populares",ru:"Популярные услуги",ar:"الخدمات الشائعة",fa:"خدمات محبوب"};
@@ -921,32 +960,37 @@ const ANA={
   en:{catTitle:"📊 Job Categories",catSub:"How many open jobs and pros per category?",proTitle:"🛠️ Pro Analytics",proSub:"Registered pros by category.",jobs:"jobs",pros:"pros"},
   de:{catTitle:"📊 Auftragskategorien",catSub:"Wie viele offene Aufträge und Profis je Kategorie?",proTitle:"🛠️ Profi-Analyse",proSub:"Registrierte Profis nach Kategorie.",jobs:"Aufträge",pros:"Profis"},
   fr:{catTitle:"📊 Catégories de demandes",catSub:"Combien de demandes ouvertes et de pros par catégorie ?",proTitle:"🛠️ Analyse des pros",proSub:"Pros inscrits par catégorie.",jobs:"demandes",pros:"pros"},
-  es:{catTitle:"📊 Categorías de trabajos",catSub:"¿Cuántos trabajos abiertos y profesionales por categoría?",proTitle:"🛠️ Análisis de profesionales",proSub:"Profesionales registrados por categoría.",jobs:"trabajos",pros:"profesionales"}
+  es:{catTitle:"📊 Categorías de trabajos",catSub:"¿Cuántos trabajos abiertos y profesionales por categoría?",proTitle:"🛠️ Análisis de profesionales",proSub:"Profesionales registrados por categoría.",jobs:"trabajos",pros:"profesionales"},
+  ru:{catTitle:"📊 Категории работ",catSub:"Сколько открытых заявок и мастеров в каждой категории?",proTitle:"🛠️ Аналитика мастеров",proSub:"Зарегистрированные мастера по категориям.",jobs:"заявок",pros:"мастеров"},
+  ar:{catTitle:"📊 فئات الأعمال",catSub:"كم عدد الطلبات المفتوحة والحرفيين في كل فئة؟",proTitle:"🛠️ تحليل الحرفيين",proSub:"الحرفيون المسجلون حسب الفئة.",jobs:"طلب",pros:"حرفي"},
+  fa:{catTitle:"📊 دسته‌بندی کارها",catSub:"در هر دسته چند درخواست باز و چند استادکار وجود دارد؟",proTitle:"🛠️ تحلیل استادکاران",proSub:"استادکاران ثبت‌شده بر اساس دسته.",jobs:"درخواست",pros:"استادکار"}
 };
 function an(k){return (ANA[lang]||ANA.en||ANA.tr)[k]}
 /* Şehir bazlı ölçek (demoda simüle) */
 const CITY_FACTORS={"":1,"Kayseri":1};
 let cityFactor=1;
-const CITY_LBL={tr:"🏙️ Şehir",en:"🏙️ City",de:"🏙️ Stadt",fr:"🏙️ Ville",es:"🏙️ Ciudad"};
-const ALLCITY={tr:"Tüm Türkiye",en:"All cities",de:"Alle Städte",fr:"Toutes les villes",es:"Todas las ciudades"};
+const CITY_LBL={tr:"🏙️ Şehir",en:"🏙️ City",de:"🏙️ Stadt",fr:"🏙️ Ville",es:"🏙️ Ciudad",ru:"🏙️ Город",ar:"🏙️ المدينة",fa:"🏙️ شهر"};
+const ALLCITY={tr:"Tüm Türkiye",en:"All cities",de:"Alle Städte",fr:"Toutes les villes",es:"Todas las ciudades",ru:"Вся Турция",ar:"كل تركيا",fa:"سراسر ترکیه"};
 function jobsOf(c){return Math.max(1,Math.round((c.c*1.25+80)*cityFactor))} /* iş sayısı (şehir ölçekli) */
 function prosOf(c){return Math.max(1,Math.round(c.c*cityFactor))}
 function setCityFactor(){const v=document.getElementById('anaCity').value;cityFactor=CITY_FACTORS[v]??1;renderCats();renderAnalytics()}
 function renderAnalytics(){
-  const el=document.getElementById('anaProv');if(!el)return;
+  // Ana sayfa kategori başlığı (grup sayfasında renderServiceCards ayarlar)
   if(!(groupFilter&&SERVICES[groupFilter])){
     const ct=document.getElementById('anaCatTitle');if(ct)ct.textContent=an('catTitle');
     const cs=document.getElementById('anaCatSub');if(cs)cs.textContent=an('catSub');
   }
-  document.getElementById('anaProTitle').textContent=an('proTitle');
-  document.getElementById('anaProSub').textContent=an('proSub');
-  // Şehir seçici doldur
+  // Şehir seçici doldur (guard'lı)
   const lbl=document.getElementById('anaCityLbl');if(lbl)lbl.textContent=CITY_LBL[lang]||CITY_LBL.en||CITY_LBL.tr;
   const sel=document.getElementById('anaCity');
   if(sel&&!sel.dataset.filled){
     sel.innerHTML=`<option value="">${ALLCITY[lang]||ALLCITY.en||ALLCITY.tr}</option>`+CITIES.map(c=>`<option value="${c}">${c}</option>`).join("");
     sel.dataset.filled="1";
   } else if(sel){ sel.options[0].textContent=ALLCITY[lang]||ALLCITY.en||ALLCITY.tr; }
+  // Usta analizi bar bölümü (varsa)
+  const el=document.getElementById('anaProv');if(!el)return;
+  const pt=document.getElementById('anaProTitle');if(pt)pt.textContent=an('proTitle');
+  const ps=document.getElementById('anaProSub');if(ps)ps.textContent=an('proSub');
   const sorted=[...CATS].sort((a,b)=>prosOf(b)-prosOf(a)).slice(0,8);
   const max=Math.max(...sorted.map(prosOf));
   el.innerHTML=sorted.map(c=>`
@@ -963,70 +1007,80 @@ const CITIES=["Kayseri"];
 
 let LISTINGS=[
   {id:1,icon:"🚰",cat:"plumbing",city:"İstanbul",urg:"URGENT",budget:"1.500–2.500 ₺",offers:5,
-    title:{tr:"Mutfak musluğu damlatıyor, değişsin",en:"Kitchen faucet dripping, needs replacement",de:"Küchenarmatur tropft, muss getauscht werden",fr:"Robinet de cuisine qui goutte, à remplacer",es:"Grifo de cocina gotea, cambiar"},
-    desc:{tr:"Mutfaktaki eviye bataryası sürekli damlatıyor. Yenisiyle değişmesini istiyorum. Malzeme dahil teklif bekliyorum.",en:"The kitchen sink mixer drips constantly. I want it replaced with a new one, material included.",de:"Die Küchenarmatur tropft ständig. Ich möchte sie inkl. Material ersetzen lassen.",fr:"Le mitigeur de cuisine goutte en continu. Je veux le remplacer, matériel inclus.",es:"El grifo de la cocina gotea constantemente. Quiero cambiarlo, material incluido."},
-    offersList:[{who:"Mehmet Usta",rating:4.9,price:"1.800 ₺",msg:{tr:"Bugün gelebilirim, malzeme dahil.",en:"I can come today, material included.",de:"Ich kann heute kommen, inkl. Material.",fr:"Je peux venir aujourd'hui, matériel inclus.",es:"Puedo ir hoy, material incluido."}},
-      {who:"Su Tesisat Ltd.",rating:4.7,price:"2.100 ₺",msg:{tr:"2 yıl garanti veriyoruz.",en:"We offer 2-year warranty.",de:"Wir bieten 2 Jahre Garantie.",fr:"Garantie de 2 ans.",es:"Ofrecemos garantía de 2 años."}}]},
+    title:{tr:"Mutfak musluğu damlatıyor, değişsin",en:"Kitchen faucet dripping, needs replacement",de:"Küchenarmatur tropft, muss getauscht werden",fr:"Robinet de cuisine qui goutte, à remplacer",es:"Grifo de cocina gotea, cambiar",ru:"Кухонный кран капает, нужна замена",ar:"صنبور المطبخ يقطر، يحتاج استبدال",fa:"شیر آشپزخانه چکه می‌کند، باید تعویض شود"},
+    desc:{tr:"Mutfaktaki eviye bataryası sürekli damlatıyor. Yenisiyle değişmesini istiyorum. Malzeme dahil teklif bekliyorum.",en:"The kitchen sink mixer drips constantly. I want it replaced with a new one, material included.",de:"Die Küchenarmatur tropft ständig. Ich möchte sie inkl. Material ersetzen lassen.",fr:"Le mitigeur de cuisine goutte en continu. Je veux le remplacer, matériel inclus.",es:"El grifo de la cocina gotea constantemente. Quiero cambiarlo, material incluido.",ru:"Кухонный смеситель постоянно капает. Хочу заменить на новый, с материалом. Жду предложения.",ar:"خلاط مغسلة المطبخ يقطر باستمرار. أريد استبداله بآخر جديد، شامل المواد.",fa:"شیر ظرفشویی آشپزخانه دائماً چکه می‌کند. می‌خواهم با یک نو تعویض شود، همراه با متریال."},
+    offersList:[{who:"Mehmet Usta",rating:4.9,price:"1.800 ₺",msg:{tr:"Bugün gelebilirim, malzeme dahil.",en:"I can come today, material included.",de:"Ich kann heute kommen, inkl. Material.",fr:"Je peux venir aujourd'hui, matériel inclus.",es:"Puedo ir hoy, material incluido.",ru:"Могу приехать сегодня, с материалом.",ar:"أستطيع الحضور اليوم، شامل المواد.",fa:"می‌توانم امروز بیایم، همراه با متریال."}},
+      {who:"Su Tesisat Ltd.",rating:4.7,price:"2.100 ₺",msg:{tr:"2 yıl garanti veriyoruz.",en:"We offer 2-year warranty.",de:"Wir bieten 2 Jahre Garantie.",fr:"Garantie de 2 ans.",es:"Ofrecemos garantía de 2 años.",ru:"Даём гарантию 2 года.",ar:"نقدّم ضمان سنتين.",fa:"دو سال گارانتی می‌دهیم."}}]},
   {id:2,icon:"🏠",cat:"roofing",city:"Bursa",urg:"WITHIN_WEEK",budget:"1.000–2.500 ₺",offers:4,
-    title:{tr:"Çatı akıntısı, küçük onarım","en":"Roof leak, small repair",de:"Kleine Dachreparatur",fr:"Petite réparation de toiture",es:"Pequeña reparación de tejado"},
-    desc:{tr:"Yağmurda çatıdan az miktarda su alıyor. Birkaç kiremit ve derz onarımı yeterli olur. Küçük bir tamir.",en:"Minor water leak from the roof when it rains. A few tiles and sealing should fix it. Small repair.",de:"Bei Regen dringt etwas Wasser durch das Dach. Ein paar Ziegel und Abdichtung genügen.",fr:"Petite fuite d'eau par le toit sous la pluie. Quelques tuiles et un joint suffiront.",es:"Pequeña filtración de agua del tejado con lluvia. Unas tejas y sellado bastarán."},
-    offersList:[{who:"Çatı Ustası Hasan",rating:4.8,price:"1.500 ₺",msg:{tr:"Yarın bakabilirim, malzeme dahil.",en:"I can check tomorrow, material included.",de:"Ich kann morgen kommen, inkl. Material.",fr:"Je peux venir demain, matériel inclus.",es:"Puedo ir mañana, material incluido."}}]},
+    title:{tr:"Çatı akıntısı, küçük onarım","en":"Roof leak, small repair",de:"Kleine Dachreparatur",fr:"Petite réparation de toiture",es:"Pequeña reparación de tejado",ru:"Протечка крыши, мелкий ремонт",ar:"تسرب في السقف، إصلاح بسيط",fa:"نشتی سقف، تعمیر جزئی"},
+    desc:{tr:"Yağmurda çatıdan az miktarda su alıyor. Birkaç kiremit ve derz onarımı yeterli olur. Küçük bir tamir.",en:"Minor water leak from the roof when it rains. A few tiles and sealing should fix it. Small repair.",de:"Bei Regen dringt etwas Wasser durch das Dach. Ein paar Ziegel und Abdichtung genügen.",fr:"Petite fuite d'eau par le toit sous la pluie. Quelques tuiles et un joint suffiront.",es:"Pequeña filtración de agua del tejado con lluvia. Unas tejas y sellado bastarán.",ru:"Во время дождя с крыши немного протекает. Несколько черепиц и герметизация решат вопрос. Мелкий ремонт.",ar:"يتسرب قليل من الماء من السقف عند المطر. بضع قرميدات وعزل تكفي. إصلاح بسيط.",fa:"هنگام باران کمی آب از سقف نفوذ می‌کند. چند سفال و درزگیری کافی است. تعمیر جزئی."},
+    offersList:[{who:"Çatı Ustası Hasan",rating:4.8,price:"1.500 ₺",msg:{tr:"Yarın bakabilirim, malzeme dahil.",en:"I can check tomorrow, material included.",de:"Ich kann morgen kommen, inkl. Material.",fr:"Je peux venir demain, matériel inclus.",es:"Puedo ir mañana, material incluido.",ru:"Могу посмотреть завтра, с материалом.",ar:"يمكنني المعاينة غدًا، شامل المواد.",fa:"می‌توانم فردا بررسی کنم، همراه با متریال."}}]},
   {id:3,icon:"💡",cat:"electrical",city:"Ankara",urg:"EMERGENCY",budget:"Görüşülür",offers:3,
-    title:{tr:"Elektrikler gitti, sigorta atıyor",en:"Power out, breaker keeps tripping",de:"Stromausfall, Sicherung fliegt",fr:"Coupure de courant, disjoncteur saute",es:"Sin luz, el interruptor salta"},
-    desc:{tr:"Evde elektrikler gidip geliyor, sigorta sürekli atıyor. Acil bir elektrik ustası lazım.",en:"Power keeps cutting at home, breaker trips constantly. Need an electrician urgently.",de:"Strom fällt ständig aus, Sicherung fliegt. Dringend Elektriker gesucht.",fr:"Le courant saute sans cesse à la maison. J'ai besoin d'un électricien d'urgence.",es:"La luz se corta en casa, el interruptor salta. Necesito un electricista urgente."},
+    title:{tr:"Elektrikler gitti, sigorta atıyor",en:"Power out, breaker keeps tripping",de:"Stromausfall, Sicherung fliegt",fr:"Coupure de courant, disjoncteur saute",es:"Sin luz, el interruptor salta",ru:"Пропало электричество, выбивает автомат",ar:"انقطاع الكهرباء، القاطع يفصل باستمرار",fa:"برق قطع شده، فیوز مدام می‌پرد"},
+    desc:{tr:"Evde elektrikler gidip geliyor, sigorta sürekli atıyor. Acil bir elektrik ustası lazım.",en:"Power keeps cutting at home, breaker trips constantly. Need an electrician urgently.",de:"Strom fällt ständig aus, Sicherung fliegt. Dringend Elektriker gesucht.",fr:"Le courant saute sans cesse à la maison. J'ai besoin d'un électricien d'urgence.",es:"La luz se corta en casa, el interruptor salta. Necesito un electricista urgente.",ru:"Дома постоянно пропадает электричество, выбивает автомат. Срочно нужен электрик.",ar:"الكهرباء تنقطع باستمرار في المنزل والقاطع يفصل. أحتاج كهربائيًا بشكل عاجل.",fa:"برق خانه مدام قطع می‌شود و فیوز می‌پرد. فوراً به برق‌کار نیاز دارم."},
     offersList:[]},
   {id:4,icon:"🪚",cat:"furniture",city:"İzmir",urg:"FLEXIBLE",budget:"400–900 ₺",offers:3,
-    title:{tr:"Sarkan mutfak dolabı kapağı tamiri",en:"Loose kitchen cabinet door repair",de:"Lockere Küchenschranktür reparieren",fr:"Réparation de porte de meuble de cuisine",es:"Reparación de puerta de mueble de cocina"},
-    desc:{tr:"Mutfak dolabının iki kapağı sarktı, menteşeleri değişsin/ayarlansın. Küçük bir tamir işi.",en:"Two kitchen cabinet doors are sagging; hinges need replacing/adjusting. Small repair.",de:"Zwei Küchenschranktüren hängen; Scharniere tauschen/justieren. Kleine Reparatur.",fr:"Deux portes de meuble s'affaissent ; charnières à changer/ajuster. Petite réparation.",es:"Dos puertas del mueble se caen; cambiar/ajustar bisagras. Reparación pequeña."},
-    offersList:[{who:"Marangoz Ali",rating:4.9,price:"550 ₺",msg:{tr:"Aynı gün hallederim.",en:"I can fix it the same day.",de:"Ich erledige es am selben Tag.",fr:"Je le répare le jour même.",es:"Lo arreglo el mismo día."}}]}
+    title:{tr:"Sarkan mutfak dolabı kapağı tamiri",en:"Loose kitchen cabinet door repair",de:"Lockere Küchenschranktür reparieren",fr:"Réparation de porte de meuble de cuisine",es:"Reparación de puerta de mueble de cocina",ru:"Ремонт провисшей дверцы кухонного шкафа",ar:"إصلاح باب خزانة المطبخ المتدلي",fa:"تعمیر درب افتاده کابینت آشپزخانه"},
+    desc:{tr:"Mutfak dolabının iki kapağı sarktı, menteşeleri değişsin/ayarlansın. Küçük bir tamir işi.",en:"Two kitchen cabinet doors are sagging; hinges need replacing/adjusting. Small repair.",de:"Zwei Küchenschranktüren hängen; Scharniere tauschen/justieren. Kleine Reparatur.",fr:"Deux portes de meuble s'affaissent ; charnières à changer/ajuster. Petite réparation.",es:"Dos puertas del mueble se caen; cambiar/ajustar bisagras. Reparación pequeña.",ru:"Две дверцы кухонного шкафа провисли; заменить/отрегулировать петли. Мелкий ремонт.",ar:"بابا خزانة المطبخ متدليان؛ يلزم استبدال/ضبط المفصلات. إصلاح بسيط.",fa:"دو درب کابینت آشپزخانه افتاده؛ لولاها تعویض/تنظیم شوند. تعمیر جزئی."},
+    offersList:[{who:"Marangoz Ali",rating:4.9,price:"550 ₺",msg:{tr:"Aynı gün hallederim.",en:"I can fix it the same day.",de:"Ich erledige es am selben Tag.",fr:"Je le répare le jour même.",es:"Lo arreglo el mismo día.",ru:"Сделаю в тот же день.",ar:"أنجزه في نفس اليوم.",fa:"همان روز انجامش می‌دهم."}}]}
 ];
 
 /* ~30 test ilanı — üyeler ilan vermiş gibi (kategorilere dağıtılmış) */
 const MEMBERS=["Ahmet Y.","Ayşe K.","Mehmet D.","Zeynep A.","Can B.","Elif S.","Murat T.","Fatma Ö.","Emre G.","Selin U.","Hakan V.","Deniz P.","Burak N.","Ceren L.","Okan R.","Merve C.","Serkan M.","Gül H.","Tolga E.","Nur İ.","Kaan Ş.","İpek D.","Barış A.","Sena K.","Onur T.","Derya M."];
 const SEED_LISTINGS=[
-  ["plumbing","Banyo lavabosu tıkandı, açılsın","Bathroom sink clogged","İstanbul","URGENT","250–500 ₺",3],
-  ["plumbing","Musluk contası değişimi","Faucet washer replacement","Ankara","WITHIN_WEEK","200–450 ₺",2],
-  ["plumbing","Acil gider açma","Emergency drain unclogging","İzmir","EMERGENCY","300–650 ₺",4],
-  ["electrical","Salon avizesi montajı","Living room chandelier install","Bursa","FLEXIBLE","300–600 ₺",5],
-  ["electrical","2 priz + 1 anahtar değişimi","Replace 2 sockets + 1 switch","İstanbul","WITHIN_WEEK","250–550 ₺",2],
-  ["electrical","Sigorta atıyor, kontrol","Breaker tripping, check-up","Adana","URGENT","300–700 ₺",1],
-  ["construction","Duvarda çatlak sıva tamiri","Wall crack plaster repair","İstanbul","FLEXIBLE","500–1.500 ₺",5],
-  ["construction","Kırık fayans değişimi (3 adet)","Replace 3 broken tiles","Konya","WITHIN_WEEK","400–900 ₺",3],
-  ["construction","Kapı pervazı tamiri","Door frame repair","Ankara","FLEXIBLE","350–800 ₺",2],
-  ["painting","Tek oda boya rötuşu","Single room paint touch-up","İzmir","WITHIN_WEEK","800–1.800 ₺",4],
-  ["painting","Tavan rutubet lekesi boyası","Ceiling damp stain painting","Antalya","FLEXIBLE","600–1.400 ₺",1],
-  ["painting","Çocuk odası boyama","Kids room painting","Bursa","FLEXIBLE","900–2.000 ₺",3],
-  ["furniture","Gardırop montajı","Wardrobe assembly","İstanbul","URGENT","400–900 ₺",5],
-  ["furniture","Mutfak dolabı menteşe tamiri","Cabinet hinge repair","Gaziantep","FLEXIBLE","250–600 ₺",2],
-  ["furniture","Ahşap iç kapı tamiri","Wooden door repair","Ankara","WITHIN_WEEK","300–750 ₺",1],
-  ["hvac","Klima montajı (1 adet)","Install 1 AC unit","İzmir","WITHIN_WEEK","900–1.800 ₺",4],
-  ["hvac","Kombi bakımı","Boiler maintenance","İstanbul","FLEXIBLE","500–1.000 ₺",3],
-  ["hvac","Petek temizliği","Radiator cleaning","Bursa","FLEXIBLE","400–900 ₺",2],
-  ["appliance","Çamaşır makinesi tamiri","Washing machine repair","Adana","URGENT","400–1.000 ₺",5],
-  ["appliance","Buzdolabı soğutmuyor","Fridge not cooling","İstanbul","EMERGENCY","500–1.200 ₺",4],
-  ["appliance","Bulaşık makinesi kurulumu","Dishwasher installation","Konya","FLEXIBLE","300–600 ₺",1],
-  ["ironwork","Balkon korkuluğu kaynak tamiri","Balcony railing weld repair","Ankara","FLEXIBLE","500–1.200 ₺",2],
-  ["ironwork","Demir kapı menteşe tamiri","Steel door hinge repair","İzmir","WITHIN_WEEK","400–900 ₺",3],
-  ["roofing","Çatı kiremit değişimi (birkaç adet)","Replace a few roof tiles","Bursa","URGENT","800–2.000 ₺",5],
-  ["roofing","Dere oluk temizliği/onarım","Gutter clean & fix","Antalya","WITHIN_WEEK","500–1.200 ₺",2],
-  ["cleaning","Genel ev temizliği","General home cleaning","İstanbul","WITHIN_WEEK","600–1.200 ₺",4],
-  ["cleaning","Koltuk yıkama (3+3+1)","Sofa washing","Ankara","FLEXIBLE","500–1.000 ₺",3],
-  ["appliance","Klima gazı dolumu","AC gas refill","İzmir","WITHIN_WEEK","600–1.100 ₺",5],
-  ["plumbing","Klozet iç takım değişimi","Toilet flush kit replacement","İstanbul","FLEXIBLE","300–700 ₺",2],
-  ["furniture","Perde/kornis montajı","Curtain rod mounting","Gaziantep","FLEXIBLE","200–500 ₺",3]
+  ["plumbing",{tr:"Banyo lavabosu tıkandı, açılsın",en:"Bathroom sink clogged",de:"Waschbecken im Bad verstopft",fr:"Lavabo de salle de bain bouché",es:"Lavabo del baño atascado",ru:"Засорилась раковина в ванной",ar:"انسداد مغسلة الحمام",fa:"روشویی حمام گرفته است"},"URGENT","250–500 ₺",3],
+  ["plumbing",{tr:"Musluk contası değişimi",en:"Faucet washer replacement",de:"Wasserhahn-Dichtung wechseln",fr:"Remplacement du joint de robinet",es:"Cambio de junta de grifo",ru:"Замена прокладки крана",ar:"استبدال جلدة الصنبور",fa:"تعویض واشر شیر"},"WITHIN_WEEK","200–450 ₺",2],
+  ["plumbing",{tr:"Acil gider açma",en:"Emergency drain unclogging",de:"Notfall-Abflussreinigung",fr:"Débouchage d'urgence",es:"Desatasco urgente",ru:"Срочная прочистка слива",ar:"فتح مجاري طارئ",fa:"بازکردن فوری فاضلاب"},"EMERGENCY","300–650 ₺",4],
+  ["electrical",{tr:"Salon avizesi montajı",en:"Living room chandelier install",de:"Kronleuchter im Wohnzimmer montieren",fr:"Pose de lustre au salon",es:"Instalación de lámpara de salón",ru:"Монтаж люстры в гостиной",ar:"تركيب ثريا الصالة",fa:"نصب لوستر پذیرایی"},"FLEXIBLE","300–600 ₺",5],
+  ["electrical",{tr:"2 priz + 1 anahtar değişimi",en:"Replace 2 sockets + 1 switch",de:"2 Steckdosen + 1 Schalter tauschen",fr:"Remplacer 2 prises + 1 interrupteur",es:"Cambiar 2 enchufes + 1 interruptor",ru:"Замена 2 розеток + 1 выключателя",ar:"استبدال مقبسين ومفتاح",fa:"تعویض ۲ پریز + ۱ کلید"},"WITHIN_WEEK","250–550 ₺",2],
+  ["electrical",{tr:"Sigorta atıyor, kontrol",en:"Breaker tripping, check-up",de:"Sicherung fliegt, Kontrolle",fr:"Disjoncteur saute, contrôle",es:"El interruptor salta, revisión",ru:"Выбивает автомат, проверка",ar:"القاطع يفصل، فحص",fa:"فیوز می‌پرد، بررسی"},"URGENT","300–700 ₺",1],
+  ["construction",{tr:"Duvarda çatlak sıva tamiri",en:"Wall crack plaster repair",de:"Riss in der Wand verputzen",fr:"Réparation de fissure au mur",es:"Reparación de grieta en pared",ru:"Заделка трещины в стене",ar:"إصلاح شرخ الجدار باللياسة",fa:"تعمیر ترک دیوار و گچ‌کاری"},"FLEXIBLE","500–1.500 ₺",5],
+  ["construction",{tr:"Kırık fayans değişimi (3 adet)",en:"Replace 3 broken tiles",de:"3 kaputte Fliesen ersetzen",fr:"Remplacer 3 carreaux cassés",es:"Cambiar 3 azulejos rotos",ru:"Замена 3 разбитых плиток",ar:"استبدال 3 بلاطات مكسورة",fa:"تعویض ۳ کاشی شکسته"},"WITHIN_WEEK","400–900 ₺",3],
+  ["construction",{tr:"Kapı pervazı tamiri",en:"Door frame repair",de:"Türzarge reparieren",fr:"Réparation d'encadrement de porte",es:"Reparación de marco de puerta",ru:"Ремонт дверного наличника",ar:"إصلاح إطار الباب",fa:"تعمیر چارچوب درب"},"FLEXIBLE","350–800 ₺",2],
+  ["painting",{tr:"Tek oda boya rötuşu",en:"Single room paint touch-up",de:"Ausbesserung eines Zimmers",fr:"Retouche peinture d'une pièce",es:"Retoque de pintura de una habitación",ru:"Подкраска одной комнаты",ar:"لمسات دهان لغرفة واحدة",fa:"روتوش رنگ یک اتاق"},"WITHIN_WEEK","800–1.800 ₺",4],
+  ["painting",{tr:"Tavan rutubet lekesi boyası",en:"Ceiling damp stain painting",de:"Deckenflecken überstreichen",fr:"Peinture de tache d'humidité au plafond",es:"Pintar mancha de humedad en techo",ru:"Покраска пятна сырости на потолке",ar:"دهان بقعة رطوبة بالسقف",fa:"رنگ لکه رطوبت سقف"},"FLEXIBLE","600–1.400 ₺",1],
+  ["painting",{tr:"Çocuk odası boyama",en:"Kids room painting",de:"Kinderzimmer streichen",fr:"Peinture chambre d'enfant",es:"Pintar habitación infantil",ru:"Покраска детской комнаты",ar:"دهان غرفة الأطفال",fa:"رنگ‌آمیزی اتاق کودک"},"FLEXIBLE","900–2.000 ₺",3],
+  ["furniture",{tr:"Gardırop montajı",en:"Wardrobe assembly",de:"Kleiderschrank montieren",fr:"Montage d'armoire",es:"Montaje de armario",ru:"Сборка шкафа",ar:"تركيب خزانة الملابس",fa:"مونتاژ کمد لباس"},"URGENT","400–900 ₺",5],
+  ["furniture",{tr:"Mutfak dolabı menteşe tamiri",en:"Cabinet hinge repair",de:"Schrankscharnier reparieren",fr:"Réparation de charnière de meuble",es:"Reparación de bisagra de armario",ru:"Ремонт петли шкафа",ar:"إصلاح مفصلة الخزانة",fa:"تعمیر لولای کابینت"},"FLEXIBLE","250–600 ₺",2],
+  ["furniture",{tr:"Ahşap iç kapı tamiri",en:"Wooden door repair",de:"Holz-Innentür reparieren",fr:"Réparation de porte intérieure en bois",es:"Reparación de puerta de madera",ru:"Ремонт деревянной двери",ar:"إصلاح باب خشبي داخلي",fa:"تعمیر درب چوبی داخلی"},"WITHIN_WEEK","300–750 ₺",1],
+  ["hvac",{tr:"Klima montajı (1 adet)",en:"Install 1 AC unit",de:"1 Klimagerät montieren",fr:"Pose d'1 climatiseur",es:"Instalar 1 equipo de AC",ru:"Монтаж 1 кондиционера",ar:"تركيب مكيف واحد",fa:"نصب ۱ دستگاه کولر"},"WITHIN_WEEK","900–1.800 ₺",4],
+  ["hvac",{tr:"Kombi bakımı",en:"Boiler maintenance",de:"Boiler-Wartung",fr:"Entretien de chaudière",es:"Mantenimiento de caldera",ru:"Обслуживание котла",ar:"صيانة السخان",fa:"سرویس پکیج"},"FLEXIBLE","500–1.000 ₺",3],
+  ["hvac",{tr:"Petek temizliği",en:"Radiator cleaning",de:"Heizkörperreinigung",fr:"Nettoyage de radiateurs",es:"Limpieza de radiadores",ru:"Промывка радиаторов",ar:"تنظيف الرادياتير",fa:"شست‌وشوی رادیاتور"},"FLEXIBLE","400–900 ₺",2],
+  ["appliance",{tr:"Çamaşır makinesi tamiri",en:"Washing machine repair",de:"Waschmaschine reparieren",fr:"Réparation de lave-linge",es:"Reparación de lavadora",ru:"Ремонт стиральной машины",ar:"إصلاح الغسالة",fa:"تعمیر ماشین لباسشویی"},"URGENT","400–1.000 ₺",5],
+  ["appliance",{tr:"Buzdolabı soğutmuyor",en:"Fridge not cooling",de:"Kühlschrank kühlt nicht",fr:"Réfrigérateur ne refroidit plus",es:"El refrigerador no enfría",ru:"Холодильник не охлаждает",ar:"الثلاجة لا تبرّد",fa:"یخچال سرد نمی‌کند"},"EMERGENCY","500–1.200 ₺",4],
+  ["appliance",{tr:"Bulaşık makinesi kurulumu",en:"Dishwasher installation",de:"Geschirrspüler installieren",fr:"Installation de lave-vaisselle",es:"Instalación de lavavajillas",ru:"Установка посудомоечной машины",ar:"تركيب غسالة الصحون",fa:"نصب ماشین ظرفشویی"},"FLEXIBLE","300–600 ₺",1],
+  ["ironwork",{tr:"Balkon korkuluğu kaynak tamiri",en:"Balcony railing weld repair",de:"Balkongeländer schweißen",fr:"Soudure de garde-corps de balcon",es:"Soldadura de barandilla de balcón",ru:"Сварка балконного ограждения",ar:"لحام درابزين الشرفة",fa:"جوشکاری نرده بالکن"},"FLEXIBLE","500–1.200 ₺",2],
+  ["ironwork",{tr:"Demir kapı menteşe tamiri",en:"Steel door hinge repair",de:"Stahltür-Scharnier reparieren",fr:"Réparation de charnière de porte en acier",es:"Reparación de bisagra de puerta de hierro",ru:"Ремонт петли железной двери",ar:"إصلاح مفصلة الباب الحديدي",fa:"تعمیر لولای درب آهنی"},"WITHIN_WEEK","400–900 ₺",3],
+  ["roofing",{tr:"Çatı kiremit değişimi (birkaç adet)",en:"Replace a few roof tiles",de:"Einige Dachziegel ersetzen",fr:"Remplacer quelques tuiles",es:"Cambiar algunas tejas",ru:"Замена нескольких черепиц",ar:"استبدال بضع قرميدات",fa:"تعویض چند سفال سقف"},"URGENT","800–2.000 ₺",5],
+  ["roofing",{tr:"Dere oluk temizliği/onarım",en:"Gutter clean & fix",de:"Dachrinne reinigen & reparieren",fr:"Nettoyage et réparation de gouttière",es:"Limpieza y arreglo de canalón",ru:"Чистка и ремонт водостока",ar:"تنظيف وإصلاح المزراب",fa:"تمیزکاری و تعمیر ناودان"},"WITHIN_WEEK","500–1.200 ₺",2],
+  ["cleaning",{tr:"Genel ev temizliği",en:"General home cleaning",de:"Allgemeine Hausreinigung",fr:"Nettoyage général de la maison",es:"Limpieza general del hogar",ru:"Генеральная уборка дома",ar:"تنظيف عام للمنزل",fa:"نظافت کلی منزل"},"WITHIN_WEEK","600–1.200 ₺",4],
+  ["cleaning",{tr:"Koltuk yıkama (3+3+1)",en:"Sofa washing",de:"Sofareinigung (3+3+1)",fr:"Nettoyage de canapé (3+3+1)",es:"Lavado de sofá (3+3+1)",ru:"Химчистка дивана (3+3+1)",ar:"غسيل الأرائك (3+3+1)",fa:"شست‌وشوی مبل (۳+۳+۱)"},"FLEXIBLE","500–1.000 ₺",3],
+  ["appliance",{tr:"Klima gazı dolumu",en:"AC gas refill",de:"Klimaanlage Gas nachfüllen",fr:"Recharge de gaz de climatisation",es:"Recarga de gas del aire acondicionado",ru:"Заправка кондиционера газом",ar:"شحن غاز المكيف",fa:"شارژ گاز کولر"},"WITHIN_WEEK","600–1.100 ₺",5],
+  ["plumbing",{tr:"Klozet iç takım değişimi",en:"Toilet flush kit replacement",de:"WC-Spülgarnitur wechseln",fr:"Remplacement du mécanisme de chasse",es:"Cambio de mecanismo de cisterna",ru:"Замена арматуры бачка унитаза",ar:"استبدال طقم السيفون الداخلي",fa:"تعویض مکانیزم داخلی توالت فرنگی"},"FLEXIBLE","300–700 ₺",2],
+  ["furniture",{tr:"Perde/kornis montajı",en:"Curtain rod mounting",de:"Gardinenstange montieren",fr:"Pose de tringle à rideaux",es:"Montaje de barra de cortina",ru:"Установка карниза для штор",ar:"تركيب قضيب الستائر",fa:"نصب میله پرده"},"FLEXIBLE","200–500 ₺",3]
 ];
+const SEED_DESC={
+  tr:n=>`${n} için tecrübeli usta arıyorum. Uygun fiyatlı teklifleri değerlendireceğim.`,
+  en:n=>`Looking for an experienced pro for: ${n}. I'll consider reasonable offers.`,
+  de:n=>`Ich suche einen erfahrenen Profi für: ${n}. Ich prüfe faire Angebote.`,
+  fr:n=>`Je cherche un pro expérimenté pour : ${n}. J'étudierai les offres raisonnables.`,
+  es:n=>`Busco un profesional con experiencia para: ${n}. Consideraré ofertas razonables.`,
+  ru:n=>`Ищу опытного мастера для: ${n}. Рассмотрю разумные предложения.`,
+  ar:n=>`أبحث عن حرفي متمرّس لـ: ${n}. سأدرس العروض المعقولة.`,
+  fa:n=>`به دنبال استادکار باتجربه برای: ${n} هستم. پیشنهادهای منطقی را بررسی می‌کنم.`
+};
 (function seedListings(){
   const iconOf=k=>(CATS.find(c=>c.key===k)||{}).icon||"🔧";
+  const LANGS=["tr","en","de","fr","es","ru","ar","fa"];
   LISTINGS.forEach((l,i)=>{ if(!l.owner) l.owner=MEMBERS[i%MEMBERS.length]; l.city="Kayseri"; });
   SEED_LISTINGS.forEach((s,i)=>{
-    const [cat,tr2,en2,city,urg,budget,offers]=s;
+    const [cat,tt,urg,budget,offers]=s;
+    const desc={};
+    LANGS.forEach(L=>{ desc[L]=(SEED_DESC[L]||SEED_DESC.en)(tt[L]||tt.en||tt.tr); });
     LISTINGS.push({
       id:100+i, icon:iconOf(cat), cat, city:"Kayseri", urg, budget, offers,
       owner:MEMBERS[i%MEMBERS.length],
-      title:{tr:tr2,en:en2},
-      desc:{tr:`${tr2} için tecrübeli usta arıyorum. Uygun fiyatlı teklifleri değerlendireceğim.`,
-            en:`Looking for an experienced pro for: ${en2}. I'll consider reasonable offers.`},
-      offersList:[]
+      title:tt, desc, offersList:[]
     });
   });
 })();
@@ -1056,7 +1110,13 @@ function applyI18n(){
 (function(){const st=document.createElement('style');st.textContent='@media(max-width:720px){#footerInner{grid-template-columns:1fr 1fr!important}}@media(max-width:460px){#footerInner{grid-template-columns:1fr!important}}';document.head.appendChild(st);})();
 const TESTI={
   tr:{title:"💬 Müşteri Yorumları",items:[{n:"Ayşe K.",s:"Ev Temizliği",r:5,t:"Aynı gün geldiler, ev tertemiz oldu. Kesinlikle tavsiye ederim."},{n:"Mehmet D.",s:"Kombi Tamiri",r:5,t:"Usta çok bilgiliydi, sorunu 1 saatte çözdü. Fiyat da uygundu."},{n:"Zeynep A.",s:"Nakliyat",r:4,t:"Eşyalar sağlam taşındı, ekip güler yüzlü ve dakikti."}]},
-  en:{title:"💬 Customer Reviews",items:[{n:"Ayşe K.",s:"Home Cleaning",r:5,t:"Came same day, spotless. Highly recommend."},{n:"Mehmet D.",s:"Boiler Repair",r:5,t:"Very knowledgeable, fixed it in an hour. Fair price too."},{n:"Zeynep A.",s:"Moving",r:4,t:"Everything moved safely, friendly and punctual team."}]}
+  en:{title:"💬 Customer Reviews",items:[{n:"Ayşe K.",s:"Home Cleaning",r:5,t:"Came same day, spotless. Highly recommend."},{n:"Mehmet D.",s:"Boiler Repair",r:5,t:"Very knowledgeable, fixed it in an hour. Fair price too."},{n:"Zeynep A.",s:"Moving",r:4,t:"Everything moved safely, friendly and punctual team."}]},
+  de:{title:"💬 Kundenbewertungen",items:[{n:"Ayşe K.",s:"Hausreinigung",r:5,t:"Kamen am selben Tag, blitzsauber. Sehr empfehlenswert."},{n:"Mehmet D.",s:"Boiler-Reparatur",r:5,t:"Sehr kompetent, in einer Stunde behoben. Auch fairer Preis."},{n:"Zeynep A.",s:"Umzug",r:4,t:"Alles sicher transportiert, freundliches und pünktliches Team."}]},
+  fr:{title:"💬 Avis clients",items:[{n:"Ayşe K.",s:"Nettoyage maison",r:5,t:"Venus le jour même, impeccable. Je recommande vivement."},{n:"Mehmet D.",s:"Réparation de chaudière",r:5,t:"Très compétent, réparé en une heure. Prix correct aussi."},{n:"Zeynep A.",s:"Déménagement",r:4,t:"Tout transporté en sécurité, équipe aimable et ponctuelle."}]},
+  es:{title:"💬 Reseñas de clientes",items:[{n:"Ayşe K.",s:"Limpieza del hogar",r:5,t:"Vinieron el mismo día, impecable. Muy recomendable."},{n:"Mehmet D.",s:"Reparación de caldera",r:5,t:"Muy competente, lo arregló en una hora. Buen precio también."},{n:"Zeynep A.",s:"Mudanza",r:4,t:"Todo transportado con seguridad, equipo amable y puntual."}]},
+  ru:{title:"💬 Отзывы клиентов",items:[{n:"Ayşe K.",s:"Уборка дома",r:5,t:"Приехали в тот же день, идеально чисто. Очень рекомендую."},{n:"Mehmet D.",s:"Ремонт котла",r:5,t:"Очень знающий мастер, починил за час. Цена тоже честная."},{n:"Zeynep A.",s:"Переезд",r:4,t:"Всё перевезли аккуратно, команда вежливая и пунктуальная."}]},
+  ar:{title:"💬 آراء العملاء",items:[{n:"Ayşe K.",s:"تنظيف المنزل",r:5,t:"حضروا في نفس اليوم، نظافة تامة. أنصح بهم بشدة."},{n:"Mehmet D.",s:"إصلاح السخان",r:5,t:"خبير جدًا، أصلحه في ساعة. والسعر مناسب أيضًا."},{n:"Zeynep A.",s:"نقل",r:4,t:"نُقلت الأغراض بأمان، فريق ودود ودقيق في المواعيد."}]},
+  fa:{title:"💬 نظرات مشتریان",items:[{n:"Ayşe K.",s:"نظافت منزل",r:5,t:"همان روز آمدند، همه‌جا تمیز شد. قویاً توصیه می‌کنم."},{n:"Mehmet D.",s:"تعمیر پکیج",r:5,t:"بسیار وارد بود، در یک ساعت درست کرد. قیمت هم مناسب بود."},{n:"Zeynep A.",s:"حمل و نقل",r:4,t:"همه‌چیز سالم جابه‌جا شد، تیم خوش‌برخورد و وقت‌شناس."}]}
 };
 function renderTesti(){
   const d=TESTI[lang]||TESTI.en;const el=document.getElementById('testiTitle');if(!el)return;
@@ -1067,7 +1127,16 @@ function renderTesti(){
     <div style="display:flex;align-items:center;gap:8px"><span style="width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#1a1205;font-weight:800;font-size:13px">${x.n[0]}</span><div style="font-size:13px"><b>${x.n}</b><div style="color:var(--muted);font-size:12px">${x.s}</div></div></div>
   </div>`).join("");
 }
-const FOOT={tr:{corp:"Kurumsal",about:"Hakkımızda",how:"Nasıl Çalışır",career:"Kariyer",blog:"Blog",services:"Hizmetler",legal:"Yasal & Destek",be:"Usta Ol",pro:"Ustam Pro",terms:"Kullanım Koşulları",privacy:"Gizlilik & KVKK",contact:"İletişim",tag:"İşini ustasına bırak.",rights:"Tüm hakları saklıdır."},en:{corp:"Company",about:"About",how:"How it works",career:"Careers",blog:"Blog",services:"Services",legal:"Legal & Support",be:"Become a Pro",pro:"Ustam Pro",terms:"Terms of Use",privacy:"Privacy & Data",contact:"Contact",tag:"Leave the job to the pros.",rights:"All rights reserved."}};
+const FOOT={
+  tr:{corp:"Kurumsal",about:"Hakkımızda",how:"Nasıl Çalışır",career:"Kariyer",blog:"Blog",services:"Hizmetler",legal:"Yasal & Destek",be:"Usta Ol",pro:"Ustam Pro",terms:"Kullanım Koşulları",privacy:"Gizlilik & KVKK",contact:"İletişim",tag:"İşini ustasına bırak.",rights:"Tüm hakları saklıdır."},
+  en:{corp:"Company",about:"About",how:"How it works",career:"Careers",blog:"Blog",services:"Services",legal:"Legal & Support",be:"Become a Pro",pro:"Ustam Pro",terms:"Terms of Use",privacy:"Privacy & Data",contact:"Contact",tag:"Leave the job to the pros.",rights:"All rights reserved."},
+  de:{corp:"Unternehmen",about:"Über uns",how:"So funktioniert's",career:"Karriere",blog:"Blog",services:"Dienste",legal:"Rechtliches & Support",be:"Profi werden",pro:"Ustam Pro",terms:"Nutzungsbedingungen",privacy:"Datenschutz",contact:"Kontakt",tag:"Überlass die Arbeit den Profis.",rights:"Alle Rechte vorbehalten."},
+  fr:{corp:"Entreprise",about:"À propos",how:"Comment ça marche",career:"Carrières",blog:"Blog",services:"Services",legal:"Légal & Support",be:"Devenir pro",pro:"Ustam Pro",terms:"Conditions d'utilisation",privacy:"Confidentialité",contact:"Contact",tag:"Confiez le travail aux pros.",rights:"Tous droits réservés."},
+  es:{corp:"Empresa",about:"Acerca de",how:"Cómo funciona",career:"Empleo",blog:"Blog",services:"Servicios",legal:"Legal y Soporte",be:"Ser profesional",pro:"Ustam Pro",terms:"Términos de uso",privacy:"Privacidad",contact:"Contacto",tag:"Deja el trabajo en manos de profesionales.",rights:"Todos los derechos reservados."},
+  ru:{corp:"Компания",about:"О нас",how:"Как это работает",career:"Карьера",blog:"Блог",services:"Услуги",legal:"Правовое и поддержка",be:"Стать мастером",pro:"Ustam Pro",terms:"Условия использования",privacy:"Конфиденциальность",contact:"Контакты",tag:"Доверьте работу мастерам.",rights:"Все права защищены."},
+  ar:{corp:"الشركة",about:"من نحن",how:"كيف يعمل",career:"الوظائف",blog:"المدونة",services:"الخدمات",legal:"قانوني ودعم",be:"كن محترفًا",pro:"Ustam Pro",terms:"شروط الاستخدام",privacy:"الخصوصية",contact:"اتصل بنا",tag:"اترك العمل للمحترفين.",rights:"جميع الحقوق محفوظة."},
+  fa:{corp:"شرکت",about:"درباره ما",how:"چگونه کار می‌کند",career:"فرصت‌های شغلی",blog:"وبلاگ",services:"خدمات",legal:"حقوقی و پشتیبانی",be:"استاد شوید",pro:"Ustam Pro",terms:"شرایط استفاده",privacy:"حریم خصوصی",contact:"تماس",tag:"کار را به استادها بسپار.",rights:"همه حقوق محفوظ است."}
+};
 function fo(k){return (FOOT[lang]||FOOT.en)[k]}
 function renderFooter(){
   const el=document.getElementById('footerInner');if(!el)return;
@@ -1227,7 +1296,10 @@ const CHAT={
   en:{title:"Messages",ph:"Type a message…",send:"Send",greet:"Hi, I can answer any questions about my offer. When works for you?",typing:"typing…"},
   de:{title:"Nachrichten",ph:"Nachricht schreiben…",send:"Senden",greet:"Hallo, ich beantworte gern Fragen zu meinem Angebot. Wann passt es Ihnen?",typing:"schreibt…"},
   fr:{title:"Messages",ph:"Écrire un message…",send:"Envoyer",greet:"Bonjour, je peux répondre à vos questions sur mon offre. Quand êtes-vous disponible ?",typing:"écrit…"},
-  es:{title:"Mensajes",ph:"Escribe un mensaje…",send:"Enviar",greet:"Hola, puedo responder tus dudas sobre mi oferta. ¿Cuándo te viene bien?",typing:"escribiendo…"}
+  es:{title:"Mensajes",ph:"Escribe un mensaje…",send:"Enviar",greet:"Hola, puedo responder tus dudas sobre mi oferta. ¿Cuándo te viene bien?",typing:"escribiendo…"},
+  ru:{title:"Сообщения",ph:"Напишите сообщение…",send:"Отправить",greet:"Здравствуйте, могу ответить на вопросы по моему предложению. Когда вам удобно?",typing:"печатает…"},
+  ar:{title:"الرسائل",ph:"اكتب رسالة…",send:"إرسال",greet:"مرحبًا، يمكنني الإجابة عن أي أسئلة حول عرضي. متى يناسبك؟",typing:"يكتب…"},
+  fa:{title:"پیام‌ها",ph:"پیام بنویسید…",send:"ارسال",greet:"سلام، می‌توانم به سؤالات شما درباره پیشنهادم پاسخ دهم. چه زمانی برایتان مناسب است؟",typing:"در حال نوشتن…"}
 };
 function ch(k){return (CHAT[lang]||CHAT.en||CHAT.tr)[k]}
 let chatMsgs=[];let chatWho="";
@@ -1332,7 +1404,10 @@ const WIZ={
   en:{step:"Step",next:"Next",back:"Back",publish:"Publish job",s1:"What do you need done?",s1d:"Pick a category.",s2:"Describe the job",s2d:"A title and a few sentences is enough.",s3:"Where and when?",s3d:"Choose city and urgency.",s4:"Review and publish",titlePh:"E.g. Kitchen faucet replacement",descPh:"Describe the details…",privacy:"🔒 Your contact stays private; shared only with the pro you choose.",cap:"This job accepts up to 5 offers."},
   de:{step:"Schritt",next:"Weiter",back:"Zurück",publish:"Auftrag veröffentlichen",s1:"Was soll erledigt werden?",s1d:"Wähle eine Kategorie.",s2:"Beschreibe den Auftrag",s2d:"Ein Titel und ein paar Sätze genügen.",s3:"Wo und wann?",s3d:"Stadt und Dringlichkeit wählen.",s4:"Prüfen und veröffentlichen",titlePh:"z. B. Küchenarmatur tauschen",descPh:"Beschreibe die Details…",privacy:"🔒 Deine Kontaktdaten bleiben privat; nur mit dem gewählten Profi geteilt.",cap:"Dieser Auftrag erhält bis zu 5 Angebote."},
   fr:{step:"Étape",next:"Suivant",back:"Retour",publish:"Publier la demande",s1:"De quoi avez-vous besoin ?",s1d:"Choisissez une catégorie.",s2:"Décrivez le travail",s2d:"Un titre et quelques phrases suffisent.",s3:"Où et quand ?",s3d:"Choisissez ville et urgence.",s4:"Vérifier et publier",titlePh:"ex. Remplacement de robinet",descPh:"Décrivez les détails…",privacy:"🔒 Vos coordonnées restent privées ; partagées seulement avec le pro choisi.",cap:"Cette demande reçoit jusqu'à 5 offres."},
-  es:{step:"Paso",next:"Siguiente",back:"Atrás",publish:"Publicar solicitud",s1:"¿Qué necesitas hacer?",s1d:"Elige una categoría.",s2:"Describe el trabajo",s2d:"Un título y unas frases bastan.",s3:"¿Dónde y cuándo?",s3d:"Elige ciudad y urgencia.",s4:"Revisar y publicar",titlePh:"ej. Cambio de grifo de cocina",descPh:"Describe los detalles…",privacy:"🔒 Tu contacto es privado; se comparte solo con el profesional elegido.",cap:"Esta solicitud recibe hasta 5 ofertas."}
+  es:{step:"Paso",next:"Siguiente",back:"Atrás",publish:"Publicar solicitud",s1:"¿Qué necesitas hacer?",s1d:"Elige una categoría.",s2:"Describe el trabajo",s2d:"Un título y unas frases bastan.",s3:"¿Dónde y cuándo?",s3d:"Elige ciudad y urgencia.",s4:"Revisar y publicar",titlePh:"ej. Cambio de grifo de cocina",descPh:"Describe los detalles…",privacy:"🔒 Tu contacto es privado; se comparte solo con el profesional elegido.",cap:"Esta solicitud recibe hasta 5 ofertas."},
+  ru:{step:"Шаг",next:"Далее",back:"Назад",publish:"Опубликовать заявку",s1:"Что нужно сделать?",s1d:"Выберите категорию.",s2:"Опишите работу",s2d:"Достаточно заголовка и нескольких предложений.",s3:"Где и когда?",s3d:"Выберите город и срочность.",s4:"Проверьте и опубликуйте",titlePh:"Напр. Замена кухонного смесителя",descPh:"Опишите детали…",privacy:"🔒 Ваши контакты остаются приватными; передаются только выбранному мастеру.",cap:"Эта заявка принимает до 5 предложений."},
+  ar:{step:"خطوة",next:"التالي",back:"رجوع",publish:"نشر الطلب",s1:"ما الذي تريد إنجازه؟",s1d:"اختر فئة.",s2:"صف العمل",s2d:"عنوان وبضع جمل تكفي.",s3:"أين ومتى؟",s3d:"اختر المدينة والاستعجال.",s4:"راجع وانشر",titlePh:"مثال: تغيير صنبور المطبخ",descPh:"اكتب التفاصيل…",privacy:"🔒 تبقى معلومات التواصل سرية؛ تُشارك فقط مع الحرفي الذي تختاره.",cap:"يستقبل هذا الطلب حتى 5 عروض."},
+  fa:{step:"مرحله",next:"بعدی",back:"قبلی",publish:"انتشار درخواست",s1:"چه کاری می‌خواهید انجام شود؟",s1d:"یک دسته انتخاب کنید.",s2:"کار را شرح دهید",s2d:"یک عنوان و چند جمله کافی است.",s3:"کجا و چه زمانی؟",s3d:"شهر و فوریت را انتخاب کنید.",s4:"بررسی و انتشار",titlePh:"مثلاً تعویض شیر آشپزخانه",descPh:"جزئیات را بنویسید…",privacy:"🔒 اطلاعات تماس شما محرمانه می‌ماند؛ فقط با استادکار انتخابی به اشتراک گذاشته می‌شود.",cap:"این درخواست حداکثر ۵ پیشنهاد می‌پذیرد."}
 };
 function wz(k){return (WIZ[lang]||WIZ.en||WIZ.tr)[k]}
 let wiz={step:1,catIdx:null,title:"",desc:"",city:"İstanbul",urg:"FLEXIBLE"};
@@ -1404,19 +1479,28 @@ function renderWiz(){
       ${footer}
     </div>`,true);
 }
+const NEGOT={tr:"Görüşülür",en:"Negotiable",de:"Verhandelbar",fr:"À négocier",es:"A convenir",ru:"Договорная",ar:"قابل للتفاوض",fa:"توافقی"};
 function wizPublish(){
   wizSave();
   const pick=wiz.pick||{icon:'🔧',name:t('listing.title'),cat:'other'};
   const title=wiz.title||pick.name;
-  LISTINGS.unshift({id:Date.now(),icon:pick.icon,cat:pick.cat,city:wiz.city,urg:wiz.urg,budget:"Görüşülür",offers:0,owner:"Sen",
-    title:{tr:title,en:title,de:title,fr:title,es:title},desc:{tr:wiz.desc||"—",en:wiz.desc||"—",de:wiz.desc||"—",fr:wiz.desc||"—",es:wiz.desc||"—"},offersList:[]});
+  const d=wiz.desc||"—";
+  const all=v=>({tr:v,en:v,de:v,fr:v,es:v,ru:v,ar:v,fa:v});
+  LISTINGS.unshift({id:Date.now(),icon:pick.icon,cat:pick.cat,city:wiz.city,urg:wiz.urg,budget:(NEGOT[lang]||NEGOT.en),offers:0,owner:"Sen",
+    title:all(title),desc:all(d),offersList:[]});
   closeModal();renderListings();toast("✅ "+t('msg.posted'));scrollToId('listGrid');
 }
 
 let authTab="login";
 const REG={
   tr:{customer:"Usta Arıyorum",customerDesc:"İş veren olarak kayıt ol; ilan aç, teklif al.",provider:"Usta Olmak İstiyorum",providerDesc:"Hizmet ver; ilanlara teklif gönder, iş al.",back:"← Geri"},
-  en:{customer:"I'm Looking for a Pro",customerDesc:"Register as a client; post jobs, get offers.",provider:"I Want to Become a Pro",providerDesc:"Offer services; send offers, get jobs.",back:"← Back"}
+  en:{customer:"I'm Looking for a Pro",customerDesc:"Register as a client; post jobs, get offers.",provider:"I Want to Become a Pro",providerDesc:"Offer services; send offers, get jobs.",back:"← Back"},
+  de:{customer:"Ich suche einen Profi",customerDesc:"Als Auftraggeber registrieren; Aufträge einstellen, Angebote erhalten.",provider:"Ich möchte Profi werden",providerDesc:"Leistungen anbieten; Angebote senden, Aufträge erhalten.",back:"← Zurück"},
+  fr:{customer:"Je cherche un pro",customerDesc:"S'inscrire comme client ; publier des demandes, recevoir des offres.",provider:"Je veux devenir pro",providerDesc:"Proposer des services ; envoyer des offres, obtenir des travaux.",back:"← Retour"},
+  es:{customer:"Busco un profesional",customerDesc:"Regístrate como cliente; publica solicitudes, recibe ofertas.",provider:"Quiero ser profesional",providerDesc:"Ofrece servicios; envía ofertas, consigue trabajos.",back:"← Atrás"},
+  ru:{customer:"Я ищу мастера",customerDesc:"Зарегистрируйтесь как заказчик; размещайте заявки, получайте предложения.",provider:"Хочу стать мастером",providerDesc:"Предлагайте услуги; отправляйте предложения, получайте заказы.",back:"← Назад"},
+  ar:{customer:"أبحث عن حرفي",customerDesc:"سجّل كعميل؛ انشر الطلبات واحصل على العروض.",provider:"أريد أن أصبح حرفيًا",providerDesc:"قدّم الخدمات؛ أرسل العروض واحصل على الأعمال.",back:"← رجوع"},
+  fa:{customer:"دنبال استادکار هستم",customerDesc:"به‌عنوان کارفرما ثبت‌نام کنید؛ درخواست ثبت کنید و پیشنهاد بگیرید.",provider:"می‌خواهم استادکار شوم",providerDesc:"خدمات ارائه دهید؛ پیشنهاد بفرستید و کار بگیرید.",back:"← بازگشت"}
 };
 function reg(k){return (REG[lang]||REG.en||REG.tr)[k]}
 function openAuth(tab){
